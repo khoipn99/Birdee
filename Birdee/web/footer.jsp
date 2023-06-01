@@ -120,7 +120,7 @@
                     <h5>NHẬN TIN KHUYẾN MÃI</h5>
                     <div class="input-group mb-3">
                         <input type="text" class="form-control" placeholder=" Nhập email của bạn..." aria-label="Nhập email của bạn..." aria-describedby="basic-addon2">
-                        <a href="#" style="text-decoration: none;"><span class="input-group-text ;" id="basic-addon2">Đăng ký</span></a>
+                        <a href="#" style="text-decoration: none;"><span class="input-group-text" id="basic-addon2">Đăng ký</span></a>
                       </div>
                       <!-- <span class="box50 border border-white mr-3 text-primary"><i class="fa-brands fa-square-facebook"></i></span> -->
                       <!-- <span class="box50 border border-white mr-3 text-danger"><i class="fa-brands fa-google"></i></span> -->

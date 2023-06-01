@@ -32,15 +32,17 @@ public class MainController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet MainController</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet MainController at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+            String url = "home.jsp";
+            String action = null;
+            action = request.getParameter("action");
+            if (action == null)
+                url = "home.jsp";
+            else if (action.equals("Login"))
+                url = "LoginServlet";
+            else if (action.equals("Register"))
+                url = "register.jsp";
+            
+            request.getRequestDispatcher(url).forward(request, response);
         }
     }
 
