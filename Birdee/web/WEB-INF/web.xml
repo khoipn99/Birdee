@@ -5,8 +5,8 @@
         <servlet-class>controller.MainController</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>LoginServlet</servlet-name>
-        <servlet-class>controller.LoginServlet</servlet-class>
+        <servlet-name>PrintProduct</servlet-name>
+        <servlet-class>servlet.PrintProduct</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>registerServlet</servlet-name>
@@ -21,8 +21,8 @@
         <url-pattern>/MainController</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>LoginServlet</servlet-name>
-        <url-pattern>/LoginServlet</url-pattern>
+        <servlet-name>PrintProduct</servlet-name>
+        <url-pattern>/PrintProduct</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>registerServlet</servlet-name>
@@ -38,6 +38,6 @@
         </session-timeout>
     </session-config>
     <welcome-file-list>
-        <welcome-file>home.jsp</welcome-file>
+        <welcome-file>MainController</welcome-file>
     </welcome-file-list>
 </web-app>

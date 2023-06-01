@@ -4,19 +4,67 @@
     Author     : Admin
 --%>
 
+<%@page import="java.util.List"%>
+<%@page import="dao.BirdDAO"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="dto.Bird"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
     <head>
-        <%@include file="headHome.jsp" %>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Birdee</title>
+        <link rel="stylesheet" href="style.css" type="text/css"/>
     </head>
     <body>
-        <c:set var="userName" value="${requestScope.userName}"/>
-        <c:if test="${userName != null}">
-            <h1>Welcome ${userName}</h1>
-        </c:if>
- 
+
+        <header>
+            <%@include file="headHome.jsp" %>
+        </header>
+        <!-- Phat -->
+        <section>
+            <%  
+                /*
+                String keyword = request.getParameter("txtsearch");                
+                ArrayList<Bird> list;
+                String[] tmp = {"out of stock","availble"};
+                if(keyword == null )
+                    list = BirdDAO.getBird("");
+                else
+                    list = BirdDAO.getBird(keyword);
+                 */                   
+                ArrayList<Bird> list = (ArrayList<Bird>)request.getAttribute("myBirdList");                
+                if(list != null && !list.isEmpty()){
+                    for (Bird b : list) { 
+                    float vote = BirdDAO.getBirdVote(b.getBird_id());
+                                            %>
+                    <table class="product">
+                        
+                        <tr><th><img src='<%= b.getUrl() %>' class="plantimg"></th></tr>
+                        <tr><td><%= b.getBird_name() %></td></tr>
+                        <tr><td><%= b.getPrice() %> USD</td></tr>
+                        <tr><td><%= b.getAddress() %></td></tr>
+                        <%  
+                            if(vote > 0){
+                        %>
+                        <tr><td><%= vote %> Star</td></tr>                       
+                        <%
+                            }
+                            %>                           
+                            <tr><td><%= BirdDAO.getBirdBuying(b.getBird_id()) %> bought</td></tr>
+                        <tr><td><a>Add to cart</a></td></tr>
+                        
+                    </table>    
+                    
+        <%                }
+                }
+                %>
+            
+                
+        </section>
+  
+      <!-- Thanh -->
         <section class="body py-3">  
             <div class="container">
 
@@ -367,7 +415,8 @@
             </div>
 
         </section>
-
+        <footer>
+            <%@include file="footer.jsp" %>
+        </footer>
     </body>
-    <footer><%@include file="footer.jsp" %></footer>
 </html>
