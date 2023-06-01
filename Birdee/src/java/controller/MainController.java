@@ -7,6 +7,7 @@ package controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -27,16 +28,19 @@ public class MainController extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    private String url = "errorpage.html";
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            String url = "home.jsp";
+             String url = "PrintProduct;
             String action = null;
-            action = request.getParameter("action");
-            if (action == null)
-                url = "home.jsp";
+            String action = request.getParameter("action");           
+            if (action == null)          
+                url = "PrintProduct";                                                                    
+            else if(action.equals(""))
+                url = "PrintProduct";
             else if (action.equals("Login"))
                 url = "LoginServlet";
             else if (action.equals("Register"))
