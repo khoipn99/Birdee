@@ -34,16 +34,19 @@ public class MainController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            String url = "";
+             String url = "PrintProduct;
+            String action = null;
             String action = request.getParameter("action");           
-            if(url.equals("")){
+            if (action == null)          
+                url = "PrintProduct";                                                                    
+            else if(action.equals(""))
                 url = "PrintProduct";
-            }
+            else if (action.equals("Login"))
+                url = "LoginServlet";
+            else if (action.equals("Register"))
+                url = "register.jsp";
             
-            RequestDispatcher rd = request.getRequestDispatcher(url);
-            rd.forward(request, response);
-            
-            
+            request.getRequestDispatcher(url).forward(request, response);
         }
     }
 

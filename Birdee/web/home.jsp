@@ -9,33 +9,30 @@
 <%@page import="java.util.ArrayList"%>
 <%@page import="dto.Bird"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Birdee</title>
         <link rel="stylesheet" href="style.css" type="text/css"/>
     </head>
     <body>
         <header>
             <%@include file="headHome.jsp" %>
-        </header>
-        
+        </header>        
         <section>
             <%  
                 /*
-                String keyword = request.getParameter("txtsearch");
-                
+                String keyword = request.getParameter("txtsearch");                
                 ArrayList<Bird> list;
                 String[] tmp = {"out of stock","availble"};
                 if(keyword == null )
                     list = BirdDAO.getBird("");
                 else
                     list = BirdDAO.getBird(keyword);
-                 */   
-                
-                ArrayList<Bird> list = (ArrayList<Bird>)request.getAttribute("myBirdList");
-                
+                 */                   
+                ArrayList<Bird> list = (ArrayList<Bird>)request.getAttribute("myBirdList");                
                 if(list != null && !list.isEmpty()){
                     for (Bird b : list) { 
                     float vote = BirdDAO.getBirdVote(b.getBird_id());
@@ -68,6 +65,7 @@
         <footer>
             <%@include file="footer.jsp" %>
         </footer>
+
     </body>
     
 </html>
