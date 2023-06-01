@@ -7,6 +7,7 @@ package dto;
 
 import java.sql.Date;
 
+
 /**
  *
  * @author ACE
@@ -24,10 +25,26 @@ public class Bird {
     private float price;
     private String email_shop_staff;
     private int cate_id;
-    private String email_platform_staff; 
+    private String email_platform_staff;
+    private String url;
 
     public Bird() {
     }
+
+    public Bird(String bird_name, String url, Date dob, boolean gender, float height, float weight, String origin,int quantity, String description, float price) {
+        this.bird_name = bird_name;
+        this.url =url;
+        this.dob = dob;
+        this.gender = gender;
+        this.height = height;
+        this.weight = weight;
+        this.origin = origin;
+        this.quantity =quantity;
+        this.description = description;
+        this.price = price;
+    }
+    
+    
 
     public Bird(int bird_id, String bird_name, Date dob, boolean gender, float height, float weight, String origin, String description, int quantity, float price, String email_shop_staff, int cate_id, String email_platform_staff) {
         this.bird_id = bird_id;
@@ -148,6 +165,14 @@ public class Bird {
     public void setEmail_platform_staff(String email_platform_staff) {
         this.email_platform_staff = email_platform_staff;
     }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
     
-    
+        
 }

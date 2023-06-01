@@ -41,6 +41,8 @@ public class MainController extends HttpServlet {
                 url = "LoginServlet";
             else if (action.equals("Register"))
                 url = "register.jsp";
+            else if (action.equals("Search"))
+                url = "SearchServlet";
             
             request.getRequestDispatcher(url).forward(request, response);
         }

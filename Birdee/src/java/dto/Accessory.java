@@ -18,9 +18,20 @@ public class Accessory {
     private String email_shop_staff;
     private int cate_id;
     private String email_platform_staff;
+    private String url;
 
     public Accessory() {
     }
+
+    public Accessory(String name,String url,int quantity, String description, float price ) {
+        this.name = name;
+        this.url = url;
+        this.quantity = quantity;
+        this.description = description;
+        this.price = price;
+        
+    }
+    
 
     public Accessory(int accessory_id, String name, float price, int quantity, String description, String email_shop_staff, int cate_id, String email_platform_staff) {
         this.accessory_id = accessory_id;
@@ -96,6 +107,14 @@ public class Accessory {
     public void setEmail_platform_staff(String email_platform_staff) {
         this.email_platform_staff = email_platform_staff;
     }
-    
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+   
     
 }
