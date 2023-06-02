@@ -37,7 +37,7 @@ public class AccessoryDAO {
                         float price = rs.getFloat("price");                       
                         String email_shop_staff = rs.getString("email_shop_staff");
                         int cate_id = rs.getInt("cate_id");
-                        String email_platform_staff = rs.getString("email_platform_staff");                                              
+                        String email_platform_staff = rs.getString("email_platform_staff");                                             
                                                
                         Accessory accessory = new Accessory(id, name, price, quantity, description, email_shop_staff, cate_id, email_platform_staff);
                         list.add(accessory);
@@ -115,13 +115,11 @@ public class AccessoryDAO {
         }
     
         public static ArrayList<String> getAccessoryImg(int Accessory_id){
-        ArrayList<String> tmp = new ArrayList<>();
-        
+        ArrayList<String> tmp = new ArrayList<>();        
         Connection cn = null;
         try {
             cn = DBUtils.makeConnection();
-            if(cn != null){
-                
+            if(cn != null){                
                 String sql = "select Accessory.accessory_id, url from Accessory \n"
                     + "join Accessory_Img on Accessory_Img.accessory_id = Accessory.accessory_id \n"
                     + "where Accessory.accessory_id like ?";               
@@ -141,7 +139,7 @@ public class AccessoryDAO {
         return tmp;
         }
         
-        public static String getBirdAddress(int Accessory_id){
+        public static String getAccessoryAddress(int Accessory_id){
         String tmp = "";
         
         Connection cn = null;
@@ -169,9 +167,9 @@ public class AccessoryDAO {
         }
     
     public static void main(String[] args) {
-        System.out.println(getAccessoryBuying(2));
-        
-        
-        
+        System.out.println(getAccessoryBuying(2));       
+                
     }
-
+    
+    
+}
