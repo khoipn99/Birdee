@@ -41,12 +41,15 @@ public class MainController extends HttpServlet {
             else if(action.equals(""))
                 url = "PrintProduct";
             else if (action.equals("Login"))
-                url = "LoginServlet";
+                url = "LoginServlet";            
+            else if (action.equals("Search"))
+                url = "SearchServlet";            
             else if (action.equals("RegisterAccount"))
                 url = "registerAccount.jsp";
-            else if(action.equals("Register")){
+            else if(action.equals("Register"))
                 url = "RegisterServlet";
-            }
+            
+
             request.getRequestDispatcher(url).forward(request, response);
         }
     }
