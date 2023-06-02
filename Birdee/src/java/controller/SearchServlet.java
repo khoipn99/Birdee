@@ -48,9 +48,9 @@ public class SearchServlet extends HttpServlet {
             request.setAttribute("AccessoryList", Alist);
             request.getRequestDispatcher("home_search.jsp").forward(request, response);
         } else {
-            // Perform a search for birds and accessories based on the search keyword
-            ArrayList<Bird> Blist = BirdDAO.getBird(keyword);
-            ArrayList<Accessory> Alist = AccessoryDAO.getAccessory(keyword);
+            
+            ArrayList<Bird> Blist = BirdDAO.searchBird(keyword);
+            ArrayList<Accessory> Alist = AccessoryDAO.searchAccessory(keyword);
 
             if (!Blist.isEmpty()) {
                 request.setAttribute("BirdList", Blist);
@@ -60,7 +60,7 @@ public class SearchServlet extends HttpServlet {
                 request.setAttribute("AccessoryList", Alist);
             }
 
-            // If no results are found, set the ERROR attribute of the request object
+            
             if (Blist.isEmpty() && Alist.isEmpty()) {
                 request.setAttribute("ERROR", "Can not find anything with that name");
             }

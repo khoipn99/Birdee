@@ -4,6 +4,8 @@
     Author     : Admin
 --%>
 
+<%@page import="dao.AccessoryDAO"%>
+<%@page import="dao.BirdDAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
@@ -17,16 +19,11 @@
             <h1>Welcome ${userName}</h1>
         </c:if>
         <h1>BIRD</h1>
-        <table>
+        <table class="">
             <tr>
-                <th>BirdName</th>
                 <th>IMAGE</th>
-                <th>Date of birth</th>
-                <th>Gender</th>
-                <th>Height</th>
-                <th>Weight</th>
-                <th>Origin</th>
-                <th>Quantity</th>
+                <th>BirdName</th>
+                <th>Address</th>
                 <th>Description</th>
                 <th>Price</th>
                 <th>Action</th>
@@ -34,17 +31,13 @@
             <c:forEach var="BL" items="${requestScope.BirdList}">
                 <form action="MainController" method="post">
                     <tr>
+                        <td>
+                            <c:forEach var="url" items="${BirdDAO.getBirdImg(BL.getBird_id())}">
+                                <img style="width: 100px" src="${url}">
+                            </c:forEach>
+                        </td>                        
                         <td>${BL.getBird_name()}</td>
-                        <td><img style="width: 50%" src='${BL.getUrl()}' /></td>
-                        <td>${BL.getDob()}</td>
-                        <td>${BL.isGender()}</td>
-                        <td>${BL.getHeight()}</td>
-                        <td>${BL.getWeight()}</td>
-                        <td>${BL.getOrigin()}</td>
-                        <td><c:choose>
-                                <c:when test="${BL.getQuantity() > 0}">${BL.getQuantity()}</c:when>
-                                <c:otherwise>sold out</c:otherwise>
-                            </c:choose></td>
+                        <td>${BirdDAO.getBirdAddress(BL.getBird_id())}</td>
                         <td>${BL.getDescription()}</td>
                         <td>${BL.getPrice()}</td>
                         <td><input type="submit" value="Add to cart"></td>
@@ -57,24 +50,22 @@
         <h1>ACCESSORY</h1>
         <table>
             <tr>
-                <th>Accessory Name</th>
                 <th>IMAGE</th>
-                <th>Quantity</th>
-                <th>Description</th>
+                <th>Accessory Name</th>
                 <th>Price</th>
+                <th>Address</th>
+                <th>Vote</th>
                 <th>Action</th>
             </tr>
             <c:forEach var="AL" items="${requestScope.AccessoryList}">
                 <form action="MainController" method="post">
-                    <tr>
-                        <td>${AL.getName()}</td>
-                        <td><img src='${AL.getUrl()}' /></td>
-                        <td><c:choose>
-                                <c:when test="${AL.getQuantity() > 0}">${AL.getQuantity()}</c:when>
-                                <c:otherwise>sold out</c:otherwise>
-                            </c:choose></td>
-                        <td>${AL.getDescription()}</td>
+                    <tr><td>
+                            <c:forEach var="url" items="${AccessoryDAO.getAccessoryImg(AL.getAccessory_id()).get(0)}">
+                                <img src="${url}">
+                            </c:forEach>
+                        <td>${AL.getName()}</td>  
                         <td>${AL.getPrice()}</td>
+                        <td>${AccessoryDAO.getAccessoryAddress(AL.getAccessory_id())}</td> 
                         <td><input type="submit" value="Add to cart"></td>
                     </tr>
                 </form>
@@ -84,7 +75,7 @@
         </table>
         <p>-----------------------------------------------------------------------------------------</p>
         <h3 style="color: red"><c:out value="${requestScope.ERROR}" default=""/></h3>
-       
+
     </body>
     <footer><%@include file="footer.jsp" %></footer>
 </html>
