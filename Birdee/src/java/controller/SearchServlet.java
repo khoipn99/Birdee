@@ -46,7 +46,7 @@ public class SearchServlet extends HttpServlet {
             
             request.setAttribute("BirdList", Blist);
             request.setAttribute("AccessoryList", Alist);
-            request.getRequestDispatcher("home.jsp").forward(request, response);
+            request.getRequestDispatcher("home_search.jsp").forward(request, response);
         } else {
             // Perform a search for birds and accessories based on the search keyword
             ArrayList<Bird> Blist = BirdDAO.getBird(keyword);
@@ -65,7 +65,7 @@ public class SearchServlet extends HttpServlet {
                 request.setAttribute("ERROR", "Can not find anything with that name");
             }
 
-            request.getRequestDispatcher("home.jsp").forward(request, response);
+            request.getRequestDispatcher("home_search.jsp").forward(request, response);
         }
     }
 }
