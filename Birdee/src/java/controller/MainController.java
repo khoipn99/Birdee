@@ -28,15 +28,14 @@ public class MainController extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    private String url = "errorpage.html";
+    private String url = "PrintProduct";
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-             String url = "PrintProduct;
+            /* TODO output your page here. You may use following sample code. */            
             String action = null;
-            String action = request.getParameter("action");           
+            action = request.getParameter("action");           
             if (action == null)          
                 url = "PrintProduct";                                                                    
             else if(action.equals(""))
