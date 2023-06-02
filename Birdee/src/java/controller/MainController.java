@@ -27,19 +27,19 @@ public class MainController extends HttpServlet {
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
-     */ 
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */            
-            String url = "login.jsp";
+
+
+            /* TODO output your page here. You may use following sample code. */
+            String url = "PrintProduct";
             String action = null;
-            action = request.getParameter("action");           
+            action = request.getParameter("action");          
             if (action == null)          
-                url = "home.jsp";                                                                    
-//            else if(action.equals(""))
-//                url = "PrintProduct";
+                url = "PrintProduct";                                                                    
             else if (action.equals("Login"))
                 url = "LoginServlet";            
             else if (action.equals("Search"))
