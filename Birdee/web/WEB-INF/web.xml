@@ -6,7 +6,7 @@
     </servlet>
     <servlet>
         <servlet-name>PrintProduct</servlet-name>
-        <servlet-class>servlet.PrintProduct</servlet-class>
+        <servlet-class>controller.PrintProduct</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>registerServlet</servlet-name>
