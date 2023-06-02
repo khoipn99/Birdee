@@ -4,6 +4,8 @@
     Author     : Admin
 --%>
 
+<%@page import="dao.AccessoryDAO"%>
+<%@page import="dto.Accessory"%>
 <%@page import="java.util.List"%>
 <%@page import="dao.BirdDAO"%>
 <%@page import="java.util.ArrayList"%>
@@ -97,14 +99,14 @@
 
                             <div class="col">
                                 <div class="card" style="width: 18rem;">
-                                    <img src="<%= b.getUrl()%>" class="card-img-top" alt="...">
+                                    <img src="<%= BirdDAO.getBirdImg(b.getBird_id()).get(0) %>" class="card-img-top" alt="...">
                                     <div class="card-body">
                                         <h5 class="card-title"><%= b.getBird_name()%></h5>
 
                                     </div>
                                     <ul class="list-group list-group-flush">
                                         <li class="list-group-item" style="color: red"><%= b.getPrice()%> USD</li>
-                                        <li class="list-group-item"><%= b.getAddress()%></li>
+                                        <li class="list-group-item"><%= BirdDAO.getBirdAddress(b.getBird_id()) %></li>
                                             <%
                                                 if (vote > 0) {
                                             %>
@@ -182,14 +184,14 @@
 
                         <div class="col py-3">                       
                             <div class="card" style="width: 15rem;">
-                                <img src="<%= b.getUrl()%>" class="card-img-top2" alt="...">
+                                <img src="<%= BirdDAO.getBirdImg(b.getBird_id()).get(0) %>" class="card-img-top2" alt="...">
                                 <div class="card-body">
                                     <h5 class="card-title"><%= b.getBird_name()%></h5>
 
                                 </div>
                                 <ul class="list-group list-group-flush">
                                     <li class="list-group-item" style="color: red"><%= b.getPrice()%> USD</li>
-                                    <li class="list-group-item"><%= b.getAddress()%></li>
+                                    <li class="list-group-item"><%= BirdDAO.getBirdAddress(b.getBird_id()) %></li>
                                         <%
                                             if (vote > 0) {
                                         %>
@@ -224,18 +226,33 @@
                 </div>
                 <div class="p2 mb-3">
                     <div class="row py-3">
-
+                        <%
+                            ArrayList<Accessory> list3 = (ArrayList<Accessory>) request.getAttribute("myAccessoryList");
+                            if (list2 != null && !list2.isEmpty()) {
+                                for (Accessory a : list3) {
+                                    float vote = AccessoryDAO.getAccessoryVote(a.getAccessory_id());
+                        %> 
                         <div class="col py-3">
                             <div class="card" style="width: 15rem;">
-                                <img src="..." class="card-img-top2" alt="...">
+                                <img src="<%= AccessoryDAO.getAccessoryImg(a.getAccessory_id()).get(0) %>" class="card-img-top2" alt="...">
                                 <div class="card-body">
-                                    <h5 class="card-title">Card title</h5>
+                                    <h5 class="card-title"><%= a.getName() %></h5>
 
                                 </div>
                                 <ul class="list-group list-group-flush">
-                                    <li class="list-group-item">An item</li>
-                                    <li class="list-group-item">A second item</li>
-                                    <li class="list-group-item">A third item</li>
+                                    <li class="list-group-item" style="color: red"><%= a.getPrice() %> USD</li>
+                                    <li class="list-group-item"><%= AccessoryDAO.getBirdAddress(a.getAccessory_id()) %></li>
+                                <%
+                                            if (vote > 0) {
+                                        %>    
+                                    <li class="list-group-item"><a style="color: red"><%= vote %> Star</a><a>, đã mua <%= AccessoryDAO.getAccessoryBuying(a.getAccessory_id()) %></a></li>
+                                <%
+                                        } else {
+                                        %>   
+                                <li class="list-group-item">đã mua <%= AccessoryDAO.getAccessoryBuying(a.getAccessory_id()) %></li>
+                                        <%
+                                            }
+                                        %>    
                                 </ul>
                                 <div class="card-body" style="background-color: rgba(1, 122, 71, 1)">
                                     <a href="#" class="card-link" style="color: white" >Add to cart</a>
@@ -243,7 +260,10 @@
                                 </div>
                             </div>
                         </div>
-
+                        <%                
+                                }
+                            }
+                        %>          
                     </div>
                 </div>
             </div>
