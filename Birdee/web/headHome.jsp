@@ -25,106 +25,89 @@
 
         <section class="head">
             <div class="container py-3">
-                <div class="row ">
-                <div class="col-md-3  logo">
-                    <a href="MainController?action="><img src="mylib/img/haiquangdoi.png" class="img-fluid" alt="Logo"></a>
-                </div>
-                <div class="col-md-4 ">
-                    <div class="he2"> 
-                    <div class="input-group mb-3">
-                        <input type="text" class="form-control" placeholder="Tìm kiếm sản phẩm...." aria-label="Tìm kiếm sản phẩm"
-                                aria-describedby="basic-addon2">
-                            <span class="input-group-text" id="basic-addon2"><i class="fa-solid fa-magnifying-glass"></i></span>
-                    </div>
-                    <div class="col-md-4 ">
-                        <div class="he2"> 
-                            <form action="MainController" method="post">
-                                <div class="input-group mb-3">
-                                    <input type="text" name="txtsearch" class="form-control" placeholder="Tìm kiếm sản phẩm...." aria-label="Tìm kiếm sản phẩm"
-                                           aria-describedby="basic-addon2">
-                                    <button type="submit" name="action" value="Search" class="btn btn-primary">
-                                        <span class="input-group-text" id="basic-addon2">
-                                            <i class="fa-solid fa-magnifying-glass"></i>
-                                        </span>  
-                                    </button>
-                                </div>
-                  
-                            </form>
-
-                        </div>
-                    </div>
-                    <div class="col-md-3 mt-1">
-                        <div class="row mt-1">
-
-                            <div class="col mt-1">
-                                <div class="row mt-1">
-                                    <div class="col-3">
-                                        <div class="fs-3">
-                                            <i class="fa-solid fa-phone-volume" style="color: white;"></i>
-                                        </div>
-                                    </div>
-                                    <div class="col-9 he4">
-                                        <a style="color: white;">Tư vấn hỗ trợ </a>
-                                        <br>
-                                        <strong style="color: white;">09650060383</strong>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col mt-1">
-                                <div class="row mt-1">
-                                    <div class="col-3">
-                                        <div class="fs-3">
-                                            <i class="fa-solid fa-user " style="color: white
-                                               ;"></i>
-                                        </div>
-                                    </div>
-                                    <div class="col-9">
-                                        <a style="color: white; ">Xin chào</a> <br>
-                                        <a href="#" style="color: white; text-decoration: none;"><strong>Đăng Nhập</strong></a></div>
-                                </div>
-                                <div class="col-9">
-                                    <a style="color: white; ">Xin chào</a> <br>
-                                            <a href="login.jsp" style="color: white; text-decoration: none;"><strong>Đăng Nhập</strong></a></div>
-                            </div>
-
-                        </div>
-                    </div>
-                    <div class="col-md-2 mt-3">
-                        <div class="row">
-                            <div class="col">
-                                <a href="#" class=" position-relative">
-                                    <span class="fs-3"><i class="fa-regular fa-heart" style="color: white;"></i></span>
-                                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                                        0
-
-                                    </span>
-                                </a>
-                            </div>
-                            <div class="col">
-                                <a href="#" class=" position-relative">
-                                    <span class="fs-3"><i class="fa-solid fa-bag-shopping" style="color: white;"></i></span>
-                                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                                        0
-
-                                    </span>
-                                </a>
-                            </div>
-                            <div class="col">
-                                <a href="#" class=" position-relative">
-                                    <span class="fs-3"><i class="fa-solid fa-print" style="color: white;"></i></span>
-                                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                                        0
-
-                                    </span>
-                                </a>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
+               <div class="row ">
+   
+                   <div class="col-md-3  logo">
+                       <a href="MainController?action="><img src="mylib/img/haiquangdoi.png" class="img-fluid" alt="Logo"></a>
+                   </div>
+                   <div class="col-md-4 ">
+                       <div class="he2"> 
+                       <div class="input-group mb-3">
+                           <input type="text" class="form-control" placeholder="Tìm kiếm sản phẩm...." aria-label="Tìm kiếm sản phẩm"
+                                   aria-describedby="basic-addon2">
+                               <span class="input-group-text" id="basic-addon2"><i class="fa-solid fa-magnifying-glass"></i></span>
+                       </div>
+                   </div>
+                   </div>
+                   <div class="col-md-3 mt-1">
+                       <div class="row mt-1">
+                           
+                           <div class="col mt-1">
+                               <div class="row mt-1">
+                                   <div class="col-3">
+                                       <div class="fs-3">
+                                           <i class="fa-solid fa-phone-volume" style="color: white;"></i>
+                                       </div>
+                                   </div>
+                                   <div class="col-9 he4">
+                                       <a style="color: white;">Tư vấn hỗ trợ </a>
+                                       <br>
+                                               <strong style="color: white;">09650060383</strong>
+                                           </div>
+                               </div>
+                           </div>
+                           <div class="col mt-1">
+                               <div class="row mt-1">
+                                   <div class="col-3">
+                                       <div class="fs-3">
+                                           <i class="fa-solid fa-user " style="color: white
+                                           ;"></i>
+                                       </div>
+                                   </div>
+                                   <div class="col-9">
+                                       <a style="color: white; ">Xin chào</a> <br>
+                                               <a href="login.jsp" style="color: white; text-decoration: none;"><strong>Đăng Nhập</strong></a></div>
+                               </div>
+                           </div>
+                       
+                       </div>
+                   </div>
+                   <div class="col-md-2 mt-3">
+                       <div class="row">
+                           <div class="col">
+                               <a href="#" class=" position-relative">
+                                   <span class="fs-3"><i class="fa-regular fa-heart" style="color: white;"></i></span>
+                                   <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                     0
+                                    
+                                   </span>
+                               </a>
+                           </div>
+                           <div class="col">
+                               <a href="#" class=" position-relative">
+                                   <span class="fs-3"><i class="fa-solid fa-bag-shopping" style="color: white;"></i></span>
+                                   <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                     0
+                                   
+                                   </span>
+                               </a>
+                           </div>
+                           <div class="col">
+                               <a href="#" class=" position-relative">
+                                   <span class="fs-3"><i class="fa-solid fa-print" style="color: white;"></i></span>
+                                   <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                     0
+                                     
+                                   </span>
+                               </a>
+                           </div>
+                       </div>
+                     
+                   </div>
+               </div>
             </div>
-
-        </section>
+             
+           </section>
 
     </body>
 
