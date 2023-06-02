@@ -72,7 +72,14 @@
                                     </div>
                                     <div class="col-9">
                                         <a style="color: white; ">Xin chào</a> <br>
-                                        <a href="login.jsp" style="color: white; text-decoration: none;"><strong>Đăng Nhập</strong></a></div>
+                                        <c:set var="uName" value="${sessionScope.userName}"/>
+                                        <c:if test="${uName != null}">
+                                            <a href="#" style="color: white; text-decoration: none;"><strong>${uName}</strong></a></div>
+                                        </c:if>
+                                        <c:if test="${uName == null}">
+                                            <a href="login.jsp" style="color: white; text-decoration: none;"><strong>Đăng Nhập</strong></a></div>
+                                        </c:if>
+                                        
                                 </div>
                             </div>
 

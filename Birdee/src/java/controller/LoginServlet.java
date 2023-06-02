@@ -53,7 +53,7 @@ public class LoginServlet extends HttpServlet {
                 }
                 else {
                     if (acc.getRole_id().equals("cus")) {
-                        request.setAttribute("userName", acc.getUsername());                        
+                        session.setAttribute("userName", acc.getUsername());                        
                         request.getRequestDispatcher("home.jsp").forward(request, response);
                     }
                     else if (acc.getRole_id().equals("ad")) {
