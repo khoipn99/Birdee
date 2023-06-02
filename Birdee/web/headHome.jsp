@@ -26,9 +26,15 @@
         <section class="head">
             <div class="container py-3">
                 <div class="row ">
-
-                    <div class="col-md-3  logo">
-                        <a href="#"><img src="mylib/img/haiquangdoi.png" class="img-fluid" alt="Logo"></a>
+                <div class="col-md-3  logo">
+                    <a href="MainController?action="><img src="mylib/img/haiquangdoi.png" class="img-fluid" alt="Logo"></a>
+                </div>
+                <div class="col-md-4 ">
+                    <div class="he2"> 
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="Tìm kiếm sản phẩm...." aria-label="Tìm kiếm sản phẩm"
+                                aria-describedby="basic-addon2">
+                            <span class="input-group-text" id="basic-addon2"><i class="fa-solid fa-magnifying-glass"></i></span>
                     </div>
                     <div class="col-md-4 ">
                         <div class="he2"> 
@@ -76,6 +82,9 @@
                                         <a style="color: white; ">Xin chào</a> <br>
                                         <a href="#" style="color: white; text-decoration: none;"><strong>Đăng Nhập</strong></a></div>
                                 </div>
+                                <div class="col-9">
+                                    <a style="color: white; ">Xin chào</a> <br>
+                                            <a href="login.jsp" style="color: white; text-decoration: none;"><strong>Đăng Nhập</strong></a></div>
                             </div>
 
                         </div>

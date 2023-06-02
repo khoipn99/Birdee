@@ -1,12 +1,4 @@
-/*
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
-*/
-/* 
-    Created on : May 31, 2023, 9:44:40 PM
-    Author     : Acer
-*/
+
 .logo img{
     width: 100%;
     height: 200px;
@@ -71,5 +63,51 @@ text-align: center;
     /* background: linear-gradient(180deg, #48E0A0 39.06%, rgba(93, 234, 167, 0.71) 100%); */
     background-color: rgba(1, 122, 71, 1);
 }
+.body1{
+    text-align: center;
+    font-size: 30px;
+    font-weight: bold;
+    color: rgba(1, 122, 71, 1);;
+}
+.body2{
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+    text-decoration: none;
+}
+.cate a{
+    text-decoration: none;
+}
+.top1{
+    text-align: center;
+    font-size: 30px;
+    font-weight: bold;
+    color: rgba(1, 122, 71, 1);;
+}
+
+.p1{
+    text-align: center;
+    font-size: 30px;
+    font-weight: bold;
+    color: rgba(1, 122, 71, 1);;
+}
 
 
+.p2 img{
+    width: 100%;
+    height: 150px;
+}
+.lo1 img{
+    width: 100%;
+    height: 400px;
+    text-align: center;
+    
+}
+.lo2 {
+   text-align: left;
+   margin-top: 15px ;
+}
+.re1{
+    text-align: left;
+    font-weight: bold;
+}
