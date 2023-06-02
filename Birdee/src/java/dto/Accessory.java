@@ -18,6 +18,7 @@ public class Accessory {
     private String email_shop_staff;
     private int cate_id;
     private String email_platform_staff;
+    
 
     public Accessory() {
     }
@@ -96,6 +97,5 @@ public class Accessory {
     public void setEmail_platform_staff(String email_platform_staff) {
         this.email_platform_staff = email_platform_staff;
     }
-    
-    
+
 }
