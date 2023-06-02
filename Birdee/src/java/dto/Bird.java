@@ -26,13 +26,9 @@ public class Bird {
     private String email_shop_staff;
     private int cate_id;
     private String email_platform_staff; 
-    private String url;
-    private String address;
-
 
     public Bird() {
     }
-
 
     public Bird(int bird_id, String bird_name, Date dob, boolean gender, float height, float weight, String origin, String description, int quantity, float price, String email_shop_staff, int cate_id, String email_platform_staff, String url, String address) {
         this.bird_id = bird_id;
