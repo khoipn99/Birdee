@@ -150,10 +150,12 @@ public class Bird {
         this.email_platform_staff = email_platform_staff;
     }
 
+
     @Override
     public String toString() {
         return "Bird{" + "bird_id=" + bird_id + ", bird_name=" + bird_name + ", dob=" + dob + ", gender=" + gender + ", height=" + height + ", weight=" + weight + ", origin=" + origin + ", description=" + description + ", quantity=" + quantity + ", price=" + price + ", email_shop_staff=" + email_shop_staff + ", cate_id=" + cate_id + ", email_platform_staff=" + email_platform_staff + '}';
     }
+
 
  
 

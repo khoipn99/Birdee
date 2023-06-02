@@ -48,11 +48,8 @@ public class BirdDAO {
                         float price = rs.getFloat("price");
                         String email_shop_staff = rs.getString("email_shop_staff");
                         int cate_id = rs.getInt("cate_id");
-                        String email_platform_staff = rs.getString("email_platform_staff");
-                        String url = rs.getString("url");
-                        String address = rs.getString("address");
-                        Bird bird = new Bird(id, name, dob, gender, height, weight, origin, description, quantity,
-                                price, email_shop_staff, cate_id, email_platform_staff, url, address);
+                        String email_platform_staff = rs.getString("email_platform_staff");                                                                                            
+                        Bird bird = new Bird(id, name, dob, gender, height, weight, origin, description, quantity, price, email_shop_staff, cate_id, email_platform_staff);
                         list.add(bird);
 
                     }
@@ -126,9 +123,79 @@ public class BirdDAO {
         } catch (Exception e) {
             System.out.println(e);
         }
+        return tmp;
+        }
+    
+    
+        public static ArrayList<String> getBirdImg(int Bird_id){
+        ArrayList<String> tmp = new ArrayList<>();
+        
+        Connection cn = null;
+        try {
+            cn = DBUtils.makeConnection();
+            if(cn != null){
+                
+                String sql = "select url\n"
+                    + "from Bird join Bird_Img on Bird.bird_id = Bird_Img.bird_id \n"
+                    + "where Bird.bird_id like ?";               
+                PreparedStatement pst = cn.prepareStatement(sql);
+                pst.setInt(1, Bird_id);
+                ResultSet rs = pst.executeQuery();
+                while(rs != null && rs.next()){                              
+                     String url = rs.getString("url");
+                     tmp.add(url);
+                }
+                
+            }     
+            
+        } catch (Exception e) {
+            System.out.println(e);
+        } 
 
         return tmp;
+        }
+        
+        public static String getBirdAddress(int Bird_id){
+        String tmp = "";
+        
+        Connection cn = null;
+        try {
+            cn = DBUtils.makeConnection();
+            if(cn != null){
+                
+                String sql = "select address\n"
+                    + "from Bird join Bird_Img on Bird.bird_id = Bird_Img.bird_id \n"
+                    + "join Account on Bird.email_shop_staff = Account.email \n"    
+                    + "where Bird.bird_id like ?";               
+                PreparedStatement pst = cn.prepareStatement(sql);
+                pst.setInt(1, Bird_id);
+                ResultSet rs = pst.executeQuery();
+                while(rs != null && rs.next()){                              
+                     String url = rs.getString("address");
+                     tmp= url;
+                }
+                
+            }     
+            
+        } catch (Exception e) {
+            System.out.println(e);
+        } 
+        return tmp;
+        }
+        
+        
+        
+        
+        public static void main(String[] args) {
+            System.out.println(getBirdImg(2));
+            
+            ArrayList<Bird> bird = getBird("");
+            for (Bird bird1 : bird) {
+                System.out.println(bird1.getBird_id());
+            }
+            
     }
+
 
     public static ArrayList<Bird> searchBird(String keyword) {
         ArrayList<Bird> list = new ArrayList<>();

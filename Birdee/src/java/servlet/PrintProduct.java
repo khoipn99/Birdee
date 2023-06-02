@@ -4,7 +4,9 @@
  */
 package servlet;
 
+import dao.AccessoryDAO;
 import dao.BirdDAO;
+import dto.Accessory;
 import dto.Bird;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -37,19 +39,24 @@ public class PrintProduct extends HttpServlet {
         try ( PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
                                             
-                String keyword = request.getParameter("txtsearch");
-                
+                String keyword = request.getParameter("txtsearch");               
                 ArrayList<Bird> list;
-                String[] tmp = {"out of stock","availble"};
                 if(keyword == null )
                     list = BirdDAO.getBird("");
                 else
-                    list = BirdDAO.getBird(keyword);               
-                                
+                    list = BirdDAO.getBird(keyword);  
+                
+                ArrayList<Accessory> list2;
+                
+                    list2 = AccessoryDAO.getAccessorys();
+                                                             
                 request.setAttribute("myBirdList", list);
+                request.setAttribute("myAccessoryList", list2);
+                
                 
                 RequestDispatcher dispatcher = request.getRequestDispatcher("home.jsp");
                 dispatcher.forward(request, response);
+                
             
         }
     }

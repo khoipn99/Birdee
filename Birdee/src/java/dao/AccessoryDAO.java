@@ -1,4 +1,5 @@
 /*
+
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -15,80 +16,162 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import util.DBUtils;
 
-/**
- *
- * @author ASUS
- */
 public class AccessoryDAO {
-
-    public static ArrayList<Accessory> getAccessory(String keyword) {
+    public static ArrayList<Accessory> getAccessorys(){
+        ArrayList<Accessory> list = new ArrayList<>();
+        Connection cn = null;
         try {
-            Connection cn = DBUtils.makeConnection();
-            if (cn != null) {
-                String sql = "SELECT A.name, AI.url,A.quantity, A.description, A.price\n"
-                        + "FROM dbo.Accessory AS A JOIN Accessory_Img AS AI \n"
-                        + "ON A.accessory_id = AI.accessory_id\n"
-                        + "WHERE name like ?";
+            cn = DBUtils.makeConnection();
+            if(cn != null){
+                String sql = "select *\n"
+                    + "from Accessory " ;              
+                    
                 PreparedStatement pst = cn.prepareStatement(sql);
-                pst.setString(1, "%" + keyword + "%");
                 ResultSet rs = pst.executeQuery();
-                ArrayList<Accessory> list = new ArrayList<>();
-                if (rs != null) {
-                    while (rs.next()) {
+                if(rs != null){
+                    while(rs.next()){
+                        int id = rs.getInt("accessory_id");
                         String name = rs.getString("name");
-                        String img = rs.getString("url");
-                        int quantity = rs.getInt("quantity");
                         String description = rs.getString("description");
-                        float price = rs.getFloat("price");
-
-                        Accessory Ac = new Accessory(name, img, quantity, description, price);
-                        list.add(Ac);
-                    }
-                    return list;
-                }
-                cn.close();
-            } else {
-                System.out.println("Connection Error");
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-    public static ArrayList<Accessory> getAccessoriesList() {
-        try {
-            Connection cn = DBUtils.makeConnection();
-            if (cn != null) {
-                String s = "SELECT A.name, AI.url,A.quantity, A.price,A.description\n"
-                        + "FROM dbo.Accessory AS A JOIN Accessory_Img AS AI \n"
-                        + "ON A.accessory_id = AI.accessory_id";
-                Statement st = cn.createStatement();
-                ResultSet rs = st.executeQuery(s);
-                ArrayList<Accessory> list = new ArrayList<>();
-                if (rs != null) {
-                    while (rs.next()) {
-                        String name = rs.getString("name");
-                        String img = rs.getString("url");
                         int quantity = rs.getInt("quantity");
-                        String description = rs.getString("description");
-                        float price = rs.getFloat("price");
-                        Accessory Ac = new Accessory(name, img, quantity, description, price);
+                        float price = rs.getFloat("price");                       
+                        String email_shop_staff = rs.getString("email_shop_staff");
+                        int cate_id = rs.getInt("cate_id");
+                        String email_platform_staff = rs.getString("email_platform_staff");                                              
+                                               
+                        Accessory accessory = new Accessory(id, name, price, quantity, description, email_shop_staff, cate_id, email_platform_staff);
+                        list.add(accessory);
                         
-                        list.add(Ac);
-                    }
-                    return list;
+                    
+                   }
                 }
-                cn.close();
-            } else {
-                System.out.println("Connection Error");
             }
-
+            
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println(e);
         }
-        return null;
+        return list;
+    }
+    
+    public static float getAccessoryVote(int Accessory_id){
+        float tmp = 0;
+        ArrayList<Integer> list = new ArrayList();
+        Connection cn = null;
+        try {
+            cn = DBUtils.makeConnection();
+            if(cn != null){
+                
+                String sql = "select Accessory.accessory_id, rating\n"
+                    + "from Accessory \n" +
+                        "join Order_Detail_Accessory on Order_Detail_Accessory.accessory_id = Accessory.accessory_id \n" +
+                        "join Review_Accessory on Review_Accessory.order_detail_id_A = Order_Detail_Accessory.order_detail_id_A\n" +
+                        "where Accessory.accessory_id like ?";
+                
+                PreparedStatement pst = cn.prepareStatement(sql);
+                pst.setInt(1, Accessory_id);
+                ResultSet rs = pst.executeQuery();
+                while(rs != null && rs.next()){                    
+                        int id = rs.getInt("rating") ;                        
+                        list.add(id);
+                        tmp += id;
+                }
+                
+            }     
+            
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        if(list.size() != 0){
+        return tmp/list.size();
+        }
+        return 0;
+    }
+    
+    public static int getAccessoryBuying(int Accessory_id){
+        int tmp = 0;
+        
+        Connection cn = null;
+        try {
+            cn = DBUtils.makeConnection();
+            if(cn != null){
+                
+                String sql = "select Accessory.accessory_id from Accessory \n" +                       
+                        "join Order_Detail_Accessory on Order_Detail_Accessory.accessory_id = Accessory.accessory_id\n" +
+                        "where Accessory.accessory_id like ?";
+                
+                PreparedStatement pst = cn.prepareStatement(sql);
+                pst.setInt(1, Accessory_id );
+                ResultSet rs = pst.executeQuery();
+                while(rs != null && rs.next()){                              
+                        tmp += 1;
+                }
+                
+            }     
+            
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return tmp;
+        }
+    
+        public static ArrayList<String> getAccessoryImg(int Accessory_id){
+        ArrayList<String> tmp = new ArrayList<>();
+        
+        Connection cn = null;
+        try {
+            cn = DBUtils.makeConnection();
+            if(cn != null){
+                
+                String sql = "select Accessory.accessory_id, url from Accessory \n"
+                    + "join Accessory_Img on Accessory_Img.accessory_id = Accessory.accessory_id \n"
+                    + "where Accessory.accessory_id like ?";               
+                PreparedStatement pst = cn.prepareStatement(sql);
+                pst.setInt(1, Accessory_id);
+                ResultSet rs = pst.executeQuery();
+                while(rs != null && rs.next()){                              
+                     String url = rs.getString("url");
+                     tmp.add(url);
+                }
+                
+            }     
+            
+        } catch (Exception e) {
+            System.out.println(e);
+        } 
+        return tmp;
+        }
+        
+        public static String getBirdAddress(int Accessory_id){
+        String tmp = "";
+        
+        Connection cn = null;
+        try {
+            cn = DBUtils.makeConnection();
+            if(cn != null){
+                
+                String sql = "select Accessory.accessory_id, address from Accessory\n"
+                    + "join Account on Account.email = Accessory.email_shop_staff \n"    
+                    + "where Accessory.accessory_id like ?";               
+                PreparedStatement pst = cn.prepareStatement(sql);
+                pst.setInt(1, Accessory_id);
+                ResultSet rs = pst.executeQuery();
+                while(rs != null && rs.next()){                              
+                     String url = rs.getString("address");
+                     tmp= url;
+                }
+                
+            }     
+            
+        } catch (Exception e) {
+            System.out.println(e);
+        } 
+        return tmp;
+        }
+    
+    public static void main(String[] args) {
+        System.out.println(getAccessoryBuying(2));
+        
+        
+        
     }
 
-}
