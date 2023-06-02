@@ -25,13 +25,12 @@ public class Bird {
     private String email_shop_staff;
     private int cate_id;
     private String email_platform_staff; 
-    private String url;
-    private String address;
+
 
     public Bird() {
     }
 
-    public Bird(int bird_id, String bird_name, Date dob, boolean gender, float height, float weight, String origin, String description, int quantity, float price, String email_shop_staff, int cate_id, String email_platform_staff, String url, String address) {
+    public Bird(int bird_id, String bird_name, Date dob, boolean gender, float height, float weight, String origin, String description, int quantity, float price, String email_shop_staff, int cate_id, String email_platform_staff) {
         this.bird_id = bird_id;
         this.bird_name = bird_name;
         this.dob = dob;
@@ -45,8 +44,6 @@ public class Bird {
         this.email_shop_staff = email_shop_staff;
         this.cate_id = cate_id;
         this.email_platform_staff = email_platform_staff;
-        this.url = url;
-        this.address = address;
     }
 
     public int getBird_id() {
@@ -153,26 +150,7 @@ public class Bird {
         this.email_platform_staff = email_platform_staff;
     }
 
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    @Override
-    public String toString() {
-        return "Bird{" + "bird_id=" + bird_id + ", bird_name=" + bird_name + ", dob=" + dob + ", gender=" + gender + ", height=" + height + ", weight=" + weight + ", origin=" + origin + ", description=" + description + ", quantity=" + quantity + ", price=" + price + ", email_shop_staff=" + email_shop_staff + ", cate_id=" + cate_id + ", email_platform_staff=" + email_platform_staff + ", url=" + url + ", address=" + address + '}';
-    }
+    
 
     
     
