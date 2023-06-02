@@ -292,3 +292,7 @@ text-align: center;
   .l12 img{
     width: 100%;
   }
+
+  .search123{
+      display: flex;
+  }
