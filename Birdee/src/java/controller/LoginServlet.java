@@ -36,26 +36,42 @@ public class LoginServlet extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             String email = request.getParameter("email");
-            String password = request.getParameter("pass");
+            String password = request.getParameter("password");
             HttpSession session = request.getSession(true);
             Account acc = null;
             String msg = "";
             if (email == null || email.isEmpty() || password == null || password.isEmpty()) {
                 
-                response.sendRedirect("errprPage.jsp");
+                response.sendRedirect("errorPage.jsp");
             }
             else {
                 acc = AccountDAO.getAccount(email, password);
                 if (acc == null) {
                     msg = "Invalid Email or Password";
-                    request.setAttribute("msg", msg);
+                    request.setAttribute("msg", msg);                    
                     request.getRequestDispatcher("login.jsp").forward(request, response);
                 }
                 else {
                     if (acc.getRole_id().equals("cus")) {
-                        request.setAttribute("userName", acc.getUsername());
+                        request.setAttribute("userName", acc.getUsername());                        
                         request.getRequestDispatcher("home.jsp").forward(request, response);
-                    }                        
+                    }
+                    else if (acc.getRole_id().equals("ad")) {
+                        request.setAttribute("userName", acc.getUsername());                        
+                        request.getRequestDispatcher("adminPage.jsp").forward(request, response);
+                    }
+                    else if (acc.getRole_id().equals("ma")) {
+                        request.setAttribute("userName", acc.getUsername());                        
+                        request.getRequestDispatcher("managerPage.jsp").forward(request, response);
+                    }
+                    else if (acc.getRole_id().equals("staff")) {
+                        request.setAttribute("userName", acc.getUsername());                        
+                        request.getRequestDispatcher("staffPage.jsp").forward(request, response);
+                    }
+                    else {
+                        request.setAttribute("userName", acc.getUsername());                        
+                        request.getRequestDispatcher("home.jsp").forward(request, response);
+                    }
                 }
             }
         }
