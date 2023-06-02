@@ -49,8 +49,8 @@ public class SearchServlet extends HttpServlet {
             request.getRequestDispatcher("home_search.jsp").forward(request, response);
         } else {
             // Perform a search for birds and accessories based on the search keyword
-            ArrayList<Bird> Blist = BirdDAO.getBird(keyword);
-            ArrayList<Accessory> Alist = AccessoryDAO.getAccessory(keyword);
+            ArrayList<Bird> Blist = BirdDAO.searchBird(keyword);
+            ArrayList<Accessory> Alist = AccessoryDAO.searchAccessory(keyword);
 
             if (!Blist.isEmpty()) {
                 request.setAttribute("BirdList", Blist);
