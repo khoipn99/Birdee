@@ -314,7 +314,7 @@
                                 </div>
                                 <ul class="list-group list-group-flush">
                                     <li class="list-group-item" style="color: red"><%= a.getPrice() %> USD</li>
-                                    <li class="list-group-item"><%= AccessoryDAO.getBirdAddress(a.getAccessory_id()) %></li>
+                                    <li class="list-group-item"><%= AccessoryDAO.getAccessoryAddress(a.getAccessory_id()) %></li>
                                 <%
                                             if (vote > 0) {
                                         %>    
