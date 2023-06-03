@@ -40,14 +40,14 @@ public class PrintProduct extends HttpServlet {
             /* TODO output your page here. You may use following sample code. */
 
             String keyword = request.getParameter("txtsearch");
-            ArrayList<Bird> list;
+            ArrayList<Bird> list = new ArrayList<>();
             if (keyword == null) {
                 list = BirdDAO.getBird("");
             } else {
                 list = BirdDAO.getBird(keyword);
             }
 
-            ArrayList<Accessory> list2;
+            ArrayList<Accessory> list2 = new ArrayList<>();
 
             list2 = AccessoryDAO.getAccessorys();
 

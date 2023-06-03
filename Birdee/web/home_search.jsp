@@ -14,10 +14,7 @@
         <%@include file="headHome.jsp" %>
     </head>
     <body>
-        <c:set var="userName" value="${requestScope.userName}"/>
-        <c:if test="${userName != null}">
-            <h1>Welcome ${userName}</h1>
-        </c:if>
+        
         <h1>BIRD</h1>
         <table class="">
             <tr>
