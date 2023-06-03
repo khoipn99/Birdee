@@ -30,6 +30,7 @@
                     <div class="col-md-3  logo">
                         <a href="MainController?action="><img src="mylib/img/haiquangdoi.png" class="img-fluid" alt="Logo"></a>
                     </div>
+
                     <div class="col-md-4 ">
                         <div class="he2"> 
                             <div class="input-group mb-3">
@@ -45,6 +46,7 @@
                             </div>
                         </div>
                     </div>
+
                     <div class="col-md-3 mt-1">
                         <div class="row mt-1">
 
@@ -72,20 +74,23 @@
                                     </div>
                                     <div class="col-9">
                                         <a style="color: white; ">Xin chào</a> <br>
-                                        
                                         <c:set var="uName" value="${sessionScope.userName}"/>
                                         <c:if test="${uName != null}">
-                                            <a href="#" style="color: white; text-decoration: none;"><strong>${uName}</strong></a></div>
+                                            <a href="#" style="color: white; text-decoration: none;"><strong>${uName}</strong></a>
+                                            <a href="MainController?action=Logout" style="color: white; text-decoration: none;"><strong>Logout</strong></a>
                                         </c:if>
                                         <c:if test="${uName == null}">
-                                            <a href="login.jsp" style="color: white; text-decoration: none;"><strong>Đăng Nhập</strong></a></div>
+                                            <a href="login.jsp" style="color: white; text-decoration: none;"><strong>Đăng Nhập</strong></a>
                                         </c:if>
-                                        
-                                </div>
+                                            </div>
+                                    </div>
                             </div>
-
+                                        
+                            </div>
                         </div>
+
                     </div>
+
                     <div class="col-md-2 mt-3">
                         <div class="row">
                             <div class="col">
@@ -120,6 +125,7 @@
                     </div>
                 </div>
             </div>
+
 
         </section>
 

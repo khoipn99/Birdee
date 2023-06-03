@@ -33,7 +33,12 @@
                                             <input type="checkbox" id="remember" name="remember" value="Remember">
                                             <div class="fg456"><label for="remember">Keep me logged in</label></div>
                                         </div>
+                                        <c:set var="msg" value="${requestScope.msg}" />
+                                        <c:if test="${msg != null}">
+                                            <p style="color: red">${msg}</p> 
+                                        </c:if>
                                     </div>
+                                    
                                     <button type="submit" value="Login" name="action">Login</button>                                
                                     <a href="#">Forgot Password?</a>
                                 </form>

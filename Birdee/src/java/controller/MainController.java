@@ -42,7 +42,8 @@ public class MainController extends HttpServlet {
                 url = "registerAccount.jsp";
             else if(action.equals("Register"))
                 url = "RegisterServlet";
-            
+            else if (action.equals("Logout"))
+                url = "LogoutServlet";
 
             request.getRequestDispatcher(url).forward(request, response);
         }
