@@ -51,7 +51,7 @@
 
                 </div>
 
-                <div class="body1 py-3">KHÁM PHÁ DANH MỤC
+                <div class="body1 py-3">KHÁM PHÁ 
 
                 </div>
                 <div class="body2 py-3">
