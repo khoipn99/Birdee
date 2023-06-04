@@ -30,7 +30,7 @@
                                     </div>
                                     <div class="form-group">
                                         <div class="fg123">
-                                            <input type="checkbox" id="remember" name="remember" value="Remember">
+                                            <input type="checkbox" id="remember" name="remember" value="true">
                                             <div class="fg456"><label for="remember">Keep me logged in</label></div>
                                         </div>
                                         <c:set var="msg" value="${requestScope.msg}" />

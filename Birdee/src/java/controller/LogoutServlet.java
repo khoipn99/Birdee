@@ -8,6 +8,7 @@ package controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -35,6 +36,19 @@ public class LogoutServlet extends HttpServlet {
             /* TODO output your page here. You may use following sample code. */
             HttpSession session = request.getSession();
             session.removeAttribute("userName");
+            Cookie[] cookies = request.getCookies();
+            if (cookies != null) {
+                for (Cookie c : cookies) {
+                    if (c.getName().equals("cEmail")) {
+                        c.setMaxAge(0);
+                        response.addCookie(c);
+                    }
+                    if (c.getName().equals("cPass")) {
+                        c.setMaxAge(0);
+                        response.addCookie(c);
+                    }
+                }
+            }
             response.sendRedirect("PrintProduct");
         }
     }
