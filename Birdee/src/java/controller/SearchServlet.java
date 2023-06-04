@@ -42,12 +42,13 @@ public class SearchServlet extends HttpServlet {
         
         // If the search keyword is empty or null, retrieve all birds and accessories
         if (keyword == null || keyword.trim().isEmpty()) {
-            ArrayList<Bird> Blist = BirdDAO.getBirdsList();
-            ArrayList<Accessory> Alist = AccessoryDAO.getAccessoriesList();
-            
-            request.setAttribute("BirdList", Blist);
-            request.setAttribute("AccessoryList", Alist);
-            request.getRequestDispatcher("home_search.jsp").forward(request, response);
+//            ArrayList<Bird> Blist = BirdDAO.getBirdsList();
+//            ArrayList<Accessory> Alist = AccessoryDAO.getAccessoriesList();
+//            
+//            request.setAttribute("BirdList", Blist);
+//            request.setAttribute("AccessoryList", Alist);
+//            request.getRequestDispatcher("home_search.jsp").forward(request, response);
+request.getRequestDispatcher("MainController?action=").forward(request, response);
         } else {
             
             ArrayList<Bird> Blist = BirdDAO.searchBird(keyword);
