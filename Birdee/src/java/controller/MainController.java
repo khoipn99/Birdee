@@ -29,11 +29,11 @@ public class MainController extends HttpServlet {
 
 
             /* TODO output your page here. You may use following sample code. */
-            String url = "PrintProduct";
+            String url = "HomeServlet";
             String action = null;
             action = request.getParameter("action");          
             if (action == null)          
-                url = "PrintProduct";                                                                    
+                url = "HomeServlet";                                                                    
             else if (action.equals("Login"))
                 url = "LoginServlet";            
             else if (action.equals("Search"))

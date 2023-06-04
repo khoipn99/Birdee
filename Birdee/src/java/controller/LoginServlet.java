@@ -10,6 +10,7 @@ import dto.Account;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -37,6 +38,7 @@ public class LoginServlet extends HttpServlet {
             /* TODO output your page here. You may use following sample code. */
             String email = request.getParameter("email");
             String password = request.getParameter("password");
+            Boolean rem = Boolean.parseBoolean(request.getParameter("remember"));
             HttpSession session = request.getSession(true);
             Account acc = null;
             String msg = "";
@@ -52,6 +54,15 @@ public class LoginServlet extends HttpServlet {
                     request.getRequestDispatcher("login.jsp").forward(request, response);
                 }
                 else {
+                    if (rem) {
+                        Cookie cEmail = new Cookie("cEmail", email);
+                        Cookie cPass = new Cookie("cPass", password);
+                        cEmail.setMaxAge(60 * 60 * 24 * 365);
+                        cPass.setMaxAge(60 * 60 * 24 * 365);
+                        response.addCookie(cEmail);
+                        response.addCookie(cPass);
+                    }
+                    
                     if (acc.getRole_id().equals("cus")) {
                         session.setAttribute("userName", acc.getUsername());                        
                         request.getRequestDispatcher("PrintProduct").forward(request, response);

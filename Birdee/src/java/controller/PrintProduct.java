@@ -38,7 +38,7 @@ public class PrintProduct extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-
+            
             String keyword = request.getParameter("txtsearch");
             ArrayList<Bird> list = new ArrayList<>();
             if (keyword == null) {
@@ -48,7 +48,6 @@ public class PrintProduct extends HttpServlet {
             }
 
             ArrayList<Accessory> list2 = new ArrayList<>();
-
             list2 = AccessoryDAO.getAccessorys();
 
             request.setAttribute("myBirdList", list);
