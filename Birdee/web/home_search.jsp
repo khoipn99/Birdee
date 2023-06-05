@@ -11,68 +11,106 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <%@include file="headHome.jsp" %>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+        <title>Birdee</title>
+        <style>
+            .hidden {
+                display: none;
+            }
+        </style>
+        <link rel="stylesheet" href="style.css" type="text/css"/>
     </head>
     <body>
-        
-        <h1>BIRD</h1>
-        <table class="">
-            <tr>
-                <th>IMAGE</th>
-                <th>BirdName</th>
-                <th>Address</th>
-                <th>Description</th>
-                <th>Price</th>
-                <th>Action</th>
-            </tr>
-            <c:forEach var="BL" items="${requestScope.BirdList}">
-                <form action="MainController" method="post">
-                    <tr>
-                        <td>
-                            <c:forEach var="url" items="${BirdDAO.getBirdImg(BL.getBird_id())}">
-                                <img style="width: 100px" src="${url}">
+        <header>
+            <%@include file="headHome.jsp" %>
+        </header>
+        <section class="top py-3 ${not empty requestScope.BirdList ? '' : 'hidden'}">
+            <div class="container mb-3">
+                <h1 class="top1">BIRD</h1>
+                <div class="my-3">
+                    <div class="container text-center">
+                        <div class="row">
+                            <c:forEach var="BL" items="${requestScope.BirdList}">
+                                <div class="col">
+                                    <div class="card" style="width: 18rem;">
+                                        <form action="MainController" method="post">
+                                            <c:forEach var="url" items="${BirdDAO.getBirdImg(BL.getBird_id())}">
+                                                <img class="card-img-top" alt="..." src="${url}">
+                                            </c:forEach>
+                                            <div class="card-body">
+                                                <h5>${BL.getBird_name()}</h5>
+                                            </div>
+                                            <ul class="list-group list-group-flush">
+                                                <li class="list-group-item" style="color: red">${BL.getPrice()} USD</li>
+                                                <li class="list-group-item">${BirdDAO.getBirdAddress(BL.getBird_id())}</li>
+                                                    <c:set var="vote" value="${BirdDAO.getBirdVote(BL.bird_id)}" />
+                                                <li class="list-group-item">
+                                                    <c:if test="${vote > 0}">
+                                                        <a style="color: red">${vote} Star</a><a>, đã mua ${BirdDAO.getBirdBuying(BL.bird_id)}</a>
+                                                    </c:if>
+                                                    <c:if test="${vote <= 0}">
+                                                        đã mua ${BirdDAO.getBirdBuying(b.bird_id)}
+                                                    </c:if>
+                                                </li>
+                                            </ul>
+                                            <div class="card-body" style="background-color: rgba(1, 122, 71, 1)">                                      
+                                                <a href="#" class="card-link" style="color: white">Add to cart</a>
+                                            </div>
+                                        </form> 
+                                    </div>
+                                </div>
                             </c:forEach>
-                        </td>                        
-                        <td>${BL.getBird_name()}</td>
-                        <td>${BirdDAO.getBirdAddress(BL.getBird_id())}</td>
-                        <td>${BL.getDescription()}</td>
-                        <td>${BL.getPrice()}</td>
-                        <td><input type="submit" value="Add to cart"></td>
-                    </tr>
-                </form>
-            </c:forEach>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-        </table>
-        <P>--------------------------------------------------------------------</P>
-        <h1>ACCESSORY</h1>
-        <table>
-            <tr>
-                <th>IMAGE</th>
-                <th>Accessory Name</th>
-                <th>Price</th>
-                <th>Address</th>
-                <th>Vote</th>
-                <th>Action</th>
-            </tr>
-            <c:forEach var="AL" items="${requestScope.AccessoryList}">
-                <form action="MainController" method="post">
-                    <tr><td>
-                            <c:forEach var="url" items="${AccessoryDAO.getAccessoryImg(AL.getAccessory_id()).get(0)}">
-                                <img src="${url}">
+
+        <section class="top py-3 ${not empty requestScope.AccessoryList ? '' : 'hidden'}">
+            <div class="container mb-3">
+                <h1 class="top1">ACCESSORY</h1>
+                <div class="my-3">
+                    <div class="container text-center">
+                        <div class="row">
+                            <c:forEach var="AL" items="${requestScope.AccessoryList}">
+                                <div class="col">
+                                    <div class="card" style="width: 18rem;">
+                                        <form action="MainController" method="post">
+                                            <c:forEach var="url" items="${AccessoryDAO.getAccessoryImg(AL.getAccessory_id()).get(0)}">
+                                                <img src="${url}">
+                                            </c:forEach>
+                                            <div class="card-body">
+                                                <h5>${AL.getName()}</h5>
+                                            </div>
+                                            <ul>
+                                                <li class="list-group-item" style="color: red">${AL.getPrice()} USD</li>
+                                                <li class="list-group-item" style="color: red">${AccessoryDAO.getAccessoryAddress(AL.getAccessory_id())}</li>
+                                                    <c:set var="vote" value="${AccessoryDAO.getAccessoryVote(AL.accessory_id)}" />
+                                                <li class="list-group-item">
+                                                    <c:if test="${vote > 0}">
+                                                        <a style="color: red">${vote} Star</a><a>, đã mua ${AccessoryDAO.getAccessoryBuying(AL.accessory_id)}</a>
+                                                    </c:if>
+                                                    <c:if test="${vote <= 0}">
+                                                        đã mua ${AccessoryDAO.getAccessoryBuying(AL.accessory_id)}
+                                                    </c:if>
+                                                </li> 
+                                            </ul>
+                                            <div class="card-body" style="background-color: rgba(1, 122, 71, 1)">                                      
+                                                <a href="#" class="card-link" style="color: white">Add to cart</a>
+                                            </div>
+                                        </form>
+                                    </div>  
+                                </div>
                             </c:forEach>
-                        <td>${AL.getName()}</td>  
-                        <td>${AL.getPrice()}</td>
-                        <td>${AccessoryDAO.getAccessoryAddress(AL.getAccessory_id())}</td> 
-                        <td><input type="submit" value="Add to cart"></td>
-                    </tr>
-                </form>
+                        </div>                       
+                    </div>
+                </div>
+            </div>
+    </section>
 
-            </c:forEach>
+    <h3 class="top1" style="color: red"><c:out value="${requestScope.ERROR}" default=""/></h3>
+</body>
+<footer><%@include file="footer.jsp" %></footer>
 
-        </table>
-        <p>-----------------------------------------------------------------------------------------</p>
-        <h3 style="color: red"><c:out value="${requestScope.ERROR}" default=""/></h3>
-
-    </body>
-    <footer><%@include file="footer.jsp" %></footer>
-</html>

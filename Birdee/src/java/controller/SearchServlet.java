@@ -37,40 +37,28 @@ public class SearchServlet extends HttpServlet {
         throws ServletException, IOException {
     response.setContentType("text/html;charset=UTF-8");
     try (PrintWriter out = response.getWriter()) {
-        // Get the search keyword from the request parameter
+
         String keyword = request.getParameter("txtsearch");
-        
+
         // If the search keyword is empty or null, retrieve all birds and accessories
         if (keyword == null || keyword.trim().isEmpty()) {
-//            ArrayList<Bird> Blist = BirdDAO.getBirdsList();
-//            ArrayList<Accessory> Alist = AccessoryDAO.getAccessoriesList();
-//            
-//            request.setAttribute("BirdList", Blist);
-//            request.setAttribute("AccessoryList", Alist);
-//            request.getRequestDispatcher("home_search.jsp").forward(request, response);
-request.getRequestDispatcher("MainController?action=").forward(request, response);
+            request.getRequestDispatcher("MainController?action=").forward(request, response);
         } else {
-            
             ArrayList<Bird> Blist = BirdDAO.searchBird(keyword);
             ArrayList<Accessory> Alist = AccessoryDAO.searchAccessory(keyword);
 
-            if (!Blist.isEmpty()) {
-                request.setAttribute("BirdList", Blist);
-            }
-
-            if (!Alist.isEmpty()) {
-                request.setAttribute("AccessoryList", Alist);
-            }
-
-            
             if (Blist.isEmpty() && Alist.isEmpty()) {
-                request.setAttribute("ERROR", "Can not find anything with that name");
+                request.setAttribute("ERROR", "Sorry! We couldn't find anything for your request");
+            } else {
+                request.setAttribute("BirdList", Blist);
+                request.setAttribute("AccessoryList", Alist);
             }
 
             request.getRequestDispatcher("home_search.jsp").forward(request, response);
         }
     }
 }
+
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -112,4 +100,3 @@ request.getRequestDispatcher("MainController?action=").forward(request, response
     }// </editor-fold>
 
 }
-
