@@ -1,4 +1,3 @@
-
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -6,23 +5,20 @@
  */
 package controller;
 
-import dao.AccessoryDAO;
-import dao.BirdDAO;
-import dto.Accessory;
-import dto.Bird;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author ASUS
+ * @author ACE
  */
-public class SearchServlet extends HttpServlet {
+public class LogoutServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,31 +30,28 @@ public class SearchServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-        throws ServletException, IOException {
-    response.setContentType("text/html;charset=UTF-8");
-    try (PrintWriter out = response.getWriter()) {
-
-        String keyword = request.getParameter("txtsearch");
-
-        // If the search keyword is empty or null, retrieve all birds and accessories
-        if (keyword == null || keyword.trim().isEmpty()) {
-            request.getRequestDispatcher("MainController?action=").forward(request, response);
-        } else {
-            ArrayList<Bird> Blist = BirdDAO.searchBird(keyword);
-            ArrayList<Accessory> Alist = AccessoryDAO.searchAccessory(keyword);
-
-            if (Blist.isEmpty() && Alist.isEmpty()) {
-                request.setAttribute("ERROR", "Sorry we couldn't find anything from your request");
-            } else {
-                request.setAttribute("BirdList", Blist);
-                request.setAttribute("AccessoryList", Alist);
+            throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            HttpSession session = request.getSession();
+            session.removeAttribute("userName");
+            Cookie[] cookies = request.getCookies();
+            if (cookies != null) {
+                for (Cookie c : cookies) {
+                    if (c.getName().equals("cEmail")) {
+                        c.setMaxAge(0);
+                        response.addCookie(c);
+                    }
+                    if (c.getName().equals("cPass")) {
+                        c.setMaxAge(0);
+                        response.addCookie(c);
+                    }
+                }
             }
-
-            request.getRequestDispatcher("home_search.jsp").forward(request, response);
+            response.sendRedirect("PrintProduct");
         }
     }
-}
-
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -100,4 +93,3 @@ public class SearchServlet extends HttpServlet {
     }// </editor-fold>
 
 }
-

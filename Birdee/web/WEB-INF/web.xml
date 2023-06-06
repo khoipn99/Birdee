@@ -6,7 +6,7 @@
     </servlet>
     <servlet>
         <servlet-name>PrintProduct</servlet-name>
-        <servlet-class>servlet.PrintProduct</servlet-class>
+        <servlet-class>controller.PrintProduct</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>registerServlet</servlet-name>
@@ -21,8 +21,20 @@
         <servlet-class>controller.SearchServlet</servlet-class>
     </servlet>
     <servlet>
+
         <servlet-name>birdDetail</servlet-name>
         <servlet-class>controller.birdDetail</servlet-class>
+
+        <servlet-name>LoginServlet</servlet-name>
+        <servlet-class>controller.LoginServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>LogoutServlet</servlet-name>
+        <servlet-class>controller.LogoutServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>HomeServlet</servlet-name>
+        <servlet-class>controller.HomeServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
@@ -47,6 +59,16 @@
     <servlet-mapping>
         <servlet-name>birdDetail</servlet-name>
         <url-pattern>/birdDetail</url-pattern>
+        <servlet-name>LoginServlet</servlet-name>
+        <url-pattern>/LoginServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LogoutServlet</servlet-name>
+        <url-pattern>/LogoutServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>HomeServlet</servlet-name>
+        <url-pattern>/HomeServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

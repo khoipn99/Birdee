@@ -16,15 +16,15 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Birdee</title>
-        <link rel="stylesheet" href="style.css" type="text/css"/>
+        <title>Birdee</title>        
+        <script src="mylib/bt5/bootstrap-5.0.2-dist/js/bootstrap.bundle.min.js"></script>
+        <header>
+            <%@include file="header.jsp" %>
+        </header>
     </head>
     <body>
         
-        <header>
-            <%@include file="headHome.jsp" %>
-        </header>
-
+        
         <section class="body py-3">  
             <div class="container">
 
@@ -52,7 +52,7 @@
 
                 </div>
 
-                <div class="body1 py-3">KHÁM PHÁ DANH MỤC
+                <div class="body1 py-3">KHÁM PHÁ 
 
                 </div>
                 <div class="body2 py-3">
@@ -247,6 +247,7 @@
                                 </div>
                                 <ul class="list-group list-group-flush">
                                     <li class="list-group-item" style="color: red"><%= a.getPrice() %>00 VND</li>
+
                                     <li class="list-group-item"><%= AccessoryDAO.getAccessoryAddress(a.getAccessory_id()) %></li>
                                 <%
                                             if (vote > 0) {
