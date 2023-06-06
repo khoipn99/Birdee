@@ -21,7 +21,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author vudin
  */
-public class birdDetail extends HttpServlet {
+public class BirdDetail extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>

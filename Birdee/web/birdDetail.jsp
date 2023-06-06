@@ -22,7 +22,7 @@
     <body>
 
         <header>
-            <%@include file="headHome.jsp" %>
+            <%@include file="header.jsp" %>
         </header>
         <section>
             <div class="container">

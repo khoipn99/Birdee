@@ -43,7 +43,7 @@ public class MainController extends HttpServlet {
             else if(action.equals("Register"))
                 url = "RegisterServlet";
             else if(action.equals("viewBirdDetail"))
-                url = "birdDetail";
+                url = "BirdDetail";
 
             else if (action.equals("Logout"))
                 url = "LogoutServlet";

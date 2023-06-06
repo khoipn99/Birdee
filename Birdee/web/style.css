@@ -367,3 +367,16 @@ text-align: center;
   margin-right: -50px;
 
 }
+
+.headlogin{
+  background: linear-gradient(180deg,rgba(1, 122, 71, 1) 39.06%, rgba(93, 234, 167, 0.71) 200%);
+ 
+}
+.headlogin img{
+  width: 200px;
+}
+.headlogin111{
+  margin-top: 40px;
+  font-size: 1.5rem;
+  font-weight: bold;
+}

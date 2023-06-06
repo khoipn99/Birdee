@@ -9,11 +9,30 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-        <%@include file="headHome.jsp" %>
+        <title>Birdee - Register</title>
+        <link  rel="icon" type="image/png" href="mylib/img/logo2.png">
+        <link rel="stylesheet" href="style.css"/>
+        <link rel="stylesheet" href="mylib/img"/>
+        <link rel="stylesheet" href="mylib/fontawesome-free-6.4.0-web/css/all.css"/>
+        <link rel="stylesheet" href="mylib/fontawesome-free-6.4.0-web/css/all.min.css"/>
+        <link rel="stylesheet" href="mylib/bt5/bootstrap-5.0.2-dist/css/bootstrap-grid.min.css"/>
+        <link rel="stylesheet" href="mylib/bt5/bootstrap-5.0.2-dist/css/bootstrap-grid.css"/>
+        <link rel="stylesheet" href="mylib/bt5/bootstrap-5.0.2-dist/css/bootstrap.min.css"/>     
+        <script src="mylib/bt5/bootstrap-5.0.2-dist/js/popper.min.js"></script>
+        <script src="mylib/bt5/bootstrap-5.0.2-dist/js/bootstrap.bundle.min.js"></script>
     </head>
     <body>
- 
+        <section class="headlogin">
+            <div class="container py-3 head115">
+                <div class="row">
+                    <div class="col he999"><a href="MainController?action="><img src="mylib/img/haiquangdoi.png" alt=""></a>
+                    </div>
+                     <div class="col">
+                        <p class="headlogin111" style="color: white;">Đăng Ký</p>   
+                     </div>
+                </div>
+                </div>
+        </section>
          <section class="login2">
             <div class="container">
                 <div class="row py-3">
