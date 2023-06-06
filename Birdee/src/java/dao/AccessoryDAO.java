@@ -145,6 +145,34 @@ public class AccessoryDAO {
         return tmp;
     }
 
+    public static ArrayList<Integer> getAccessory_Isimg(int accessory_id) {
+        ArrayList<Integer> tmp = new ArrayList<>();
+
+        Connection cn = null;
+        try {
+            cn = DBUtils.makeConnection();
+            if (cn != null) {
+
+                String sql = "select is_main_img\n"
+                        + "from Accessory join Accessory_Img on Accessory_Img.accessory_id = Accessory.accessory_id\n"
+                        + "where Accessory.accessory_id like ?";
+                PreparedStatement pst = cn.prepareStatement(sql);
+                pst.setInt(1, accessory_id);
+                ResultSet rs = pst.executeQuery();
+                while (rs != null && rs.next()) {
+                    int is = rs.getInt("is_main_img");
+                    tmp.add(is);
+                }
+
+            }
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+        return tmp;
+    }
+
     public static String getAccessoryAddress(int Accessory_id) {
         String tmp = "";
         Connection cn = null;
@@ -245,7 +273,6 @@ public class AccessoryDAO {
         }
         return null;
     }
-    
 
     public static void main(String[] args) {
         System.out.println(AccessoryDAO.getAccessoryImg(1).get(0));
