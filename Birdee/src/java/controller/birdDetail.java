@@ -1,7 +1,6 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 package controller;
 
@@ -12,6 +11,7 @@ import dto.Bird;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -19,9 +19,9 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author ASUS
+ * @author vudin
  */
-public class SearchServlet extends HttpServlet {
+public class birdDetail extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,42 +33,21 @@ public class SearchServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-        throws ServletException, IOException {
-    response.setContentType("text/html;charset=UTF-8");
-    try (PrintWriter out = response.getWriter()) {
-        // Get the search keyword from the request parameter
-//        String keyword = request.getParameter("txtsearch");
-//        
-//        // If the search keyword is empty or null, retrieve all birds and accessories
-//        if (keyword == null || keyword.trim().isEmpty()) {
-//            ArrayList<Bird> Blist = BirdDAO.getBirdsList();
-//            ArrayList<Accessory> Alist = AccessoryDAO.getAccessoriesList();
-//            
-//            request.setAttribute("BirdList", Blist);
-//            request.setAttribute("AccessoryList", Alist);
-//            request.getRequestDispatcher("home_search.jsp").forward(request, response);
-//        } else {
-//            // Perform a search for birds and accessories based on the search keyword
-//            ArrayList<Bird> Blist = BirdDAO.getBird(keyword);
-//            ArrayList<Accessory> Alist = AccessoryDAO.getAccessory(keyword);
-//
-//            if (!Blist.isEmpty()) {
-//                request.setAttribute("BirdList", Blist);
-//            }
-//
-//            if (!Alist.isEmpty()) {
-//                request.setAttribute("AccessoryList", Alist);
-//            }
-//
-//            // If no results are found, set the ERROR attribute of the request object
-//            if (Blist.isEmpty() && Alist.isEmpty()) {
-//                request.setAttribute("ERROR", "Can not find anything with that name");
-//            }
-//
-//            request.getRequestDispatcher("home_search.jsp").forward(request, response);
-//        }
+            throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        try ( PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            
+            String keyword = request.getParameter("birdId");               
+                ArrayList<Bird> list;
+                
+                    list = BirdDAO.getBirdById(Integer.parseInt(keyword));                                                                            
+                request.setAttribute("birdListDetail", list);                      
+                
+                RequestDispatcher dispatcher = request.getRequestDispatcher("birdDetail.jsp");
+                dispatcher.forward(request, response);
+        }
     }
-}
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

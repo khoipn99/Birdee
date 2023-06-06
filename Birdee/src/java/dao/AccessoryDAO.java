@@ -141,7 +141,7 @@ public class AccessoryDAO {
         return tmp;
         }
         
-        public static String getBirdAddress(int Accessory_id){
+        public static String getAccessoryAddress(int Accessory_id){
         String tmp = "";
         
         Connection cn = null;
@@ -174,4 +174,5 @@ public class AccessoryDAO {
         
         
     }
+}
 
