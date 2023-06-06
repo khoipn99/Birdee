@@ -105,7 +105,7 @@
                                     <a href="MainController?action=viewBirdDetail&birdId=<%= b.getBird_id() %>"><img src="<%= BirdDAO.getBirdImg(b.getBird_id()).get(0) %>" class="card-img-top" alt="..."></a>
                                     
                                     <div class="card-body">
-                                        <h5 class="card-title"><%= b.getBird_name()%></h5>
+                                        <a style="text-decoration: none; color: #000000 " href="MainController?action=viewBirdDetail&birdId=<%= b.getBird_id() %>"><h5 class="card-title"><%= b.getBird_name()%></h5></a>
 
                                     </div>
                                     <ul class="list-group list-group-flush">
@@ -191,7 +191,7 @@
                             <div class="card" style="width: 15rem;">
                                 <a href="MainController?action=viewBirdDetail&birdId=<%= b.getBird_id() %>"><img src="<%= BirdDAO.getBirdImg(b.getBird_id()).get(0) %>" class="card-img-top2" alt="..."></a>
                                 <div class="card-body">
-                                    <h5 class="card-title"><%= b.getBird_name()%></h5>
+                                    <a style="text-decoration: none; color: #000000 " href="MainController?action=viewBirdDetail&birdId=<%= b.getBird_id() %>"><h5 class="card-title"><%= b.getBird_name()%></h5></a>
 
                                 </div>
                                 <ul class="list-group list-group-flush">

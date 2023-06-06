@@ -106,7 +106,7 @@
                         <form action="MainController" method="POST">
                             <div class="search">
                                 <i class="fa fa-search"></i>
-                                <input type="text" name="txtsearch"class="form-control" placeholder="Have a question? Ask Now">
+                                <input type="text" name="txtsearch"class="form-control" placeholder="Tìm sản phẩm...">
                                 <button type="submit" value="Search" name="action"  style="background-color: #017a47; font-weight: bold;" class="btn btn-primary"><i class="fa-solid fa-magnifying-glass"></i></button>
                             </div> 
                         </form>

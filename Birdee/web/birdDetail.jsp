@@ -18,6 +18,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Birdee</title>
         <link rel="stylesheet" href="style.css" type="text/css"/>
+        <script src="mylib/bt5/bootstrap-5.0.2-dist/js/bootstrap.bundle.min.js"></script>
     </head>
     <body>
 
@@ -25,8 +26,8 @@
             <%@include file="header.jsp" %>
         </header>
         <section>
-            <div class="container">
-                <div class="row">
+            <div class="container py-3">
+                <div class="row py-3">
                     <div class="col">
 
 
@@ -110,7 +111,7 @@
                 <br>
                 <div>
                     <div class="row">
-                        <div class="col" >
+                        <div class="col-md-2" >
                             <ul>
                                 <h6>Ngày Sinh:</h6>
                                 <h6>Giới tính:</h6>
@@ -151,7 +152,9 @@
                     </div>    
                 </div>
                 <br>
-                <h5>MÔ TẢ SẢN PHẨM</h5>     
+                <hr>
+                <h5>MÔ TẢ SẢN PHẨM</h5>   
+                <hr>
                 <br>
                 <h6><%= b.getDescription()%></h6> 
 
