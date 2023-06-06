@@ -40,9 +40,10 @@
                                                     </c:if>
                                                 </c:forEach>
 
-                                                <img class="card-img-top" alt="..." src="${mainImageUrl}">
+                                                <a href="MainController?action=viewBirdDetail&birdId=${BL.getBird_id()}"><img class="card-img-top" alt="..." src="${mainImageUrl}"></a>
+                                                
                                                 <div class="card-body">
-                                                    <h5>${BL.getBird_name()}</h5>
+                                                    <a style="text-decoration: none; color: #000000 " href="MainController?action=viewBirdDetail&birdId=${BL.getBird_id()}"><h5>${BL.getBird_name()}</h5></a>
                                                 </div>
                                                 <ul class="list-group list-group-flush">
                                                     <li class="list-group-item" style="color: red">${BL.getPrice()} USD</li>
