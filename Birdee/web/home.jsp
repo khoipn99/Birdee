@@ -91,21 +91,25 @@
 
 
                             <%
+                                int flag = 0;
                                 ArrayList<Bird> list = (ArrayList<Bird>) request.getAttribute("myBirdList");
                                 if (list != null && !list.isEmpty()) {
                                     for (Bird b : list) {
                                         float vote = BirdDAO.getBirdVote(b.getBird_id());
+                                        flag += 1;
+                                        if(flag < 3){
                             %>
 
                             <div class="col">
                                 <div class="card" style="width: 18rem;">
-                                    <img src="<%= BirdDAO.getBirdImg(b.getBird_id()).get(0) %>" class="card-img-top" alt="...">
+                                    <a href="MainController?action=viewBirdDetail&birdId=<%= b.getBird_id() %>"><img src="<%= BirdDAO.getBirdImg(b.getBird_id()).get(0) %>" class="card-img-top" alt="..."></a>
+                                    
                                     <div class="card-body">
                                         <h5 class="card-title"><%= b.getBird_name()%></h5>
 
                                     </div>
                                     <ul class="list-group list-group-flush">
-                                        <li class="list-group-item" style="color: red"><%= b.getPrice()%> USD</li>
+                                        <li class="list-group-item" style="color: red"><%= b.getPrice()%>00 VND</li>
                                         <li class="list-group-item"><%= BirdDAO.getBirdAddress(b.getBird_id()) %></li>
                                             <%
                                                 if (vote > 0) {
@@ -125,7 +129,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <%                }
+                            <%                } else break;
+                                    }
                                 }
                             %>            
 
@@ -184,13 +189,13 @@
 
                         <div class="col py-3">                       
                             <div class="card" style="width: 15rem;">
-                                <img src="<%= BirdDAO.getBirdImg(b.getBird_id()).get(0) %>" class="card-img-top2" alt="...">
+                                <a href="MainController?action=viewBirdDetail&birdId=<%= b.getBird_id() %>"><a href="MainController?action=viewBirdDetail&birdId=<%= b.getBird_id() %>"><img src="<%= BirdDAO.getBirdImg(b.getBird_id()).get(0) %>" class="card-img-top2" alt="..."></a>
                                 <div class="card-body">
                                     <h5 class="card-title"><%= b.getBird_name()%></h5>
 
                                 </div>
                                 <ul class="list-group list-group-flush">
-                                    <li class="list-group-item" style="color: red"><%= b.getPrice()%> USD</li>
+                                    <li class="list-group-item" style="color: red"><%= b.getPrice()%>00 VND</li>
                                     <li class="list-group-item"><%= BirdDAO.getBirdAddress(b.getBird_id()) %></li>
                                         <%
                                             if (vote > 0) {
@@ -207,6 +212,7 @@
                                 <div class="card-body" style="background-color: rgba(1, 122, 71, 1)">
                                     <a href="#" class="card-link" style="color: white" >Add to cart</a>                                      
                                 </div>
+                                
                             </div>
                         </div>          
                         <%                }
@@ -234,13 +240,14 @@
                         %> 
                         <div class="col py-3">
                             <div class="card" style="width: 15rem;">
-                                <img src="<%= AccessoryDAO.getAccessoryImg(a.getAccessory_id()).get(0) %>" class="card-img-top2" alt="...">
+                                <a href="MainController?action=viewAccessoryDetail&accessorydId=<%= a.getAccessory_id() %>"><img src="<%= AccessoryDAO.getAccessoryImg(a.getAccessory_id()).get(0) %>" class="card-img-top2" alt="..."></a>
                                 <div class="card-body">
                                     <h5 class="card-title"><%= a.getName() %></h5>
 
                                 </div>
                                 <ul class="list-group list-group-flush">
-                                    <li class="list-group-item" style="color: red"><%= a.getPrice() %> USD</li>
+                                    <li class="list-group-item" style="color: red"><%= a.getPrice() %>00 VND</li>
+
                                     <li class="list-group-item"><%= AccessoryDAO.getAccessoryAddress(a.getAccessory_id()) %></li>
                                 <%
                                             if (vote > 0) {

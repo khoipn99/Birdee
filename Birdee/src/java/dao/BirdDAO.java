@@ -26,10 +26,7 @@ public class BirdDAO {
         try {
             cn = DBUtils.makeConnection();
             if (cn != null) {
-                String sql = "select *\n"
-                        + "from Bird join Bird_Img on Bird.bird_id = Bird_Img.bird_id \n"
-                        + "join Account on Bird.email_shop_staff = Account.email \n";
-
+                String sql = "select * from Bird\n";                                               
                 sql = sql + "where Bird.bird_name like ?";
                 PreparedStatement pst = cn.prepareStatement(sql);
                 pst.setString(1, "%" + keyword + "%");
@@ -61,7 +58,45 @@ public class BirdDAO {
         }
         return list;
     }
+    public static ArrayList<Bird> getBirdById(int BirdID) {
+        ArrayList<Bird> list = new ArrayList<>();
+        Connection cn = null;
+        try {
+            cn = DBUtils.makeConnection();
+            if (cn != null) {
+                String sql = "select * from Bird\n"
+                        + "where Bird.bird_id like ?";
+                
+                PreparedStatement pst = cn.prepareStatement(sql);
+                pst.setInt(1, BirdID);
+                ResultSet rs = pst.executeQuery();
+                if (rs != null) {
+                    while (rs.next()) {
+                        int id = rs.getInt("bird_id");
+                        String name = rs.getString("bird_name");
+                        Date dob = rs.getDate("dob");
+                        boolean gender = rs.getBoolean("gender");
+                        float height = rs.getFloat("height");
+                        float weight = rs.getFloat("weight");
+                        String origin = rs.getString("origin");
+                        String description = rs.getString("description");
+                        int quantity = rs.getInt("quantity");
+                        float price = rs.getFloat("price");
+                        String email_shop_staff = rs.getString("email_shop_staff");
+                        int cate_id = rs.getInt("cate_id");
+                        String email_platform_staff = rs.getString("email_platform_staff");                                                                                            
+                        Bird bird = new Bird(id, name, dob, gender, height, weight, origin, description, quantity, price, email_shop_staff, cate_id, email_platform_staff);
+                        list.add(bird);
 
+                    }
+                }
+            }
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return list;
+    }    
     public static float getBirdVote(int Bird_id) {
         float tmp = 0;
         ArrayList<Integer> list = new ArrayList();
@@ -71,12 +106,10 @@ public class BirdDAO {
             if (cn != null) {
 
                 String sql = "select Bird.bird_id, rating\n"
-                        + "from Bird join Bird_Img on Bird.bird_id = Bird_Img.bird_id \n"
-                        + "join Account on Bird.email_shop_staff = Account.email \n"
-                        + "join Order_Detail_Bird on Order_Detail_Bird.bird_id = Bird.bird_id\n"
-                        + "join Review_Bird on Review_Bird.order_detail_id_B = Order_Detail_Bird.order_detail_id_B\n"
-                        + "where Bird.bird_id like ?";
-
+                        + "from Bird \n" +                       
+                        "join Order_Detail_Bird on Order_Detail_Bird.bird_id = Bird.bird_id\n" +
+                        "join Review_Bird on Review_Bird.order_detail_id_B = Order_Detail_Bird.order_detail_id_B\n" +
+                        "where Bird.bird_id like ?";
                 PreparedStatement pst = cn.prepareStatement(sql);
                 pst.setInt(1, Bird_id);
                 ResultSet rs = pst.executeQuery();
@@ -104,13 +137,9 @@ public class BirdDAO {
         try {
             cn = DBUtils.makeConnection();
             if (cn != null) {
-
-                String sql = "select Bird.bird_id, order_detail_id_B\n"
-                        + "from Bird join Bird_Img on Bird.bird_id = Bird_Img.bird_id \n"
-                        + "join Account on Bird.email_shop_staff = Account.email \n"
-                        + "join Order_Detail_Bird on Order_Detail_Bird.bird_id = Bird.bird_id\n"
-                        + "where Bird.bird_id like ?";
-
+                String sql = "select Bird.bird_id, order_detail_id_B from Bird\n" +                                              
+                        "join Order_Detail_Bird on Order_Detail_Bird.bird_id = Bird.bird_id\n" +
+                        "where Bird.bird_id like ?";
                 PreparedStatement pst = cn.prepareStatement(sql);
                 pst.setInt(1, Bird_id);
                 ResultSet rs = pst.executeQuery();
@@ -132,11 +161,11 @@ public class BirdDAO {
         Connection cn = null;
         try {
             cn = DBUtils.makeConnection();
-            if (cn != null) {
-
-                String sql = "select url\n"
-                        + "from Bird join Bird_Img on Bird.bird_id = Bird_Img.bird_id \n"
-                        + "where Bird.bird_id like ?";
+            if(cn != null){
+                
+                String sql = "select url\n"                        
+                    + "from Bird join Bird_Img on Bird.bird_id = Bird_Img.bird_id \n"
+                    + "where Bird.bird_id like ?";               
                 PreparedStatement pst = cn.prepareStatement(sql);
                 pst.setInt(1, Bird_id);
                 ResultSet rs = pst.executeQuery();
@@ -163,9 +192,9 @@ public class BirdDAO {
             if (cn != null) {
 
                 String sql = "select address\n"
-                        + "from Bird join Bird_Img on Bird.bird_id = Bird_Img.bird_id \n"
-                        + "join Account on Bird.email_shop_staff = Account.email \n"
-                        + "where Bird.bird_id like ?";
+                    + "from Bird\n"
+                    + "join Account on Bird.email_shop_staff = Account.email \n"    
+                    + "where Bird.bird_id like ?";               
                 PreparedStatement pst = cn.prepareStatement(sql);
                 pst.setInt(1, Bird_id);
                 ResultSet rs = pst.executeQuery();
@@ -179,6 +208,7 @@ public class BirdDAO {
         } catch (Exception e) {
             System.out.println(e);
         }
+
         return tmp;
     }
 

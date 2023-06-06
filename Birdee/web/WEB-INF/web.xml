@@ -21,6 +21,10 @@
         <servlet-class>controller.SearchServlet</servlet-class>
     </servlet>
     <servlet>
+
+        <servlet-name>birdDetail</servlet-name>
+        <servlet-class>controller.birdDetail</servlet-class>
+
         <servlet-name>LoginServlet</servlet-name>
         <servlet-class>controller.LoginServlet</servlet-class>
     </servlet>
@@ -53,6 +57,8 @@
         <url-pattern>/SearchServlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+        <servlet-name>birdDetail</servlet-name>
+        <url-pattern>/birdDetail</url-pattern>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
     </servlet-mapping>

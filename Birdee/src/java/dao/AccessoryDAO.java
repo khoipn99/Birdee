@@ -141,12 +141,12 @@ public class AccessoryDAO {
         } catch (Exception e) {
             System.out.println(e);
         }
+
         return tmp;
     }
 
     public static String getAccessoryAddress(int Accessory_id) {
         String tmp = "";
-
         Connection cn = null;
         try {
             cn = DBUtils.makeConnection();
@@ -250,6 +250,5 @@ public class AccessoryDAO {
     public static void main(String[] args) {
         System.out.println(AccessoryDAO.getAccessoryImg(1).get(0));
     }
-    
 
 }
