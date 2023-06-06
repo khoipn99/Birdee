@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -39,6 +40,10 @@
 
                     <div class="col re5  py-3">
                         <div class="re6">
+                            <c:set var="msg" value="${requestScope.msg}" />
+                                        <c:if test="${msg != null}">
+                                            <p style="color: red">${msg}</p> 
+                                        </c:if>
                         <form action="MainController">
                             <p>Enter your name: <input type="text" name="userName" required=""/></p>
                             <p>Enter your phone number: <input type="number" name="phoneNumber" id="phoneNumber-input" pattern="[0-9]{10,11}" required onblur="checkphoneNumber()"></p>
@@ -123,7 +128,7 @@
                                     return regex.test(password);
                                 }
                             </script>
-                            <p><input type="submit" style="font-weight: bold;" value="Register" name="action"></p>
+                            <p><input type="submit" style="font-weight: bold;" value="Register" name="action" id="check-button"></p>
                         </form>
                     </div>
                     </div>
@@ -133,7 +138,7 @@
                 </div>
             </div>
        
-    </section>  
+    </section>    
     </body>
     <footer><%@include file="footer.jsp" %></footer>
 </html>

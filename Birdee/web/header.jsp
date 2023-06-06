@@ -49,7 +49,7 @@
 
                             </c:if>
                             <c:if test="${uName == null}">
-                                <a href="MainController?action=registerAccount.jsp" style="color: white; text-decoration: none;"><strong>Đăng Ký</strong></a>
+                                <a href="MainController?action=RegisterAccount" style="color: white; text-decoration: none;"><strong>Đăng Ký</strong></a>
                                 <i class="navbar__link-separator"></i>
                                 <a href="login.jsp" style="color: white; text-decoration: none;"><strong>Đăng Nhập</strong></a>
 

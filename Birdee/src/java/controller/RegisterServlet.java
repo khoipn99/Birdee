@@ -4,6 +4,7 @@
  */
 package controller;
 
+import dao.AccountDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -31,7 +32,26 @@ public class RegisterServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try ( PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            out.print("Day la registerServlet");
+            String username = request.getParameter("userName");
+            String phoneNumber = request.getParameter("phoneNumber");
+            String email = request.getParameter("email");
+            String province = request.getParameter("province");
+            String district = request.getParameter("district");
+            String ward = request.getParameter("ward");
+            String spec_address = request.getParameter("spec_address");
+            String password = request.getParameter("password");
+            String role_id = "cus";
+            
+            String address = spec_address +", "+ward+", "+district+", "+province;
+            boolean check = AccountDAO.checkValid(email, phoneNumber);
+            if(check!=true){
+                request.setAttribute("msg", "Đăng kí không thành công vui lòng kiểm tra lại email hoặc sdt!!!");
+                request.getRequestDispatcher("registerAccount.jsp").forward(request, response);
+            }else{
+                AccountDAO.addAccount(email, password, username, role_id, address, phoneNumber);
+                request.setAttribute("msg", "Đăng kí thành công!!!");
+                request.getRequestDispatcher("login.jsp").forward(request, response);
+            }
         }
     }
 
