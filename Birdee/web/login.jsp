@@ -9,7 +9,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-       <%@include file="headHome.jsp" %>
+       <%@include file="header.jsp" %>
     </head>
     <body>
           

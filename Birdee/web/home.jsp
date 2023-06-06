@@ -16,13 +16,14 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Birdee</title>
-        <link rel="stylesheet" href="style.css" type="text/css"/>
-    </head>
-    <body>
+        <title>Birdee</title>        
+        <script src="mylib/bt5/bootstrap-5.0.2-dist/js/bootstrap.bundle.min.js"></script>
         <header>
             <%@include file="header.jsp" %>
         </header>
+    </head>
+    <body>
+        
         
         <section class="body py-3">  
             <div class="container">
