@@ -46,15 +46,15 @@
                             <c:if test="${uName != null}">
                                 <a href="#" style="color: white; text-decoration: none;"><strong>${uName}</strong></a>
                                 <a href="MainController?action=Logout" style="color: white; text-decoration: none;"><strong>Logout</strong></a>
-                                
+
                             </c:if>
                             <c:if test="${uName == null}">
                                 <a href="MainController?action=registerAccount.jsp" style="color: white; text-decoration: none;"><strong>Đăng Ký</strong></a>
                                 <i class="navbar__link-separator"></i>
                                 <a href="login.jsp" style="color: white; text-decoration: none;"><strong>Đăng Nhập</strong></a>
-                                
+
                             </c:if>    
-                            
+
 
 
 
@@ -103,12 +103,16 @@
 
 
                     <div class="col-md-8">
-                        <div class="search">
-                            <i class="fa fa-search"></i>
-                            <input type="text" class="form-control" placeholder="Have a question? Ask Now">
-                            <button  style="background-color: #017a47; font-weight: bold;" class="btn btn-primary"><i class="fa-solid fa-magnifying-glass"></i></button>
-                        </div> 
+                        <form action="MainController" method="POST">
+                            <div class="search">
+                                <i class="fa fa-search"></i>
+                                <input type="text" name="txtsearch"class="form-control" placeholder="Have a question? Ask Now">
+                                <button type="submit" value="Search" name="action"  style="background-color: #017a47; font-weight: bold;" class="btn btn-primary"><i class="fa-solid fa-magnifying-glass"></i></button>
+                            </div> 
+                        </form>
                     </div>
+
+
 
                     <div class="col-md-1">
                         <div class="row">

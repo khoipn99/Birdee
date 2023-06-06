@@ -16,7 +16,7 @@
     </head>
     <body>
         <header>
-            <%@ include file="headHome.jsp" %>
+            <%@ include file="header.jsp" %>
         </header>
 
         <section class="top py-3 ${not empty requestScope.BirdList ? '' : 'hidden'}" >
