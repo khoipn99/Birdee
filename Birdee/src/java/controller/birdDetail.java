@@ -41,7 +41,7 @@ public class birdDetail extends HttpServlet {
             String keyword = request.getParameter("birdId");               
                 ArrayList<Bird> list;
                 
-                    list = BirdDAO.getBirdById(Integer.parseInt(keyword));                                                                            
+                list = BirdDAO.getBirdById(Integer.parseInt(keyword));                                                                            
                 request.setAttribute("birdListDetail", list);                      
                 
                 RequestDispatcher dispatcher = request.getRequestDispatcher("birdDetail.jsp");

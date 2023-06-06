@@ -97,7 +97,7 @@
                                     for (Bird b : list) {
                                         float vote = BirdDAO.getBirdVote(b.getBird_id());
                                         flag += 1;
-                                        if(flag < 3){
+                                        if(flag < 5){
                             %>
 
                             <div class="col">
@@ -189,7 +189,7 @@
 
                         <div class="col py-3">                       
                             <div class="card" style="width: 15rem;">
-                                <a href="MainController?action=viewBirdDetail&birdId=<%= b.getBird_id() %>"><a href="MainController?action=viewBirdDetail&birdId=<%= b.getBird_id() %>"><img src="<%= BirdDAO.getBirdImg(b.getBird_id()).get(0) %>" class="card-img-top2" alt="..."></a>
+                                <a href="MainController?action=viewBirdDetail&birdId=<%= b.getBird_id() %>"><img src="<%= BirdDAO.getBirdImg(b.getBird_id()).get(0) %>" class="card-img-top2" alt="..."></a>
                                 <div class="card-body">
                                     <h5 class="card-title"><%= b.getBird_name()%></h5>
 
