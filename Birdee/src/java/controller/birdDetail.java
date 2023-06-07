@@ -21,7 +21,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author vudin
  */
-public class birdDetail extends HttpServlet {
+public class BirdDetail extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -41,7 +41,7 @@ public class birdDetail extends HttpServlet {
             String keyword = request.getParameter("birdId");               
                 ArrayList<Bird> list;
                 
-                    list = BirdDAO.getBirdById(Integer.parseInt(keyword));                                                                            
+                list = BirdDAO.getBirdById(Integer.parseInt(keyword));                                                                            
                 request.setAttribute("birdListDetail", list);                      
                 
                 RequestDispatcher dispatcher = request.getRequestDispatcher("birdDetail.jsp");

@@ -79,7 +79,7 @@ public class LoginServlet extends HttpServlet {
                         request.setAttribute("userName", acc.getUsername());                        
                         request.getRequestDispatcher("staffPage.jsp").forward(request, response);
                     }
-                    else {
+                    else { //seller
                         request.setAttribute("userName", acc.getUsername());                        
                         request.getRequestDispatcher("home.jsp").forward(request, response);
                     }

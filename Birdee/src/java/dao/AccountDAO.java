@@ -9,6 +9,7 @@ import dto.Account;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import util.DBUtils;
 
 /**
@@ -45,11 +46,63 @@ public class AccountDAO {
         }
         return acc;        
     }
-    
-    public static void main(String[] args) {
-        Account acc = null;
-        acc = getAccount("customer@gmail.com", "123");
-        System.out.println(acc.getUsername());
+    public static ArrayList<Account> getAllAccount(){
+        ArrayList<Account> list = new ArrayList<>();
+        Connection cn = null;
+        try {
+            cn = DBUtils.makeConnection();
+            if (cn != null) {
+                String sql = "select *\n"
+                        + "from Account\n";
+                PreparedStatement pst = cn.prepareStatement(sql);
+                ResultSet rs = pst.executeQuery();
+                while (rs != null && rs.next()) {
+                    String email = rs.getString("email");
+                    String password = rs.getString("password");
+                    String name = rs.getString("username");
+                    String role = rs.getString("role_id");
+                    String address = rs.getString("address");
+                    String phone = rs.getString("phone");
+                    Account acc = new Account(email, password, name, role, address, phone);
+                    list.add(acc);
+                }
+            }
+            cn.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+    public static boolean checkValid(String email, String phone){
+        boolean kq = true;
+        ArrayList<Account> list = getAllAccount();
+        for (Account account : list) {
+            if(account.getEmail().equals(email)||account.getPhone().equals(phone.trim())){
+                kq = false;
+            }
+        }
+        return kq;
+    }
+    public static int addAccount(String email, String password, String name,String role, String address, String phone) {
+        int kq = 0;
+        Connection cn = null;
+        try {
+            cn = DBUtils.makeConnection();
+            if(cn!=null){
+            String sql = "INSERT INTO Account (email, password, username, role_id, address, phone) VALUES (?, ?, ?, ?, ?, ?)";
+            PreparedStatement statement = cn.prepareStatement(sql);
+            statement.setString(1, email);
+            statement.setString(2, password);
+            statement.setString(3, name);
+            statement.setString(4, role);
+            statement.setString(5, address);
+            statement.setString(6, phone);
+            kq = statement.executeUpdate();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return kq;
     }
     
 }

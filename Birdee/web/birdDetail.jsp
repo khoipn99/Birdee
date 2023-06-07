@@ -23,10 +23,8 @@
         </header>
     </head>
     <body>
-
-        <section>
-            <div class="container">
-                <div class="row">
+            <div class="container py-3">
+                <div class="row py-3">
                     <div class="col">
 
 
@@ -110,7 +108,7 @@
                 <br>
                 <div>
                     <div class="row">
-                        <div class="col" >
+                        <div class="col-md-2" >
                             <ul>
                                 <h6>Ngày Sinh:</h6>
                                 <h6>Giới tính:</h6>
@@ -151,7 +149,9 @@
                     </div>    
                 </div>
                 <br>
-                <h5>MÔ TẢ SẢN PHẨM</h5>     
+                <hr>
+                <h5>MÔ TẢ SẢN PHẨM</h5>   
+                <hr>
                 <br>
                 <h6><%= b.getDescription()%></h6> 
 
