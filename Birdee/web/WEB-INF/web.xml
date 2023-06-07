@@ -33,6 +33,10 @@
         <servlet-class>controller.HomeServlet</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>AccessoryDetail</servlet-name>
+        <servlet-class>controller.AccessoryDetail</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>BirdDetail</servlet-name>
         <servlet-class>controller.BirdDetail</servlet-class>
     </servlet>
@@ -69,13 +73,15 @@
         <url-pattern>/HomeServlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+        <servlet-name>AccessoryDetail</servlet-name>
+        <url-pattern>/AccessoryDetail</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>BirdDetail</servlet-name>
         <url-pattern>/BirdDetail</url-pattern>
     </servlet-mapping>
     <session-config>
-        <session-timeout>
-            30
-        </session-timeout>
+        <session-timeout>30</session-timeout>
     </session-config>
     <welcome-file-list>
         <welcome-file>MainController</welcome-file>
