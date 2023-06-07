@@ -243,7 +243,7 @@
                             <div class="card" style="width: 15rem;">
                                 <a href="MainController?action=viewAccessoryDetail&accessorydId=<%= a.getAccessory_id() %>"><img src="<%= AccessoryDAO.getAccessoryImg(a.getAccessory_id()).get(0) %>" class="card-img-top2" alt="..."></a>
                                 <div class="card-body">
-                                    <a href="MainController?action=viewAccessoryDetail&accessorydId=<%= a.getAccessory_id() %>"><h5 class="card-title"><%= a.getName() %></h5></a>
+                                    <a style="text-decoration: none; color: #000000 " href="MainController?action=viewAccessoryDetail&accessorydId=<%= a.getAccessory_id() %>"><h5 class="card-title"><%= a.getName() %></h5></a>
 
                                 </div>
                                 <ul class="list-group list-group-flush">
