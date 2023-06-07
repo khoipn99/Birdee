@@ -55,6 +55,42 @@ public class AccessoryDAO {
         }
         return list;
     }
+    
+    public static ArrayList<Accessory> getAccessoryByID(int ID) {
+        ArrayList<Accessory> list = new ArrayList<>();
+        Connection cn = null;
+        try {
+            cn = DBUtils.makeConnection();
+            if (cn != null) {
+                String sql = "select *\n"
+                        + "from Accessory "
+                        + "where Accessory.accessory_id like ?";
+                PreparedStatement pst = cn.prepareStatement(sql);
+                 pst.setInt(1, ID);
+                ResultSet rs = pst.executeQuery();
+                if (rs != null) {
+                    while (rs.next()) {
+                        int id = rs.getInt("accessory_id");
+                        String name = rs.getString("name");
+                        String description = rs.getString("description");
+                        int quantity = rs.getInt("quantity");
+                        float price = rs.getFloat("price");
+                        String email_shop_staff = rs.getString("email_shop_staff");
+                        int cate_id = rs.getInt("cate_id");
+                        String email_platform_staff = rs.getString("email_platform_staff");
+
+                        Accessory accessory = new Accessory(id, name, price, quantity, description, email_shop_staff, cate_id, email_platform_staff);
+                        list.add(accessory);
+
+                    }
+                }
+            }
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return list;
+    }
 
     public static float getAccessoryVote(int Accessory_id) {
         float tmp = 0;

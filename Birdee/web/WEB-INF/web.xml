@@ -21,10 +21,6 @@
         <servlet-class>controller.SearchServlet</servlet-class>
     </servlet>
     <servlet>
-
-        <servlet-name>birdDetail</servlet-name>
-        <servlet-class>controller.birdDetail</servlet-class>
-
         <servlet-name>LoginServlet</servlet-name>
         <servlet-class>controller.LoginServlet</servlet-class>
     </servlet>
@@ -35,6 +31,14 @@
     <servlet>
         <servlet-name>HomeServlet</servlet-name>
         <servlet-class>controller.HomeServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>birdDetail</servlet-name>
+        <servlet-class>controller.birdDetail</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AccessoryDetail</servlet-name>
+        <servlet-class>controller.AccessoryDetail</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
@@ -57,8 +61,6 @@
         <url-pattern>/SearchServlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>birdDetail</servlet-name>
-        <url-pattern>/birdDetail</url-pattern>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
     </servlet-mapping>
@@ -70,10 +72,16 @@
         <servlet-name>HomeServlet</servlet-name>
         <url-pattern>/HomeServlet</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>birdDetail</servlet-name>
+        <url-pattern>/birdDetail</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AccessoryDetail</servlet-name>
+        <url-pattern>/AccessoryDetail</url-pattern>
+    </servlet-mapping>
     <session-config>
-        <session-timeout>
-            30
-        </session-timeout>
+        <session-timeout>30</session-timeout>
     </session-config>
     <welcome-file-list>
         <welcome-file>MainController</welcome-file>

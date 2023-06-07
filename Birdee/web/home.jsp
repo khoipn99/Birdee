@@ -97,7 +97,7 @@
                                     for (Bird b : list) {
                                         float vote = BirdDAO.getBirdVote(b.getBird_id());
                                         flag += 1;
-                                        if(flag < 3){
+                                        if(flag < 5){
                             %>
 
                             <div class="col">
@@ -105,7 +105,7 @@
                                     <a href="MainController?action=viewBirdDetail&birdId=<%= b.getBird_id() %>"><img src="<%= BirdDAO.getBirdImg(b.getBird_id()).get(0) %>" class="card-img-top" alt="..."></a>
                                     
                                     <div class="card-body">
-                                        <h5 class="card-title"><%= b.getBird_name()%></h5>
+                                        <a href="MainController?action=viewBirdDetail&birdId=<%= b.getBird_id() %>"><h5 class="card-title"><%= b.getBird_name()%></h5></a>
 
                                     </div>
                                     <ul class="list-group list-group-flush">
@@ -191,7 +191,7 @@
                             <div class="card" style="width: 15rem;">
                                 <a href="MainController?action=viewBirdDetail&birdId=<%= b.getBird_id() %>"><a href="MainController?action=viewBirdDetail&birdId=<%= b.getBird_id() %>"><img src="<%= BirdDAO.getBirdImg(b.getBird_id()).get(0) %>" class="card-img-top2" alt="..."></a>
                                 <div class="card-body">
-                                    <h5 class="card-title"><%= b.getBird_name()%></h5>
+                                    <a href="MainController?action=viewBirdDetail&birdId=<%= b.getBird_id() %>"><h5 class="card-title"><%= b.getBird_name()%></h5></a>
 
                                 </div>
                                 <ul class="list-group list-group-flush">
@@ -242,7 +242,7 @@
                             <div class="card" style="width: 15rem;">
                                 <a href="MainController?action=viewAccessoryDetail&accessorydId=<%= a.getAccessory_id() %>"><img src="<%= AccessoryDAO.getAccessoryImg(a.getAccessory_id()).get(0) %>" class="card-img-top2" alt="..."></a>
                                 <div class="card-body">
-                                    <h5 class="card-title"><%= a.getName() %></h5>
+                                    <a href="MainController?action=viewAccessoryDetail&accessorydId=<%= a.getAccessory_id() %>"><h5 class="card-title"><%= a.getName() %></h5></a>
 
                                 </div>
                                 <ul class="list-group list-group-flush">

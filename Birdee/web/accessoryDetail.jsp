@@ -1,9 +1,8 @@
 <%-- 
-    Document   : birdDetail
-    Created on : Jun 6, 2023, 11:26:52 AM
+    Document   : accessoryDetail
+    Created on : Jun 7, 2023, 1:10:39 PM
     Author     : vudin
 --%>
-
 <%@page import="dao.AccessoryDAO"%>
 <%@page import="dto.Accessory"%>
 <%@page import="java.util.List"%>
@@ -32,16 +31,16 @@
 
                         <%
 
-                            ArrayList<Bird> list = (ArrayList<Bird>) request.getAttribute("birdListDetail");
+                            ArrayList<Accessory> list = (ArrayList<Accessory>) request.getAttribute("accessoryListDetail");
                             if (list != null && !list.isEmpty()) {
-                                for (Bird b : list) {
+                                for (Accessory a : list) {
 
                         %> 
                         <div>             
                             <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel" style="height: 500px; width: 500px">
                                 <div class="carousel-inner">
                                     <%                            int flag = 0;
-                                        ArrayList<String> imgList = BirdDAO.getBirdImg(b.getBird_id());
+                                        ArrayList<String> imgList = AccessoryDAO.getAccessoryImg(a.getAccessory_id());
                                         for (String i : imgList) {
                                             flag += 1;
                                             if (flag == 1) {
@@ -77,9 +76,9 @@
 
 
                         <ul>
-                            <h2><%= b.getBird_name()%></h2>                            
-                            <h5><a style="color: red"><%= BirdDAO.getBirdVote(b.getBird_id())%> Star | </a><a><%= BirdDAO.getBirdBuying(b.getBird_id())%> Ðã bán</a></h5>
-                            <h5 style="color: red"><%= b.getPrice()%>00 VND</h5>
+                            <h2><%= a.getName() %></h2>                            
+                            <h5><a style="color: red"><%= AccessoryDAO.getAccessoryVote(a.getAccessory_id()) %> Star | </a><a><%= AccessoryDAO.getAccessoryBuying(a.getAccessory_id()) %> Ðã bán</a></h5>
+                            <h5 style="color: red"><%= a.getPrice() %>00 VND</h5>
                             <br>
                             <br>
                             <br>
@@ -91,17 +90,15 @@
                             <br>
                             <br>
 
-                            <h5>Số lượng  1  |  <%= b.getQuantity()%> sản phẩm có sẵn</h5>
+                            <h5>Số lượng  1  |  <%= a.getQuantity() %> sản phẩm có sẵn</h5>
                             <br>
                             <h5><a style="color: green; background-color: greenyellow; padding: 5px">Thêm vào giỏ hàng </a><a>  </a><a style="color: white; background-color: green; padding: 5px">mua ngay</a></h5>
 
 
                         </ul>
                     </div>                    
-                    <%
-                            }
-                        }
-                    %>
+                    
+                            
                 </div>
                 <br>
                 <h5>Thông tin Shop</h5>    
@@ -112,39 +109,15 @@
                     <div class="row">
                         <div class="col" >
                             <ul>
-                                <h6>Ngày Sinh:</h6>
-                                <h6>Giới tính:</h6>
-                                <h6>Chiều cao:</h6>
-                                <h6>Cân nặng:</h6>
-                                <h6>Xuất xứ:</h6>
-                                <h6>Số chim còn lại:</h6>
+                                <h6>Số sản phẩm còn lại:</h6>                              
                                 <h6>Gửi từ:</h6>
                             </ul>
                         </div>
-                        <%
-                            ArrayList<Bird> list2 = (ArrayList<Bird>) request.getAttribute("birdListDetail");
-                            if (list != null && !list.isEmpty()) {
-                                for (Bird b : list) {
-
-                        %> 
+                        
                         <div class="col" >
-                            <ul>
-                                <h6><%= b.getDob().toString()%></h6>
-                                <%if (b.isGender()) {
-                                %>                                       
-                                <h6>Giống cái</h6>
-                                <%
-                                } else {
-                                %>
-                                <h6>Giống đực</h6>
-                                <%
-                                    };
-                                %>
-                                <h6><%= b.getHeight()%> cm</h6>
-                                <h6><%= b.getWeight()%> gam</h6>
-                                <h6><%= b.getOrigin()%></h6>
-                                <h6><%= b.getQuantity()%> con</h6>
-                                <h6><%= BirdDAO.getBirdAddress(b.getBird_id())%></h6>
+                            <ul>                              
+                                <h6><%= a.getQuantity() %></h6>
+                                <h6><%= AccessoryDAO.getAccessoryAddress(a.getAccessory_id()) %></h6>
                             </ul>
                         </div>
 
@@ -153,7 +126,7 @@
                 <br>
                 <h5>MÔ TẢ SẢN PHẨM</h5>     
                 <br>
-                <h6><%= b.getDescription()%></h6> 
+                <h6><%= a.getDescription() %></h6> 
 
                 <%
                         }
@@ -175,4 +148,5 @@
         </footer>
     </body>
 </html>
+
 
