@@ -6,8 +6,10 @@ package controller;
 
 import dao.AccessoryDAO;
 import dao.BirdDAO;
+import dao.ReviewDAO;
 import dto.Accessory;
 import dto.Bird;
+import dto.Review_Bird;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -40,9 +42,13 @@ public class BirdDetail extends HttpServlet {
             
             String keyword = request.getParameter("birdId");               
                 ArrayList<Bird> list;
+                ArrayList<Review_Bird> list2;
                 
-                list = BirdDAO.getBirdById(Integer.parseInt(keyword));                                                                            
-                request.setAttribute("birdListDetail", list);                      
+                list = BirdDAO.getBirdById(Integer.parseInt(keyword)); 
+                list2 = ReviewDAO.getReview_Bird(Integer.parseInt(keyword));
+                
+                request.setAttribute("birdListDetail", list);
+                request.setAttribute("birdListReview", list2);
                 
                 RequestDispatcher dispatcher = request.getRequestDispatcher("birdDetail.jsp");
                 dispatcher.forward(request, response);

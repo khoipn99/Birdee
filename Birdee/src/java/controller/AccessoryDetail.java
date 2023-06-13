@@ -6,8 +6,10 @@ package controller;
 
 import dao.AccessoryDAO;
 import dao.BirdDAO;
+import dao.ReviewDAO;
 import dto.Accessory;
 import dto.Bird;
+import dto.Review_Accessory;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -39,9 +41,13 @@ public class AccessoryDetail extends HttpServlet {
             /* TODO output your page here. You may use following sample code. */
             String keyword = request.getParameter("accessorydId");               
                 ArrayList<Accessory> list;
+                ArrayList<Review_Accessory> list2;
                 
-                    list = AccessoryDAO.getAccessoryByID(Integer.parseInt(keyword));                                                                            
+                list = AccessoryDAO.getAccessoryByID(Integer.parseInt(keyword));   
+                list2 = ReviewDAO.getReview_Accessory(Integer.parseInt(keyword)); 
+                
                 request.setAttribute("accessoryListDetail", list);                      
+                request.setAttribute("accessoryListReview", list2);
                 
                 RequestDispatcher dispatcher = request.getRequestDispatcher("accessoryDetail.jsp");
                 dispatcher.forward(request, response);
