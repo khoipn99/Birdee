@@ -40,6 +40,10 @@
         <servlet-name>BirdDetail</servlet-name>
         <servlet-class>controller.BirdDetail</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>LoadByCate</servlet-name>
+        <servlet-class>controller.LoadByCate</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
         <url-pattern>/MainController</url-pattern>
@@ -79,6 +83,10 @@
     <servlet-mapping>
         <servlet-name>BirdDetail</servlet-name>
         <url-pattern>/BirdDetail</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LoadByCate</servlet-name>
+        <url-pattern>/LoadByCate</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>30</session-timeout>

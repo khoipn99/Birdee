@@ -59,21 +59,21 @@
                     <div class="cate ">
                         <div class="row ">
                             <div class="col-md-3">
-                                <a href="#"><img src="mylib/img/chim.png" alt=""></a><br>
-                                <a href="#">Chim cảnh</a>
+                                <a href="LoadByCate?cateID=1"><img src="mylib/img/chim.png" alt=""></a><br>
+                                <a href="LoadByCate?cateID=1">Chim cảnh</a>
                             </div>
                             <div class="col-md-3">
-                                <a href="#"><img src="mylib/img/thucan.png" alt=""></a><br>
-                                <a href="#">Thức ăn cho chim</a>
+                                <a href="LoadByCate?cateID=2"><img src="mylib/img/thucan.png" alt=""></a><br>
+                                <a href="LoadByCate?cateID=2">Thức ăn cho chim</a>
 
                             </div>
                             <div class="col-md-3">
-                                <a href="#"><img src="mylib/img/mangan.png" alt=""></a><br>
-                                <a href="#">Máng ăn, cóng</a>
+                                <a href="LoadByCate?cateID=3"><img src="mylib/img/mangan.png" alt=""></a><br>
+                                <a href="LoadByCate?cateID=3">Máng ăn, cóng</a>
                             </div>
                             <div class="col-md-3">
-                                <a href="#"><img src="mylib/img/long.png" alt=""></a><br>
-                                <a href="#">Lồng chim</a>
+                                <a href="LoadByCate?cateID=4"><img src="mylib/img/long.png" alt=""></a><br>
+                                <a href="LoadByCate?cateID=4">Lồng chim</a>
                             </div>
                         </div>
                     </div>
