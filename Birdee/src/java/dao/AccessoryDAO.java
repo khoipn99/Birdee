@@ -309,9 +309,47 @@ public class AccessoryDAO {
         }
         return null;
     }
-
-    public static void main(String[] args) {
-        System.out.println(AccessoryDAO.getAccessoryImg(1).get(0));
+    
+    public static ArrayList<Accessory> getAccessByCate(int cate_id) {
+        Connection cn = null;
+        ArrayList<Accessory> list = new ArrayList<>();
+        try {
+            cn = DBUtils.makeConnection();
+            if (cn != null) {
+                String sql = "SELECT accessory_id,name,price,quantity,description,email_shop_staff,cate_id,email_platform_staff\n"
+                        + "FROM Accessory\n"
+                        + "WHERE cate_id = ?";
+                PreparedStatement pst = cn.prepareStatement(sql);
+                pst.setInt(1, cate_id);
+                ResultSet rs = pst.executeQuery();
+                if (rs != null)
+                    while (rs.next()) {
+                        int id = rs.getInt("accessory_id");
+                        String name = rs.getString("name");
+                        float price = rs.getFloat("price");
+                        int quantity = rs.getInt("quantity");
+                        String description = rs.getString("description");
+                        String email_shop_staff = rs.getString("email_shop_staff");
+                        int cateID = rs.getInt("cate_id");
+                        String email_platform_staff = rs.getString("email_platform_staff");
+                        Accessory Ac = new Accessory(id, name, price, quantity, description, email_shop_staff, cateID, email_platform_staff);
+                        list.add(Ac);
+                    }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
     }
-
+    
+    public static void main(String[] args) {
+        ArrayList<Accessory> list = getAccessByCate(2);
+        for (Accessory accessory : list) {
+            System.out.println(accessory.getName());
+        }
+        
+    }
+    
+    
+    
 }
