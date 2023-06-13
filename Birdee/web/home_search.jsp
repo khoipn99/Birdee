@@ -13,6 +13,7 @@
             }
         </style>
         <link rel="stylesheet" href="style.css" type="text/css"/>
+        <script src="mylib/bt5/bootstrap-5.0.2-dist/js/bootstrap.bundle.min.js"></script>
     </head>
     <body>
         <header>

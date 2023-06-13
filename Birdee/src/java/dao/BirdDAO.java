@@ -359,11 +359,13 @@ public class BirdDAO {
         return null;
     }
     
+
     public static void main(String[] args) {
 //        ArrayList<Bird> list = getBird("");
 //        System.out.println(list.get(0));
 
         getMainBirdImg(3);
     }
+
 
 }
