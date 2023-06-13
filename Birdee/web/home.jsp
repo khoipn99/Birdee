@@ -18,6 +18,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Birdee</title>        
         <script src="mylib/bt5/bootstrap-5.0.2-dist/js/bootstrap.bundle.min.js"></script>
+        <link rel="stylesheet" href="style.css" type="text/css"/>
         <header>
             <%@include file="header.jsp" %>
         </header>
@@ -102,7 +103,7 @@
 
                             <div class="col">
                                 <div class="card" style="width: 18rem;">
-                                    <a href="MainController?action=viewBirdDetail&birdId=<%= b.getBird_id() %>"><img src="<%= BirdDAO.getBirdImg(b.getBird_id()).get(0) %>" class="card-img-top" alt="..."></a>
+                                    <a href="MainController?action=viewBirdDetail&birdId=<%= b.getBird_id() %>"><img src="<%= BirdDAO.getMainBirdImg(b.getBird_id()) %>" class="card-img-top" alt="..."></a>
                                     
                                     <div class="card-body">
 
@@ -190,7 +191,7 @@
 
                         <div class="col py-3">                       
                             <div class="card" style="width: 15rem;">
-                                <a href="MainController?action=viewBirdDetail&birdId=<%= b.getBird_id() %>"><img src="<%= BirdDAO.getBirdImg(b.getBird_id()).get(0) %>" class="card-img-top2" alt="..."></a>
+                                <a href="MainController?action=viewBirdDetail&birdId=<%= b.getBird_id() %>"><img src="<%= BirdDAO.getMainBirdImg(b.getBird_id()) %>" class="card-img-top2" alt="..."></a>
                                 <div class="card-body">
                                     <a style="text-decoration: none; color: #000000 " href="MainController?action=viewBirdDetail&birdId=<%= b.getBird_id() %>"><h5 class="card-title"><%= b.getBird_name()%></h5></a>
 
@@ -241,7 +242,7 @@
                         %> 
                         <div class="col py-3">
                             <div class="card" style="width: 15rem;">
-                                <a href="MainController?action=viewAccessoryDetail&accessorydId=<%= a.getAccessory_id() %>"><img src="<%= AccessoryDAO.getAccessoryImg(a.getAccessory_id()).get(0) %>" class="card-img-top2" alt="..."></a>
+                                <a href="MainController?action=viewAccessoryDetail&accessorydId=<%= a.getAccessory_id() %>"><img src="<%= AccessoryDAO.getMainAccessoryImg(a.getAccessory_id()) %>" class="card-img-top2" alt="..."></a>
                                 <div class="card-body">
                                     <a href="MainController?action=viewAccessoryDetail&accessorydId=<%= a.getAccessory_id() %>"><h5 class="card-title"><%= a.getName() %></h5></a>
 
