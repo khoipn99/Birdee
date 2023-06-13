@@ -28,8 +28,8 @@ public class AccessoryDAO {
             cn = DBUtils.makeConnection();
             if (cn != null) {
                 String sql = "select *\n"
-                        + "from Accessory ";
-
+                        + "from Accessory\n"
+                        + "order by Accessory.accessory_id DESC\n";
                 PreparedStatement pst = cn.prepareStatement(sql);
                 ResultSet rs = pst.executeQuery();
                 if (rs != null) {
@@ -63,8 +63,9 @@ public class AccessoryDAO {
             cn = DBUtils.makeConnection();
             if (cn != null) {
                 String sql = "select *\n"
-                        + "from Accessory "
-                        + "where Accessory.accessory_id like ?";
+                        + "from Accessory\n"
+                        + "where Accessory.accessory_id like ?\n"
+                        + "order by Accessory.accessory_id DESC\n";
                 PreparedStatement pst = cn.prepareStatement(sql);
                  pst.setInt(1, ID);
                 ResultSet rs = pst.executeQuery();
@@ -170,6 +171,34 @@ public class AccessoryDAO {
                 while (rs != null && rs.next()) {
                     String url = rs.getString("url");
                     tmp.add(url);
+                }
+
+            }
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+        return tmp;
+    }
+    
+    public static String getMainAccessoryImg(int Accessory_id) {
+        String tmp = "";
+
+        Connection cn = null;
+        try {
+            cn = DBUtils.makeConnection();
+            if (cn != null) {
+
+                String sql = "select url from Accessory \n"
+                        + "join Accessory_Img on Accessory_Img.accessory_id = Accessory.accessory_id \n"
+                        + "where Accessory.accessory_id like ? and Accessory_Img.is_main_img like 1";
+                PreparedStatement pst = cn.prepareStatement(sql);
+                pst.setInt(1, Accessory_id);
+                ResultSet rs = pst.executeQuery();
+                while (rs != null && rs.next()) {
+                    String url = rs.getString("url");
+                    tmp = url;
                 }
 
             }
@@ -310,6 +339,7 @@ public class AccessoryDAO {
         return null;
     }
     
+
     public static ArrayList<Accessory> getAccessByCate(int cate_id) {
         Connection cn = null;
         ArrayList<Accessory> list = new ArrayList<>();
@@ -342,6 +372,7 @@ public class AccessoryDAO {
         return list;
     }
     
+
     public static void main(String[] args) {
         ArrayList<Accessory> list = getAccessByCate(2);
         for (Accessory accessory : list) {

@@ -26,8 +26,9 @@ public class BirdDAO {
         try {
             cn = DBUtils.makeConnection();
             if (cn != null) {
-                String sql = "select * from Bird\n";
-                sql = sql + "where Bird.bird_name like ?";
+                String sql = "select * from Bird\n"               
+                 + "where Bird.bird_name like ?\n"
+                 + "ORDER BY Bird.bird_id DESC";
                 PreparedStatement pst = cn.prepareStatement(sql);
                 pst.setString(1, "%" + keyword + "%");
                 ResultSet rs = pst.executeQuery();
@@ -66,7 +67,8 @@ public class BirdDAO {
             cn = DBUtils.makeConnection();
             if (cn != null) {
                 String sql = "select * from Bird\n"
-                        + "where Bird.bird_id like ?";
+                        + "where Bird.bird_id like ?\n"
+                        + "ORDER BY Bird.bird_id DESC";
 
                 PreparedStatement pst = cn.prepareStatement(sql);
                 pst.setInt(1, BirdID);
@@ -174,6 +176,35 @@ public class BirdDAO {
                 while (rs != null && rs.next()) {
                     String url = rs.getString("url");
                     tmp.add(url);
+                }
+
+            }
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+        return tmp;
+    }
+    
+     public static String getMainBirdImg(int Bird_id) {
+        String tmp = "";
+
+        Connection cn = null;
+        try {
+            cn = DBUtils.makeConnection();
+            if (cn != null) {
+
+                String sql = "select url\n"
+                        + "from Bird join Bird_Img on Bird.bird_id = Bird_Img.bird_id \n"
+                        + "where Bird.bird_id like ? and Bird_Img.is_main_img like 1";
+                PreparedStatement pst = cn.prepareStatement(sql);
+                pst.setInt(1, Bird_id);
+                
+                ResultSet rs = pst.executeQuery();
+                while (rs != null && rs.next()) {
+                    String url = rs.getString("url");
+                    tmp = url;
                 }
 
             }
@@ -328,5 +359,13 @@ public class BirdDAO {
         return null;
     }
     
-    
+
+    public static void main(String[] args) {
+//        ArrayList<Bird> list = getBird("");
+//        System.out.println(list.get(0));
+
+        getMainBirdImg(3);
+    }
+
+
 }
