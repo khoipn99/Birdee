@@ -11,7 +11,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Birdee</title>
-        <link  rel="icon" type="image/png" href="mylib/img/logo2.png">
+        <link rel="icon" type="image/png" href="mylib/img/logo2.png">
         <link rel="stylesheet" href="style.css"/>
         <link rel="stylesheet" href="mylib/img"/>
         <link rel="stylesheet" href="mylib/fontawesome-free-6.4.0-web/css/all.css"/>
@@ -31,40 +31,25 @@
                     <div class="col-md-6 ">
                         <a href="#" style="color: #ffffff; text-decoration: none;"> Trở thành người bán </a>
                     </div>
-
                     <div class="col-md-6 text-end ">
                         <div class="he666">
-
-
                             <i class="fa-regular fa-bell" style="color: #ffffff;"></i>
                             <a href="#">Thông báo</a>
-
-
                             <i class="fa-regular fa-circle-question" style="color: #ffffff;"></i>
                             <a href="#">Hỗ Trợ </a>
                             <c:set var="uName" value="${sessionScope.userName}"/>
                             <c:if test="${uName != null}">
                                 <a href="MainController?action=VCI" style="color: white; text-decoration: none;"><strong>${uName}</strong></a>
                                 <a href="MainController?action=Logout" style="color: white; text-decoration: none;"><strong>Logout</strong></a>
-
                             </c:if>
                             <c:if test="${uName == null}">
                                 <a href="MainController?action=RegisterAccount" style="color: white; text-decoration: none;"><strong>Đăng Ký</strong></a>
                                 <i class="navbar__link-separator"></i>
                                 <a href="login.jsp" style="color: white; text-decoration: none;"><strong>Đăng Nhập</strong></a>
-
                             </c:if>    
-
-
-
-
-
-
                         </div>
                     </div>
                 </div>
-
-
 
                 <div class="row mt-5 ">
 
@@ -74,8 +59,7 @@
                             <div class="col-md-11"><a href="MainController?action="><img src="mylib/img/haiquangdoi.png" class="img-fluid" alt="Logo"></a></div>
 
                         </div>
-                    </div>
-
+                    </div>                      
 
                     <div class="col-md-1">
                         <div class="row">
@@ -92,17 +76,33 @@
                                         <li><a class="dropdown-item" href="LoadByCate?cateID=2">Thức ăn cho chim</a></li>
                                         <li><a class="dropdown-item" href="LoadByCate?cateID=3">Máng ăn, Cóng</a></li>
                                         <li><a class="dropdown-item" href="LoadByCate?cateID=4">Lồng Chim</a></li>
+                                        <li>
+                                            <a class="dropdown-item" href="#">
+                                                Sắp xếp theo &raquo;
+                                            </a>
+                                            <ul class="dropdown-menu dropdown-submenu">
+                                                <li>
+                                                    <a class="dropdown-item" href="MainController?action=sort"> Giá giảm dần</a>
+                                                </li>
+                                                <li>
+                                                    <a class="dropdown-item" href="MainController?action=sortup">Giá tăng dần</a>
+                                                </li>
+                                                <li>
+                                                    <a class="dropdown-item" href="MainController?action=sortNew">Sản phẩm mới nhất</a>                                      
+                                                </li>
+                                                <li>
+                                                    <a class="dropdown-item" href="MainController?action=sortHot">Sản Phẩm Có Sẵn</a>
+                                                </li>
+                                                <li>
+                                                    <a class="dropdown-item" href="MainController?action=Ramdom">Gợi ý cho bạn</a>
+                                                </li>
+                                            </ul>
+                                        </li>
                                     </ul>
                                 </div>
                             </div>
                         </div>
-
-
-
-                    </div>
-
-
-
+                    </div>                   
 
                     <div class="col-md-8">
                         <form action="MainController" method="POST">
@@ -113,8 +113,6 @@
                             </div> 
                         </form>
                     </div>
-
-
 
                     <div class="col-md-1">
                         <div class="row">
@@ -142,9 +140,6 @@
                     </div>
                 </div>
             </div>
-
-
-
 
         </section>
 
