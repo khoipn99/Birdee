@@ -36,6 +36,14 @@
         <servlet-name>BirdDetail</servlet-name>
         <servlet-class>controller.BirdDetail</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>VCIServlet</servlet-name>
+        <servlet-class>controller.VCIServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditCusProfileServlet</servlet-name>
+        <servlet-class>controller.EditCusProfileServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
         <url-pattern>/MainController</url-pattern>
@@ -71,6 +79,14 @@
     <servlet-mapping>
         <servlet-name>BirdDetail</servlet-name>
         <url-pattern>/BirdDetail</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>VCIServlet</servlet-name>
+        <url-pattern>/VCIServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditCusProfileServlet</servlet-name>
+        <url-pattern>/EditCusProfileServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

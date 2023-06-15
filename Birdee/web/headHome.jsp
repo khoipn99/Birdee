@@ -76,7 +76,8 @@
                                         <a style="color: white; ">Xin chào</a> <br>
                                         <c:set var="uName" value="${sessionScope.userName}"/>
                                         <c:if test="${uName != null}">
-                                            <a href="#" style="color: white; text-decoration: none;"><strong>${uName}</strong></a>
+                                            <c:set var="email" value="${sessionScope.email}"/>
+                                            <a href="MainController?action=VCI" style="color: white; text-decoration: none;"><strong>${uName}</strong></a>
                                             <a href="MainController?action=Logout" style="color: white; text-decoration: none;"><strong>Logout</strong></a>
                                         </c:if>
                                         <c:if test="${uName == null}">

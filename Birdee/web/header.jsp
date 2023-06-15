@@ -44,7 +44,7 @@
                             <a href="#">Hỗ Trợ </a>
                             <c:set var="uName" value="${sessionScope.userName}"/>
                             <c:if test="${uName != null}">
-                                <a href="#" style="color: white; text-decoration: none;"><strong>${uName}</strong></a>
+                                <a href="MainController?action=VCI" style="color: white; text-decoration: none;"><strong>${uName}</strong></a>
                                 <a href="MainController?action=Logout" style="color: white; text-decoration: none;"><strong>Logout</strong></a>
 
                             </c:if>
@@ -54,12 +54,6 @@
                                 <a href="login.jsp" style="color: white; text-decoration: none;"><strong>Đăng Nhập</strong></a>
 
                             </c:if>    
-
-
-
-
-
-
                         </div>
                     </div>
                 </div>
@@ -83,7 +77,7 @@
                             <div class="col-md-2"></div>
                             <div class="col-md-2">
                                 <div class="dropdown">
-                                    <button  class="btn btn-secondary " type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <button  class="btn btn-warning " type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                         <i  class="fa-solid fa-bars fa-2xl" style="color: #017a47;"></i>
                                     </button>
                                     <ul class="dropdown-menu">

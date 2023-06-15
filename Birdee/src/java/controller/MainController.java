@@ -44,10 +44,12 @@ public class MainController extends HttpServlet {
                 url = "RegisterServlet";
             else if(action.equals("viewBirdDetail"))
                 url = "BirdDetail";
-
             else if (action.equals("Logout"))
                 url = "LogoutServlet";
-
+            else if (action.equals("VCI"))
+                url = "VCIServlet";
+            else if (action.equals("EditCusProfile"))
+                url = "EditCusProfileServlet";
 
             request.getRequestDispatcher(url).forward(request, response);
         }
