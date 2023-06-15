@@ -52,6 +52,8 @@ public class MainController extends HttpServlet {
                 url = "VCIServlet";
             else if (action.equals("EditCusProfile"))
                 url = "EditCusProfileServlet";
+            else if(action.equals("viewOrderList"))
+                url = "ViewOrderListServlet";
             else if (action.equals("sort"))
                 url = "SortServlet1";
             else if (action.equals("sortup"))
