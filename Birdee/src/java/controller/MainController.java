@@ -52,7 +52,8 @@ public class MainController extends HttpServlet {
                 url = "VCIServlet";
             else if (action.equals("EditCusProfile"))
                 url = "EditCusProfileServlet";
-
+            else if(action.equals("viewOrderList"))
+                url = "ViewOrderListServlet";
             request.getRequestDispatcher(url).forward(request, response);
         }
     }
