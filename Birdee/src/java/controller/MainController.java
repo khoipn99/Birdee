@@ -26,8 +26,6 @@ public class MainController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-
-
             /* TODO output your page here. You may use following sample code. */
             String url = "HomeServlet";
             String action = null;
@@ -48,7 +46,12 @@ public class MainController extends HttpServlet {
                 url = "LogoutServlet";
             else if(action.equals("viewAccessoryDetail"))
                 url = "AccessoryDetail";
-
+            else if (action.equals("AddToCart"))
+                url = "AddToCartServlet";
+            else if (action.equals("VCI"))
+                url = "VCIServlet";
+            else if (action.equals("EditCusProfile"))
+                url = "EditCusProfileServlet";
 
             request.getRequestDispatcher(url).forward(request, response);
         }

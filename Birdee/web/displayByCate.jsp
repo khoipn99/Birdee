@@ -14,6 +14,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Birdee</title>
         <link rel="stylesheet" href="style.css" type="text/css"/>
+        <script src="mylib/bt5/bootstrap-5.0.2-dist/js/popper.min.js"></script>
         <script src="mylib/bt5/bootstrap-5.0.2-dist/js/bootstrap.bundle.min.js"></script>
     </head>
     <body>

@@ -44,7 +44,7 @@
                             <a href="#">Hỗ Trợ </a>
                             <c:set var="uName" value="${sessionScope.userName}"/>
                             <c:if test="${uName != null}">
-                                <a href="#" style="color: white; text-decoration: none;"><strong>${uName}</strong></a>
+                                <a href="MainController?action=VCI" style="color: white; text-decoration: none;"><strong>${uName}</strong></a>
                                 <a href="MainController?action=Logout" style="color: white; text-decoration: none;"><strong>Logout</strong></a>
 
                             </c:if>
@@ -87,9 +87,11 @@
                                         <i  class="fa-solid fa-bars fa-2xl" style="color: #017a47;"></i>
                                     </button>
                                     <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item" href="#">Action</a></li>
-                                        <li><a class="dropdown-item" href="#">Another action</a></li>
-                                        <li><a class="dropdown-item" href="#">Something else here</a></li>
+                                        <li><a class="dropdown-item" href="MainController?action=">Trang Chủ</a></li>
+                                        <li><a class="dropdown-item" href="LoadByCate?cateID=1">Chim Cảnh</a></li>
+                                        <li><a class="dropdown-item" href="LoadByCate?cateID=2">Thức ăn cho chim</a></li>
+                                        <li><a class="dropdown-item" href="LoadByCate?cateID=3">Máng ăn, Cóng</a></li>
+                                        <li><a class="dropdown-item" href="LoadByCate?cateID=4">Lồng Chim</a></li>
                                     </ul>
                                 </div>
                             </div>
