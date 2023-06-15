@@ -1,29 +1,28 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
 package controller;
 
 import dao.AccessoryDAO;
 import dao.BirdDAO;
-import dao.ReviewDAO;
 import dto.Accessory;
 import dto.Bird;
-import dto.Review_Bird;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpServletResponse;;
 
 /**
  *
- * @author vudin
+ * @author ACE
  */
-public class BirdDetail extends HttpServlet {
+public class SortServlet1 extends HttpServlet {
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -36,21 +35,16 @@ public class BirdDetail extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try ( PrintWriter out = response.getWriter()) {
+        try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            
-            String keyword = request.getParameter("birdId");               
-                ArrayList<Bird> list;
-                ArrayList<Review_Bird> list2;
-                
-                list = BirdDAO.getBirdById(Integer.parseInt(keyword)); 
-                list2 = ReviewDAO.getReview_Bird(Integer.parseInt(keyword));
-                
-                request.setAttribute("birdListDetail", list);
-                request.setAttribute("birdListReview", list2);
-                
-                RequestDispatcher dispatcher = request.getRequestDispatcher("birdDetail.jsp");
-                dispatcher.forward(request, response);
+            //SortDown
+            ArrayList<Bird> list = new ArrayList<>();
+            list = BirdDAO.SortBirdPrice();
+            ArrayList<Accessory> list1 = new ArrayList<>();
+            list1 = AccessoryDAO.SortAccessoryPrice();
+            request.setAttribute("bprice", list);
+            request.setAttribute("aprice", list1);
+            request.getRequestDispatcher("sortDown.jsp").forward(request, response);
         }
     }
 

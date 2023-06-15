@@ -56,6 +56,26 @@
         <servlet-name>VCIServlet</servlet-name>
         <servlet-class>controller.VCIServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>RamdomProductServlet</servlet-name>
+        <servlet-class>controller.RamdomProductServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SortHotProductServlet</servlet-name>
+        <servlet-class>controller.SortHotProductServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SortProductNew</servlet-name>
+        <servlet-class>controller.SortProductNew</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SortServlet1</servlet-name>
+        <servlet-class>controller.SortServlet1</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SortUpServlet</servlet-name>
+        <servlet-class>controller.SortUpServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
         <url-pattern>/MainController</url-pattern>
@@ -111,6 +131,26 @@
     <servlet-mapping>
         <servlet-name>VCIServlet</servlet-name>
         <url-pattern>/VCIServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RamdomProductServlet</servlet-name>
+        <url-pattern>/RamdomProductServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SortHotProductServlet</servlet-name>
+        <url-pattern>/SortHotProductServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SortProductNew</servlet-name>
+        <url-pattern>/SortProductNew</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SortServlet1</servlet-name>
+        <url-pattern>/SortServlet1</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SortUpServlet</servlet-name>
+        <url-pattern>/SortUpServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>30</session-timeout>
