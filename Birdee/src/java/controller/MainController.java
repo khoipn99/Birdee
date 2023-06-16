@@ -66,6 +66,10 @@ public class MainController extends HttpServlet {
                 url= "RamdomProductServlet"; 
             else if(action.equals("ViewOrderDetail"))
                 url = "ViewOrderDetailServlet";
+            else if (action.equals("range"))
+                url= "birdRange.jsp"; 
+            else if(action.equals("sortbyrangeid"))
+                url="SortBirdsByPriceRange";
             request.getRequestDispatcher(url).forward(request, response);
         }
     }

@@ -548,11 +548,54 @@ public class AccessoryDAO {
         return list;
     }
 
+        public static ArrayList<Accessory> getAccessoriesByPriceRange(float minPrice, float maxPrice) {
+        try {
+             ArrayList<Accessory> list = new ArrayList<>();
+            
+            Connection cn = DBUtils.makeConnection();
+            if (cn != null) {
+                String s = "SELECT * FROM [dbo].[Accessory] WHERE price BETWEEN ? AND ?";
+                PreparedStatement st = cn.prepareStatement(s);
+                st.setFloat(1, minPrice);
+                st.setFloat(2, maxPrice);                
+                ResultSet rs = st.executeQuery();
+                if (rs != null) {
+                    while (rs.next()) {
+                        int id = rs.getInt("accessory_id");
+                        String name = rs.getString("name");
+                        float price = rs.getFloat("price");
+                        int quantity = rs.getInt("quantity");
+                        String description = rs.getString("description");
+                        String email_shop_staff = rs.getString("email_shop_staff");
+                        int cate_id = rs.getInt("cate_id");
+                        String email_platform_staff = rs.getString("email_platform_staff");
+
+                        Accessory Ac = new Accessory(id, name, price, quantity, description, email_shop_staff, cate_id, email_platform_staff);
+
+                        list.add(Ac);
+                    }
+                    return list;
+                }
+                cn.close();
+            } else {
+                System.out.println("Connection Error");
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    
+    
+    
+    
     
     public static void main(String[] args) {
-        ArrayList<Accessory> list = getAccessByCate(2);
+        ArrayList<Accessory> list = new ArrayList<>();
+        list=getAccessoriesByPriceRange(0, 10);
         for (Accessory accessory : list) {
-            System.out.println(accessory.getName());
+            System.out.println(accessory.getAccessory_id());
         }
         
     }
