@@ -10,15 +10,15 @@ package dto;
  * @author ACE
  */
 public class Accessory_Sub_Cart {
-    private int cart_id;
-    private int accessory_id;
+    private int cart_id;   
     private int cate_id;
     private int quantity;
+    private int accessory_id;
 
     public Accessory_Sub_Cart() {
     }
 
-    public Accessory_Sub_Cart(int cart_id, int accessory_id, int cate_id, int quantity) {
+    public Accessory_Sub_Cart(int cart_id, int cate_id, int quantity, int accessory_id) {
         this.cart_id = cart_id;
         this.accessory_id = accessory_id;
         this.cate_id = cate_id;
@@ -55,6 +55,11 @@ public class Accessory_Sub_Cart {
 
     public void setQuantity(int quantity) {
         this.quantity = quantity;
+    }
+
+    @Override
+    public String toString() {
+        return "Accessory_Sub_Cart{" + "cart_id=" + cart_id + ", cate_id=" + cate_id + ", quantity=" + quantity + ", accessory_id=" + accessory_id + '}';
     }
     
 }

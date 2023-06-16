@@ -11,14 +11,14 @@ package dto;
  */
 public class Bird_Sub_Cart {
     private int cart_id;
-    private int bird_id;
     private int cate_id;
     private int quantity;
+    private int bird_id;
 
     public Bird_Sub_Cart() {
     }
-
-    public Bird_Sub_Cart(int cart_id, int bird_id, int cate_id, int quantity) {
+    
+    public Bird_Sub_Cart(int cart_id, int cate_id, int quantity, int bird_id) {
         this.cart_id = cart_id;
         this.bird_id = bird_id;
         this.cate_id = cate_id;
@@ -56,5 +56,13 @@ public class Bird_Sub_Cart {
     public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
+
+    @Override
+    public String toString() {
+        return "Bird_Sub_Cart{" + "cart_id=" + cart_id + ", cate_id=" + cate_id + ", quantity=" + quantity + ", bird_id=" + bird_id + '}';
+    }
+
+    
+    
     
 }

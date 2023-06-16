@@ -80,6 +80,10 @@
         <servlet-name>SortUpServlet</servlet-name>
         <servlet-class>controller.SortUpServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ViewOrderDetailServlet</servlet-name>
+        <servlet-class>controller.ViewOrderDetailServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
         <url-pattern>/MainController</url-pattern>
@@ -159,6 +163,10 @@
     <servlet-mapping>
         <servlet-name>SortUpServlet</servlet-name>
         <url-pattern>/SortUpServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewOrderDetailServlet</servlet-name>
+        <url-pattern>/ViewOrderDetailServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>30</session-timeout>

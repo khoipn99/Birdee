@@ -58,13 +58,14 @@ public class MainController extends HttpServlet {
                 url = "SortServlet1";
             else if (action.equals("sortup"))
                 url= "SortUpServlet";
-             else if (action.equals("sortNew"))
+            else if (action.equals("sortNew"))
                 url= "SortProductNew";        
-               else if (action.equals("sortHot"))
+            else if (action.equals("sortHot"))
                 url= "SortHotProductServlet"; 
-             else if (action.equals("Ramdom"))
+            else if (action.equals("Ramdom"))
                 url= "RamdomProductServlet"; 
-            
+            else if(action.equals("ViewOrderDetail"))
+                url = "ViewOrderDetailServlet";
             request.getRequestDispatcher(url).forward(request, response);
         }
     }
