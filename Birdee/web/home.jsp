@@ -19,12 +19,12 @@
         <title>Birdee</title>        
         <script src="mylib/bt5/bootstrap-5.0.2-dist/js/bootstrap.bundle.min.js"></script>
         <link rel="stylesheet" href="style.css" type="text/css"/>
-        <header>
-            <%@include file="header.jsp" %>
-        </header>
+    
     </head>
     <body>
-        
+        <header class="head123">
+            <%@include file="header.jsp" %>
+        </header>
         
         <section class="body py-3">  
             <div class="container">
@@ -102,7 +102,7 @@
                             %>
 
                             <div class="col">
-                                <div class="card" style="width: 18rem;">
+                                <div class="card" style="width: 18rem; height: 30rem;">
                                     <a href="MainController?action=viewBirdDetail&birdId=<%= b.getBird_id() %>"><img src="<%= BirdDAO.getMainBirdImg(b.getBird_id()) %>" class="card-img-top" alt="..."></a>
                                     
                                     <div class="card-body">
@@ -186,7 +186,7 @@
 
                                     </ul>
                                     <div class="card-body" style="background-color: rgba(1, 122, 71, 1)">                                      
-                                        <a href="#" class="card-link" style="color: white" >Add to cart</a>
+                                        <a href="MainController?action=AddToCart&birdID=<%= b.getBird_id() %>&cateID=<%= b.getCate_id() %>" class="card-link" style="color: white" >Add to cart</a>
                                     </div>
                                 </div>
                             </div>
@@ -249,19 +249,20 @@
                         %> 
 
                         <div class="col py-3">                       
-                            <div class="card" style="width: 15rem;">
+                            <div class="card text-center" style="width: 15rem; height: 25rem; text-decoration: none;">
                                 <a href="MainController?action=viewBirdDetail&birdId=<%= b.getBird_id() %>"><img src="<%= BirdDAO.getMainBirdImg(b.getBird_id()) %>" class="card-img-top2" alt="..."></a>
                                 <div class="card-body">
                                     <a style="text-decoration: none; color: #000000 " href="MainController?action=viewBirdDetail&birdId=<%= b.getBird_id() %>"><h5 class="card-title"><%= b.getBird_name()%></h5></a>
 
                                 </div>
-                                <ul class="list-group list-group-flush">
-                                    <li class="list-group-item" style="color: red"><%= b.getPrice()%>00 VND</li>
-                                    <li class="list-group-item"><%= BirdDAO.getBirdAddress(b.getBird_id()) %></li>
+                                <div class="card-text">
+                                    <p class="" style="color: red"><%= b.getPrice()%>00 VND</p>
+                                    <p class=""><%= BirdDAO.getBirdAddress(b.getBird_id()) %></p>
                                         <%
                                             float vote = BirdDAO.getBirdVote(b.getBird_id());
                                             if (vote == 0) {
                                         %>
+
                                     <li class="list-group-item"><a>
                                             <span class="fa fa-star"></span>
                                             <span class="fa fa-star"></span>
@@ -269,9 +270,11 @@
                                             <span class="fa fa-star"></span>
                                             <span class="fa fa-star"></span>
                                         </a><a>, đã mua <%= BirdDAO.getBirdBuying(b.getBird_id())%></a></li>
+
                                         <%
                                         } else if (vote > 0 && vote < 1.5){
                                         %> 
+
                                     <li class="list-group-item"><a>
                                             <span class="fa fa-star"    style="color: yellow"></span>
                                             <span class="fa fa-star"></span>
@@ -290,8 +293,8 @@
                                             <span class="fa fa-star"></span>
                                             <span class="fa fa-star"></span>
                                         </a><a>,                                                                            
-                                        đã mua <%= BirdDAO.getBirdBuying(b.getBird_id())%></a></li>
-                                        
+                                        đã mua <%= BirdDAO.getBirdBuying(b.getBird_id())%></a></li>                                      
+
                                         <%
                                             } else if (vote >= 2.5 && vote < 3.5){
                                         %>
@@ -328,7 +331,7 @@
                                         <%
                                             } 
                                         %>
-                                </ul>
+                                </div>
                                 <div class="card-body" style="background-color: rgba(1, 122, 71, 1)">
                                     <a href="#" class="card-link" style="color: white" >Add to cart</a>                                      
                                 </div>
