@@ -395,6 +395,12 @@ text-align: center;
     background-color: whitesmoke;
 }
 
+.BorderUpdate{
+    border: 1px; 
+    border-style: solid; 
+    border-color: greenyellow
+}
+
 .head123{
     
   position: fixed;

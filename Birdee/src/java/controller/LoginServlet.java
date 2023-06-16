@@ -64,8 +64,11 @@ public class LoginServlet extends HttpServlet {
                     }
                     
                     if (acc.getRole_id().equals("cus")) {
-                        session.setAttribute("userName", acc.getUsername());  
+                        session.setAttribute("userName", acc.getUsername()); 
+                        session.setAttribute("customerInformation", acc); 
+                        session.setAttribute("isCustomer", "isCustomer");  
                         session.setAttribute("email", acc.getEmail());
+
                         request.getRequestDispatcher("PrintProduct").forward(request, response);
                     }
                     else if (acc.getRole_id().equals("ad")) {
@@ -80,7 +83,8 @@ public class LoginServlet extends HttpServlet {
                         request.setAttribute("userName", acc.getUsername());                        
                         request.getRequestDispatcher("staffPage.jsp").forward(request, response);
                     }
-                    else { //seller
+
+                    else if(acc.getRole_id().equals("ss")){ //seller
                         session.setAttribute("cEmail", email);
                         request.setAttribute("userName", acc.getUsername());                        
                         request.getRequestDispatcher("shopstaffPage.jsp").forward(request, response);

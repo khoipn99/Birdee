@@ -27,7 +27,7 @@ public class BirdDAO {
             cn = DBUtils.makeConnection();
             if (cn != null) {
                 String sql = "select * from Bird\n"               
-                 + "where Bird.bird_name like ?\n"
+                 + "where Bird.bird_name like ? and quantity > 0\n"
                  + "ORDER BY Bird.bird_id DESC";
                 PreparedStatement pst = cn.prepareStatement(sql);
                 pst.setString(1, "%" + keyword + "%");
@@ -358,6 +358,26 @@ public class BirdDAO {
         }
         return null;
     }
+    public static boolean DeleteBird(int birdId){
+        PreparedStatement stm = null;
+        try {
+            Connection c = DBUtils.makeConnection();
+            if(c != null ){
+            String sql = "Update dbo.Bird \n "
+                        +"Set quantity = 0 \n "
+                        + "where bird_id = ?";
+            stm = c.prepareStatement(sql);
+            stm.setInt(1, birdId);
+            stm.executeUpdate();
+            c.close();
+            return true;
+            } 
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+    
     
     public static ArrayList<Bird> SortBirdPrice() {
         ArrayList<Bird> list = new ArrayList<>();

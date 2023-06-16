@@ -75,6 +75,64 @@ public class AccountDAO {
         return list;
     }
     
+    public static ArrayList<Account> getAllCustomerAccount(){
+        ArrayList<Account> list = new ArrayList<>();
+        Connection cn = null;
+        try {
+            cn = DBUtils.makeConnection();
+            if (cn != null) {
+                String sql = "select *\n"
+                        + "from Account\n"
+                        + "Where Account.role_id like 'cus'\n";
+                PreparedStatement pst = cn.prepareStatement(sql);
+                ResultSet rs = pst.executeQuery();
+                while (rs != null && rs.next()) {
+                    String email = rs.getString("email");
+                    String password = rs.getString("password");
+                    String name = rs.getString("username");
+                    String role = rs.getString("role_id");
+                    String address = rs.getString("address");
+                    String phone = rs.getString("phone");
+                    Account acc = new Account(email, password, name, role, address, phone);
+                    list.add(acc);
+                }
+            }
+            cn.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+    
+    public static ArrayList<Account> getAllShopAccount(){
+        ArrayList<Account> list = new ArrayList<>();
+        Connection cn = null;
+        try {
+            cn = DBUtils.makeConnection();
+            if (cn != null) {
+                String sql = "select *\n"
+                        + "from Account\n"
+                        + "Where Account.role_id like 'ss'\n";
+                PreparedStatement pst = cn.prepareStatement(sql);
+                ResultSet rs = pst.executeQuery();
+                while (rs != null && rs.next()) {
+                    String email = rs.getString("email");
+                    String password = rs.getString("password");
+                    String name = rs.getString("username");
+                    String role = rs.getString("role_id");
+                    String address = rs.getString("address");
+                    String phone = rs.getString("phone");
+                    Account acc = new Account(email, password, name, role, address, phone);
+                    list.add(acc);
+                }
+            }
+            cn.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
     public static boolean checkValid(String email, String phone){
         boolean kq = true;
         ArrayList<Account> list = getAllAccount();
@@ -106,6 +164,15 @@ public class AccountDAO {
             e.printStackTrace();
         }
         return kq;
+    }  
+
+    public static void main(String[] args) {
+        ArrayList<Account> list = getAllShopAccount();
+        for (Account account : list) {
+            System.out.println(account.getEmail());
+            System.out.println(account.getPassword());
+            System.out.println(account.getRole_id());
+        }
     }
     
     public static Account getAccountByEmail(String email) {
@@ -156,4 +223,5 @@ public class AccountDAO {
         }
         return kq;
     }
+  
 }

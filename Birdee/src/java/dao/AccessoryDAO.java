@@ -29,6 +29,7 @@ public class AccessoryDAO {
             if (cn != null) {
                 String sql = "select *\n"
                         + "from Accessory\n"
+                        + "where quantity > 0\n"
                         + "order by Accessory.accessory_id DESC\n";
                 PreparedStatement pst = cn.prepareStatement(sql);
                 ResultSet rs = pst.executeQuery();
@@ -370,6 +371,26 @@ public class AccessoryDAO {
             e.printStackTrace();
         }
         return list;
+    }
+    
+    public static boolean DeleteAccessory(int accessoryId){
+        PreparedStatement stm = null;
+        try {
+            Connection c = DBUtils.makeConnection();
+            if(c != null ){
+            String sql = "Update dbo.Accessory\n "
+                        +"Set quantity = 0 \n "
+                        + "where accessory_id = ?";
+            stm = c.prepareStatement(sql);
+            stm.setInt(1, accessoryId);
+            stm.executeUpdate();
+            c.close();
+            return true;
+            } 
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
     }
     
     public static ArrayList<Accessory> SortAccessoryPrice() {

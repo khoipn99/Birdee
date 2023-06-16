@@ -26,6 +26,7 @@
         <%@include file="header.jsp" %>
     </header>
     <link rel="stylesheet" href="style.css" type="text/css"/>
+    
 </head>
 <body>
     <section>
@@ -84,7 +85,78 @@
 
                         <ul>
                             <h2><%= b.getBird_name()%></h2>                            
-                            <div class="form-detail"><h5><a style="color: red"><%= BirdDAO.getBirdVote(b.getBird_id())%> Star | </a><a><%= BirdDAO.getBirdBuying(b.getBird_id())%> Ðã bán</a></h5></div>
+                            <div class="form-detail"><h5><%
+                                float vote = 0;
+                                vote = BirdDAO.getBirdVote(b.getBird_id());
+                                if (BirdDAO.getBirdVote(b.getBird_id()) == 0) {
+                                    %>
+                                    <li class="list-group-item"><a>
+                                            <span class="fa fa-star"></span>
+                                            <span class="fa fa-star"></span>
+                                            <span class="fa fa-star"></span>
+                                            <span class="fa fa-star"></span>
+                                            <span class="fa fa-star"></span>
+                                        </a><a>, đã mua <%= BirdDAO.getBirdBuying(b.getBird_id())%></a></li>
+                                        <%
+
+                                        } else if (vote > 0 && vote < 1.5) {
+                                        %> 
+                                    <li class="list-group-item"><a>
+                                            <span class="fa fa-star"    style="color: yellow"></span>
+                                            <span class="fa fa-star"></span>
+                                            <span class="fa fa-star"></span>
+                                            <span class="fa fa-star"></span>
+                                            <span class="fa fa-star"></span>
+                                        </a><a>,                                                                            
+                                            đã mua <%= BirdDAO.getBirdBuying(b.getBird_id())%></a></li>
+                                            <%
+                                            } else if (vote >= 1.5 && vote < 2.5) {
+                                            %>
+                                    <li class="list-group-item"><a>
+                                            <span class="fa fa-star" style="color: yellow"></span>
+                                            <span class="fa fa-star" style="color: yellow"></span>
+                                            <span class="fa fa-star"></span>
+                                            <span class="fa fa-star"></span>
+                                            <span class="fa fa-star"></span>
+                                        </a><a>,                                                                            
+                                            đã mua <%= BirdDAO.getBirdBuying(b.getBird_id())%></a></li>
+
+                                    <%
+                                    } else if (vote >= 2.5 && vote < 3.5) {
+                                    %>
+                                    <li class="list-group-item"><a>
+                                            <span class="fa fa-star" style="color: yellow"></span>
+                                            <span class="fa fa-star" style="color: yellow"></span>
+                                            <span class="fa fa-star" style="color: yellow"></span>
+                                            <span class="fa fa-star"></span>
+                                            <span class="fa fa-star"></span>
+                                        </a><a>,                                                                            
+                                            đã mua <%= BirdDAO.getBirdBuying(b.getBird_id())%></a></li>
+                                            <%
+                                            } else if (vote >= 3.5 && vote < 4.5) {
+                                            %>
+                                    <li class="list-group-item"><a>
+                                            <span class="fa fa-star" style="color: yellow"></span>
+                                            <span class="fa fa-star" style="color: yellow"></span>
+                                            <span class="fa fa-star" style="color: yellow"></span>
+                                            <span class="fa fa-star" style="color: yellow"></span>
+                                            <span class="fa fa-star"></span>
+                                        </a><a>,                                                                            
+                                            đã mua <%= BirdDAO.getBirdBuying(b.getBird_id())%></a></li>
+                                            <%
+                                            } else if (vote >= 4.5 && vote <= 5) {
+                                            %>
+                                    <li class="list-group-item"><a>
+                                            <span class="fa fa-star" style="color: yellow"></span>
+                                            <span class="fa fa-star" style="color: yellow"></span>
+                                            <span class="fa fa-star" style="color: yellow"></span>
+                                            <span class="fa fa-star" style="color: yellow"></span>
+                                            <span class="fa fa-star" style="color: yellow"></span>
+                                        </a><a>,                                                                            
+                                            đã mua <%= BirdDAO.getBirdBuying(b.getBird_id())%></a></li>
+                                            <%
+                                                }
+                                            %></h5></div>
                             <h5 style="color: red"><%= b.getPrice()%>00 VND</h5>
                             <br>
                             <br>
@@ -99,7 +171,7 @@
 
                             <h5>Số lượng  1  |  <%= b.getQuantity()%> sản phẩm có sẵn</h5>
                             <br>
-                            <h5><a style="color: green; background-color: greenyellow; padding: 5px">Thêm vào giỏ hàng </a><a>  </a><a style="color: white; background-color: green; padding: 5px">mua ngay</a></h5>
+                            <h5><a style="color: green; background-color: greenyellow; padding: 5px">Thêm vào giỏ hàng </a><a href="MainController?action=orderNow&birdIdForOrderNow=<%= b.getBird_id() %>" style="color: white; background-color: green; padding: 5px">mua ngay</a></h5>
 
 
                         </ul>
@@ -170,12 +242,9 @@
             <div class="backgroundDetail">
                 <div class="form-detail" style=""><h5>ĐÁNH GIÁ SẢN PHẨM</h5></div>                
 
-                <div style="padding-top: 20px; padding-bottom: 20px; background-color: #fff4f4;">                   
-                    <p><h5 style="color: red"><%= BirdDAO.getBirdVote(b.getBird_id())%> Star trên 5</h5></p>
-                </div>
+                
                 <br>
                 <%
-
                     ArrayList<Review_Bird> list2 = (ArrayList<Review_Bird>) request.getAttribute("birdListReview");
                     if (list != null && !list.isEmpty()) {
                         for (Review_Bird r : list2) {
@@ -184,24 +253,89 @@
                 %>
                 <div style="border-bottom: 1px; border-top: 0px; border-right: 0px; border-left: 0px;border-style: solid;">
 
-                    <div><%= ReviewDAO.getReviewerBirdName(r.getEmail_customer()) %></div>
-                    <div style="color: red"><%= r.getRating()%> Star</div>
-                    <div><%= ReviewDAO.getReviewBirdDate(r.getOrder_detail_id_B()) %></div>
+                    <div><%= ReviewDAO.getReviewerBirdName(r.getEmail_customer())%></div>
+                    <div><%
+
+                        if (BirdDAO.getBirdVote(b.getBird_id()) == 0) {
+                        %>
+                        <li class="list-group-item"><a>
+                                <span class="fa fa-star"></span>
+                                <span class="fa fa-star"></span>
+                                <span class="fa fa-star"></span>
+                                <span class="fa fa-star"></span>
+                                <span class="fa fa-star"></span>
+                            </a></li>
+                            <%
+
+                            } else if (vote > 0 && vote < 1.5) {
+                            %> 
+                        <li class="list-group-item"><a>
+                                <span class="fa fa-star"    style="color: yellow"></span>
+                                <span class="fa fa-star"></span>
+                                <span class="fa fa-star"></span>
+                                <span class="fa fa-star"></span>
+                                <span class="fa fa-star"></span>
+                            </a></li>
+                                <%
+                                } else if (vote >= 1.5 && vote < 2.5) {
+                                %>
+                        <li class="list-group-item"><a>
+                                <span class="fa fa-star" style="color: yellow"></span>
+                                <span class="fa fa-star" style="color: yellow"></span>
+                                <span class="fa fa-star"></span>
+                                <span class="fa fa-star"></span>
+                                <span class="fa fa-star"></span>
+                            </a></li>
+
+                        <%
+                        } else if (vote >= 2.5 && vote < 3.5) {
+                        %>
+                        <li class="list-group-item"><a>
+                                <span class="fa fa-star" style="color: yellow"></span>
+                                <span class="fa fa-star" style="color: yellow"></span>
+                                <span class="fa fa-star" style="color: yellow"></span>
+                                <span class="fa fa-star"></span>
+                                <span class="fa fa-star"></span>
+                            </a></li>
+                                <%
+                                } else if (vote >= 3.5 && vote < 4.5) {
+                                %>
+                        <li class="list-group-item"><a>
+                                <span class="fa fa-star" style="color: yellow"></span>
+                                <span class="fa fa-star" style="color: yellow"></span>
+                                <span class="fa fa-star" style="color: yellow"></span>
+                                <span class="fa fa-star" style="color: yellow"></span>
+                                <span class="fa fa-star"></span>
+                            </a></li>
+                                <%
+                                } else if (vote >= 4.5 && vote <= 5) {
+                                %>
+                        <li class="list-group-item"><a>
+                                <span class="fa fa-star" style="color: yellow"></span>
+                                <span class="fa fa-star" style="color: yellow"></span>
+                                <span class="fa fa-star" style="color: yellow"></span>
+                                <span class="fa fa-star" style="color: yellow"></span>
+                                <span class="fa fa-star" style="color: yellow"></span>
+                            </a></li>
+                                <%
+                                    }
+                                %></div>
+                    <div><%= ReviewDAO.getReviewBirdDate(r.getOrder_detail_id_B())%></div>
                     <br>
                     <div><%= r.getComment()%></div>                   
                     <div>
                         <%
                             ArrayList<String> img = ReviewDAO.getReviewBirdImg(r.getOrder_detail_id_B());
                             for (String elem : img) {
-                                    
-                                
-                            %>
-                            
-                            <img src="<%= elem %>" style="width: 10%; height: 130px;">
-                        
+
+
+                        %>
+
+                        <img src="<%= elem%>" style="width: 10%; height: 130px;">
+
                         <%
                             }
-                            %>
+                        %>
                     </div>
                     <br>
                 </div> 
