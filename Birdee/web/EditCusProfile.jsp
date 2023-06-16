@@ -15,48 +15,35 @@
         <header>
             <%@include file="header.jsp" %>
         </header>
-    
+
         <div class="container py-5">
             <div class="row justify-content-center">
-                   <div class="col-md-8 col-lg-6">
-                     <div class="card shadow-sm">
-                         <div class="card-body">  
-                    <form action="MainController" method="GET">
-                        <h2 class="text-primary mb-4">Edit Customer Profile</h2>
-                        <div class="mb-3">
-                            <label for="UName" class="form-label font-weight-bold">Account Name</label>
-                            <input type="text" id="UName" name="UName" class="form-control" required>
+                <div class="col-md-8 col-lg-6">
+                    <div class="card shadow-sm">
+                        <div class="card-body">  
+                            <h2 class="text-primary mb-4">Edit Customer Profile</h2>
+                            <form action="MainController">
+                                <div class="mb-3">
+                                    <label for="UName" class="form-label">Account's Name:</label>
+                                    <input type="text" class="form-control" id="UName" name="UName">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="UAddress" class="form-label">Address:</label>
+                                    <input type="text" class="form-control" id="UAddress" name="UAddress">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="UphoneNumber" class="form-label">Phonenumber:</label>
+                                    <input type="number" class="form-control" id="UphoneNumber" name="UphoneNumber" pattern="[0-9]{10,11}">
+                                    <div class="invalid-feedback">Please enter a valid phone number.</div>
+                                </div>
+                                <p><input type="submit" class="btn btn-primary" value="EditCusProfile" name="action"></p>
+                            </form>
                         </div>
-                        <div class="mb-3">
-                            <label for="UAddress" class="form-label font-weight-bold">Address</label>
-                            <input type="text" id="UAddress" name="UAddress" class="form-control" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="UPhoneNumber" class="form-label font-weight-bold">Phone Number</label>
-                            <input type="number" id="UPhoneNumber" name="UPhoneNumber" class="form-control" pattern="[0-9]{10,11}" onblur="checkPhoneNumber()" required>
-                            <div id="phoneNumber-error" style="color: red; display: none;">Invalid phone number format</div>
-                            <script>
-                              function checkPhoneNumber() {
-                                var phoneNumberInput = document.getElementById("UPhoneNumber");
-                                var errorDiv = document.getElementById("phoneNumber-error");
-
-                                if (phoneNumberInput.value.length < 10 || phoneNumberInput.value.length > 11) {
-                                        errorDiv.style.display = "block";
-                                    } else {
-                                        errorDiv.style.display = "none";
-                                    }
-                                }
-                            </script>
-                        </div>
-                        <div class="d-grid gap-2">
-                            <button type="submit" name="action" value="EditCusProfile" class="btn btn-primary">Save Changes</button>
-                        </div>
-                    </form>
-                         </div>
-                     </div>
-                </div>      
+                    </div>
+           </div>
             </div>
         </div>
+    </div>      
 
 
 
