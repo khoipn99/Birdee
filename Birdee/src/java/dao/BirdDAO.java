@@ -609,4 +609,178 @@ public class BirdDAO {
     }
 
 
+    public static ArrayList<Bird> getBirdsList2(String keyword) {
+        try {
+            Connection cn = DBUtils.makeConnection();
+            if (cn != null) {
+                String s = "SELECT *\n"
+                        + "FROM dbo.Bird\n"
+                        + "Where quantity >0 AND email_shop_staff = ?";
+                PreparedStatement pst = cn.prepareStatement(s);
+                pst.setString(1, keyword);
+                ResultSet rs = pst.executeQuery();
+                ArrayList<Bird> list = new ArrayList<>();
+                if (rs != null) {
+                    while (rs.next()) {
+                        int id = rs.getInt("bird_id");
+                        String name = rs.getString("bird_name");
+                        Date dob = rs.getDate("dob");
+                        boolean gender = rs.getBoolean("gender");
+                        float height = rs.getFloat("height");
+                        float weight = rs.getFloat("weight");
+                        String origin = rs.getString("origin");
+                        int quantity = rs.getInt("quantity");
+                        String description = rs.getString("description");
+                        float price = rs.getFloat("price");
+                        String email_shop_staff = rs.getString("email_shop_staff");
+                        int cate_id = rs.getInt("cate_id");
+                        String email_platform_staff = rs.getString("email_platform_staff");
+                        Bird Br = new Bird(id, name, dob, gender, height, weight, origin, description, quantity, price, email_shop_staff, cate_id, email_platform_staff);
+
+                        list.add(Br);
+                    }
+                    return list;
+                }
+                cn.close();
+            } else {
+                System.out.println("Connection Error");
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public static ArrayList<Bird> getBirdDeleteTmp(String keyword) {
+        try {
+            Connection cn = DBUtils.makeConnection();
+            if (cn != null) {
+                String s = "SELECT *\n"
+                        + "FROM dbo.Bird\n"
+                        + "Where quantity = 0 AND email_shop_staff = ?";
+                PreparedStatement pst = cn.prepareStatement(s);
+                pst.setString(1, keyword);
+                ResultSet rs = pst.executeQuery();
+                ArrayList<Bird> list = new ArrayList<>();
+                if (rs != null) {
+                    while (rs.next()) {
+                        int id = rs.getInt("bird_id");
+                        String name = rs.getString("bird_name");
+                        Date dob = rs.getDate("dob");
+                        boolean gender = rs.getBoolean("gender");
+                        float height = rs.getFloat("height");
+                        float weight = rs.getFloat("weight");
+                        String origin = rs.getString("origin");
+                        int quantity = rs.getInt("quantity");
+                        String description = rs.getString("description");
+                        float price = rs.getFloat("price");
+                        String email_shop_staff = rs.getString("email_shop_staff");
+                        int cate_id = rs.getInt("cate_id");
+                        String email_platform_staff = rs.getString("email_platform_staff");
+                        Bird Br = new Bird(id, name, dob, gender, height, weight, origin, description, quantity, price, email_shop_staff, cate_id, email_platform_staff);
+
+                        list.add(Br);
+                    }
+                    return list;
+                }
+                cn.close();
+            } else {
+                System.out.println("Connection Error");
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public static boolean addBird(String name, Date dob, boolean gender, float height, float weight, String origin, String description, int quantity, float price, String email_shop_staff, String email_platform_staff) {
+        try {
+            Connection cn = DBUtils.makeConnection();
+            if (cn != null) {
+                String sql = "INSERT INTO Bird (bird_name, dob, gender, height, weight, origin, description, quantity, price, email_shop_staff, cate_id, email_platform_staff) "
+                        + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 1, ?)";
+                PreparedStatement pst = cn.prepareStatement(sql);
+                pst.setString(1, name);
+                pst.setDate(2, dob);
+                pst.setBoolean(3, gender);
+                pst.setFloat(4, height);
+                pst.setFloat(5, weight);
+                pst.setString(6, origin);
+                pst.setString(7, description);
+                pst.setInt(8, quantity);
+                pst.setFloat(9, price);
+                pst.setString(10, email_shop_staff);
+                pst.setString(11, email_platform_staff);
+
+                int rowsAffected = pst.executeUpdate();
+                return rowsAffected > 0;
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return false;
+    }
+
+    public static boolean updateBird(int birdId, String name, Date dob, boolean gender, float height, float weight, String origin, String description, int quantity, float price) {
+        try {
+            Connection cn = DBUtils.makeConnection();
+            if (cn != null) {
+                String sql = "UPDATE Bird SET bird_name=?, dob=?, gender=?, height=?, weight=?, origin=?, description=?, quantity=?, price=? WHERE bird_id=?";
+                PreparedStatement pst = cn.prepareStatement(sql);
+                pst.setString(1, name);
+                pst.setDate(2, dob);
+                pst.setBoolean(3, gender);
+                pst.setFloat(4, height);
+                pst.setFloat(5, weight);
+                pst.setString(6, origin);
+                pst.setString(7, description);
+                pst.setInt(8, quantity);
+                pst.setFloat(9, price);
+                pst.setInt(10, birdId);
+
+                int rowsAffected = pst.executeUpdate();
+                return rowsAffected > 0;
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return false;
+    }
+
+    public static boolean deleteTmp(int birdId) {
+        try {
+            Connection cn = DBUtils.makeConnection();
+            if (cn != null) {
+                String sql = "UPDATE Bird SET quantity = 0 WHERE bird_id = ?";
+                PreparedStatement pst = cn.prepareStatement(sql);
+                pst.setInt(1, birdId);
+
+                int rowsAffected = pst.executeUpdate();
+                return rowsAffected > 0;
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return false;
+    }
+
+    public static boolean RecoverB(int birdId) {
+        try {
+            Connection cn = DBUtils.makeConnection();
+            if (cn != null) {
+                String sql = "Update Bird\n"
+                        + "SET quantity = 1 WHERE bird_id = ?";
+                PreparedStatement pst = cn.prepareStatement(sql);
+                pst.setInt(1, birdId);
+                
+                int rowsAffected = pst.executeUpdate();
+                return rowsAffected > 0;
+            }   
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return false;
+    }
 }
