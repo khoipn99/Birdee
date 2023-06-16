@@ -1,38 +1,67 @@
 <%-- 
-    Document   : sortDown
-    Created on : Jun 15, 2023, 1:36:49 PM
+    Document   : birdRange
+    Created on : Jun 16, 2023, 12:02:29 PM
     Author     : Acer
 --%>
 
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="dao.BirdDAO"%>
+<%@page import="dto.Bird"%>
 <%@page import="dao.AccessoryDAO"%>
 <%@page import="dto.Accessory"%>
-<%@page import="dto.Bird"%>
 <%@page import="java.util.ArrayList"%>
-<%@page import="dao.BirdDAO"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="java.util.ArrayList"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Birdee</title>        
+        <title>JSP Page</title>
         <script src="mylib/bt5/bootstrap-5.0.2-dist/js/bootstrap.bundle.min.js"></script>
         <link rel="stylesheet" href="style.css" type="text/css"/>
-       
+        
     </head>
     <body>
-          <header>
+        <header>
             <%@include file="header.jsp" %>
         </header>
+      <div class="container py-3">
+          <div class="row">
+              <div class="col-md-2 py-xxl-5">
+                  <form action="MainController">
+                      <div class="card shadow-sm">
+                          <div class="card-body">
+                              <div class="form-floating mb-3">
+
+                                  <input type="text" name="minPrice" id="minPrice" class="form-control form-control-lg" placeholder="Minimum price">
+                                  <label for="minPrice">Minimum price</label>
+                              </div>
+                              <div class="form-floating mb-3">
+                                  <input type="text" name="maxPrice" id="maxPrice" class="form-control form-control-lg" placeholder="Maximum price">
+                                  <label for="maxPrice">Maximum price</label>
+                              </div>
+                              <button type="submit" value="sortbyrangeid" name="action" class="btn btn-primary w-100 mb-3">
+                                  <i class="fas fa-sort-amount-up"></i> Sort by price
+                              </button>
+                          </div>
+                      </div>
+
+                  </form>
+
+              </div>
+            
+
         
-      <div class="container">
+        
+              <div class="col-md-10">
+
                 <div class="row">
 
-                    <div class="p1 py-3">
+                    <div class="p1">
                         BIRD
 
                     </div>
                     <%
-                        ArrayList<Bird> list = (ArrayList<Bird>) request.getAttribute("bprice");
+                        ArrayList<Bird> list = (ArrayList<Bird>) request.getAttribute("Birdrange");
                         if (list != null && !list.isEmpty()) {
                     %>                                    
                     <q>Tổng số tìm kiếm: <%= list.size()%>   </q>                                   
@@ -49,8 +78,7 @@
 
                             <ul class="list-group list-group-flush">
                                 <li class="list-group-item" style="color: red"><%= b.getPrice()%>00 VND</li>
-                             <li class="list-group-item" style="height: 5rem;"><%= BirdDAO.getBirdAddress(b.getBird_id())%></li>  
-                                    
+                                <li class="list-group-item" style="height: 5rem;"><%= BirdDAO.getBirdAddress(b.getBird_id())%></li>                                          
 
                                 <%
                                     float vote = BirdDAO.getBirdVote(b.getBird_id());
@@ -141,7 +169,7 @@
                 <div class="p2 mb-3">
                     <div class="row py-3">
                         <%
-                            ArrayList<Accessory> list2 = (ArrayList<Accessory>) request.getAttribute("aprice");
+                            ArrayList<Accessory> list2 = (ArrayList<Accessory>) request.getAttribute("Acrange");
                             if (list2 != null && !list2.isEmpty()) {
 
                         %>
@@ -246,11 +274,8 @@
                         %>          
                     </div>
                 </div>
+                 </div>   
         </div>
-        
-          <footer>
-            <%@include file="footer.jsp" %>
-        </footer>
-     
+     </div>
     </body>
 </html>

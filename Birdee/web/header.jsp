@@ -88,6 +88,9 @@
                                                     <a class="dropdown-item" href="MainController?action=sortup">Giá tăng dần</a>
                                                 </li>
                                                 <li>
+                                                    <a class="dropdown-item" href="MainController?action=range">Khoảng giá</a>                                      
+                                                </li>
+                                                <li>
                                                     <a class="dropdown-item" href="MainController?action=sortNew">Sản phẩm mới nhất</a>                                      
                                                 </li>
                                                 <li>

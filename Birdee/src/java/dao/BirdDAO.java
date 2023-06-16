@@ -559,11 +559,53 @@ public class BirdDAO {
         return list;
     }
     
+   
+    
+        public  static ArrayList<Bird> getBirdsByPriceRange(float minPrice, float maxPrice) {
+         ArrayList<Bird> list = new ArrayList<>();
+            
+            try {
+            Connection cn = DBUtils.makeConnection();
+            if (cn != null) {
+                String s = "SELECT * FROM dbo.Bird WHERE price BETWEEN ? AND ?";
+                PreparedStatement ps = cn.prepareStatement(s);
+                ps.setFloat(1, minPrice);
+                ps.setFloat(2, maxPrice);
+                ResultSet rs = ps.executeQuery();
+               
+                while (rs.next()) {
+                    int id = rs.getInt("bird_id");
+                    String name = rs.getString("bird_name");
+                    Date dob = rs.getDate("dob");
+                    boolean gender = rs.getBoolean("gender");
+                    float height = rs.getFloat("height");
+                    float weight = rs.getFloat("weight");
+                    String origin = rs.getString("origin");
+                    int quantity = rs.getInt("quantity");
+                    String description = rs.getString("description");
+                    float price = rs.getFloat("price");
+                    String email_shop_staff = rs.getString("email_shop_staff");
+                    int cate_id = rs.getInt("cate_id");
+                    String email_platform_staff = rs.getString("email_platform_staff");
+                    Bird bird = new Bird(id, name, dob, gender, height, weight, origin, description, quantity, price, email_shop_staff, cate_id, email_platform_staff);
+                    list.add(bird);
+                }
+                cn.close();
+                return list;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    
+    
     public static void main(String[] args) {
-//        ArrayList<Bird> list = getBird("");
-//        System.out.println(list.get(0));
-
-        getMainBirdImg(3);
+       ArrayList<Bird> list = new ArrayList<>();
+       list = BirdDAO.getBirdsByPriceRange(50, 200);
+        for (Bird bird : list) {
+            System.out.println(bird.getBird_id());
+        }
     }
 
 
