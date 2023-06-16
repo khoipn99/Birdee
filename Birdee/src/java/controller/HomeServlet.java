@@ -37,7 +37,8 @@ public class HomeServlet extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             HttpSession session = request.getSession(true);
-            String uName = (String) session.getAttribute("userName");
+            String uName = null;
+                uName = (String) session.getAttribute("userName");
             if (uName != null) //Da dang nhap            
                 request.getRequestDispatcher("PrintProduct").forward(request, response);
             else { // Chua dang nhap

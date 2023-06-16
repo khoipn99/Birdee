@@ -48,8 +48,21 @@ public class MainController extends HttpServlet {
                 url = "LogoutServlet";
             else if(action.equals("viewAccessoryDetail"))
                 url = "AccessoryDetail";
-
-
+            else if(action.equals("orderNow"))
+                url = "orderNowPage.jsp";
+            else if(action.equals("SearchToUpdate"))
+                url = ".jsp";
+            else if(action.equals("Product Page"))
+                url = "staffPage.jsp";
+            else if(action.equals("Account Page"))
+                url = "accountStaffPage.jsp";
+            else if(action.equals("staffDeleteBird"))
+                url = "staffDeleteBird";
+            else if(action.equals("staffDeleteAccessory"))
+                url = "staffDeleteAccessory";
+            else if(action.equals("Comment Page"))
+                url = ".jsp";
+            
             request.getRequestDispatcher(url).forward(request, response);
         }
     }

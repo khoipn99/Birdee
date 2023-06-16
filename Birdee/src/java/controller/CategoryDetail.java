@@ -1,24 +1,25 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 package controller;
 
+import dao.BirdDAO;
+import dto.Bird;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author ACE
+ * @author vudin
  */
-public class LogoutServlet extends HttpServlet {
+public class CategoryDetail extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -32,25 +33,16 @@ public class LogoutServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
+        try ( PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            HttpSession session = request.getSession();
-            session.removeAttribute("userName");
-            session.removeAttribute("isCustomer");
-            Cookie[] cookies = request.getCookies();
-            if (cookies != null) {
-                for (Cookie c : cookies) {
-                    if (c.getName().equals("cEmail")) {
-                        c.setMaxAge(0);
-                        response.addCookie(c);
-                    }
-                    if (c.getName().equals("cPass")) {
-                        c.setMaxAge(0);
-                        response.addCookie(c);
-                    }
-                }
-            }
-            response.sendRedirect("PrintProduct");
+            String keyword = request.getParameter("categoryId");               
+                ArrayList<Bird> list;
+                
+                    list = BirdDAO.getBirdById(Integer.parseInt(keyword));                                                                            
+                request.setAttribute("categoryListDetail", list);                      
+                
+                RequestDispatcher dispatcher = request.getRequestDispatcher("categoryDetail.jsp");
+                dispatcher.forward(request, response);
         }
     }
 

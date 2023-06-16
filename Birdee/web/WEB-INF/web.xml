@@ -44,6 +44,18 @@
         <servlet-name>LoadByCate</servlet-name>
         <servlet-class>controller.LoadByCate</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>LoadProductForStaff</servlet-name>
+        <servlet-class>controller.LoadProductForStaff</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>staffDeleteBird</servlet-name>
+        <servlet-class>controller.staffDeleteBird</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>staffDeleteAccessory</servlet-name>
+        <servlet-class>controller.staffDeleteAccessory</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
         <url-pattern>/MainController</url-pattern>
@@ -87,6 +99,18 @@
     <servlet-mapping>
         <servlet-name>LoadByCate</servlet-name>
         <url-pattern>/LoadByCate</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LoadProductForStaff</servlet-name>
+        <url-pattern>/LoadProductForStaff</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>staffDeleteBird</servlet-name>
+        <url-pattern>/staffDeleteBird</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>staffDeleteAccessory</servlet-name>
+        <url-pattern>/staffDeleteAccessory</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>30</session-timeout>

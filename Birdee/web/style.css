@@ -393,3 +393,10 @@ text-align: center;
 .backgroundDetail{   
     background-color: whitesmoke;
 }
+
+.BorderUpdate{
+    border: 1px; 
+    border-style: solid; 
+    border-color: greenyellow
+}
+
