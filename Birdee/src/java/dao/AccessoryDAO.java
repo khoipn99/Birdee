@@ -28,8 +28,8 @@ public class AccessoryDAO {
             cn = DBUtils.makeConnection();
             if (cn != null) {
                 String sql = "select *\n"
-                        + "from Accessory ";
-
+                        + "from Accessory\n"
+                        + "order by Accessory.accessory_id DESC\n";
                 PreparedStatement pst = cn.prepareStatement(sql);
                 ResultSet rs = pst.executeQuery();
                 if (rs != null) {
@@ -55,7 +55,7 @@ public class AccessoryDAO {
         }
         return list;
     }
-
+    
     public static ArrayList<Accessory> getAccessoryByID(int ID) {
         ArrayList<Accessory> list = new ArrayList<>();
         Connection cn = null;
@@ -63,10 +63,11 @@ public class AccessoryDAO {
             cn = DBUtils.makeConnection();
             if (cn != null) {
                 String sql = "select *\n"
-                        + "from Accessory "
-                        + "where Accessory.accessory_id like ?";
+                        + "from Accessory\n"
+                        + "where Accessory.accessory_id like ?\n"
+                        + "order by Accessory.accessory_id DESC\n";
                 PreparedStatement pst = cn.prepareStatement(sql);
-                pst.setInt(1, ID);
+                 pst.setInt(1, ID);
                 ResultSet rs = pst.executeQuery();
                 if (rs != null) {
                     while (rs.next()) {
@@ -170,6 +171,34 @@ public class AccessoryDAO {
                 while (rs != null && rs.next()) {
                     String url = rs.getString("url");
                     tmp.add(url);
+                }
+
+            }
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+        return tmp;
+    }
+    
+    public static String getMainAccessoryImg(int Accessory_id) {
+        String tmp = "";
+
+        Connection cn = null;
+        try {
+            cn = DBUtils.makeConnection();
+            if (cn != null) {
+
+                String sql = "select url from Accessory \n"
+                        + "join Accessory_Img on Accessory_Img.accessory_id = Accessory.accessory_id \n"
+                        + "where Accessory.accessory_id like ? and Accessory_Img.is_main_img like 1";
+                PreparedStatement pst = cn.prepareStatement(sql);
+                pst.setInt(1, Accessory_id);
+                ResultSet rs = pst.executeQuery();
+                while (rs != null && rs.next()) {
+                    String url = rs.getString("url");
+                    tmp = url;
                 }
 
             }
@@ -309,7 +338,255 @@ public class AccessoryDAO {
         }
         return null;
     }
+    
 
+    public static ArrayList<Accessory> getAccessByCate(int cate_id) {
+        Connection cn = null;
+        ArrayList<Accessory> list = new ArrayList<>();
+        try {
+            cn = DBUtils.makeConnection();
+            if (cn != null) {
+                String sql = "SELECT accessory_id,name,price,quantity,description,email_shop_staff,cate_id,email_platform_staff\n"
+                        + "FROM Accessory\n"
+                        + "WHERE cate_id = ?";
+                PreparedStatement pst = cn.prepareStatement(sql);
+                pst.setInt(1, cate_id);
+                ResultSet rs = pst.executeQuery();
+                if (rs != null)
+                    while (rs.next()) {
+                        int id = rs.getInt("accessory_id");
+                        String name = rs.getString("name");
+                        float price = rs.getFloat("price");
+                        int quantity = rs.getInt("quantity");
+                        String description = rs.getString("description");
+                        String email_shop_staff = rs.getString("email_shop_staff");
+                        int cateID = rs.getInt("cate_id");
+                        String email_platform_staff = rs.getString("email_platform_staff");
+                        Accessory Ac = new Accessory(id, name, price, quantity, description, email_shop_staff, cateID, email_platform_staff);
+                        list.add(Ac);
+                    }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+    
+    public static ArrayList<Accessory> SortAccessoryPrice() {
+        ArrayList<Accessory> list = new ArrayList<>();
+        Connection cn = null;
+        try {
+            cn = DBUtils.makeConnection();
+            if (cn != null) {
+                String sql = "select *\n"
+                        + " from [dbo].[Accessory]\n"
+                        + "order by [dbo].[Accessory].[price] desc";
+                 PreparedStatement pst = cn.prepareStatement(sql);
+                ResultSet rs = pst.executeQuery();
+                if (rs != null) {
+                    while (rs.next()) {
+                        int id = rs.getInt("accessory_id");
+                        String name = rs.getString("name");
+                        String description = rs.getString("description");
+                        int quantity = rs.getInt("quantity");
+                        float price = rs.getFloat("price");
+                        String email_shop_staff = rs.getString("email_shop_staff");
+                        int cate_id = rs.getInt("cate_id");
+                        String email_platform_staff = rs.getString("email_platform_staff");
+
+                        Accessory accessory = new Accessory(id, name, price, quantity, description, email_shop_staff, cate_id, email_platform_staff);
+                        list.add(accessory);
+
+                    }
+                }
+            }
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return list;
+    }
+    
+    public static ArrayList<Accessory> SortAccessoryPriceUP() {
+        ArrayList<Accessory> list = new ArrayList<>();
+        Connection cn = null;
+        try {
+            cn = DBUtils.makeConnection();
+            if (cn != null) {
+                String sql = "select *\n"
+                        + " from [dbo].[Accessory]\n"
+                        + "order by [dbo].[Accessory].[price] ASC";
+                 PreparedStatement pst = cn.prepareStatement(sql);
+                ResultSet rs = pst.executeQuery();
+                if (rs != null) {
+                    while (rs.next()) {
+                        int id = rs.getInt("accessory_id");
+                        String name = rs.getString("name");
+                        String description = rs.getString("description");
+                        int quantity = rs.getInt("quantity");
+                        float price = rs.getFloat("price");
+                        String email_shop_staff = rs.getString("email_shop_staff");
+                        int cate_id = rs.getInt("cate_id");
+                        String email_platform_staff = rs.getString("email_platform_staff");
+
+                        Accessory accessory = new Accessory(id, name, price, quantity, description, email_shop_staff, cate_id, email_platform_staff);
+                        list.add(accessory);
+
+                    }
+                }
+            }
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return list;
+    }
+    
+
+    public static ArrayList<Accessory> SortNewAccessory() {
+        ArrayList<Accessory> list = new ArrayList<>();
+        Connection cn = null;
+        try {
+            cn = DBUtils.makeConnection();
+            if (cn != null) {
+                String sql = "SELECT *\n"
+                        + "FROM [dbo].[Accessory]\n"
+                        + "ORDER BY [dbo].[Accessory].[accessory_id] DESC";
+                PreparedStatement pst = cn.prepareStatement(sql);
+                ResultSet rs = pst.executeQuery();
+                if (rs != null) {
+                    while (rs.next()) {
+                        int id = rs.getInt("accessory_id");
+                        String name = rs.getString("name");
+                        String description = rs.getString("description");
+                        int quantity = rs.getInt("quantity");
+                        float price = rs.getFloat("price");
+                        String email_shop_staff = rs.getString("email_shop_staff");
+                        int cate_id = rs.getInt("cate_id");
+                        String email_platform_staff = rs.getString("email_platform_staff");
+
+                        Accessory accessory = new Accessory(id, name, price, quantity, description, email_shop_staff, cate_id, email_platform_staff);
+                        list.add(accessory);
+
+                    }
+                }
+            }
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return list;
+    }
+
+    public static ArrayList<Accessory> SortHotAccessory() {
+        ArrayList<Accessory> list = new ArrayList<>();
+        Connection cn = null;
+        try {
+            cn = DBUtils.makeConnection();
+            if (cn != null) {
+                String sql = "select *\n"
+                        + "from [dbo].[Accessory]\n"
+                        + "order by [dbo].[Accessory].[quantity] desc";
+                PreparedStatement pst = cn.prepareStatement(sql);
+                ResultSet rs = pst.executeQuery();
+                if (rs != null) {
+                    while (rs.next()) {
+                        int id = rs.getInt("accessory_id");
+                        String name = rs.getString("name");
+                        String description = rs.getString("description");
+                        int quantity = rs.getInt("quantity");
+                        float price = rs.getFloat("price");
+                        String email_shop_staff = rs.getString("email_shop_staff");
+                        int cate_id = rs.getInt("cate_id");
+                        String email_platform_staff = rs.getString("email_platform_staff");
+
+                        Accessory accessory = new Accessory(id, name, price, quantity, description, email_shop_staff, cate_id, email_platform_staff);
+                        list.add(accessory);
+
+                    }
+                }
+            }
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return list;
+    }
+
+    public static ArrayList<Accessory> SortRamdomAccessory() {
+        ArrayList<Accessory> list = new ArrayList<>();
+        Connection cn = null;
+        try {
+            cn = DBUtils.makeConnection();
+            if (cn != null) {
+                String sql = "SELECT *\n"
+                        + "FROM [dbo].[Accessory]\n"
+                        + "ORDER BY NEWID()";
+                PreparedStatement pst = cn.prepareStatement(sql);
+                ResultSet rs = pst.executeQuery();
+                if (rs != null) {
+                    while (rs.next()) {
+                        int id = rs.getInt("accessory_id");
+                        String name = rs.getString("name");
+                        String description = rs.getString("description");
+                        int quantity = rs.getInt("quantity");
+                        float price = rs.getFloat("price");
+                        String email_shop_staff = rs.getString("email_shop_staff");
+                        int cate_id = rs.getInt("cate_id");
+                        String email_platform_staff = rs.getString("email_platform_staff");
+
+                        Accessory accessory = new Accessory(id, name, price, quantity, description, email_shop_staff, cate_id, email_platform_staff);
+                        list.add(accessory);
+
+                    }
+                }
+            }
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return list;
+    }
+
+        public static ArrayList<Accessory> getAccessoriesByPriceRange(float minPrice, float maxPrice) {
+        try {
+             ArrayList<Accessory> list = new ArrayList<>();
+            
+            Connection cn = DBUtils.makeConnection();
+            if (cn != null) {
+                String s = "SELECT * FROM [dbo].[Accessory] WHERE price BETWEEN ? AND ?";
+                PreparedStatement st = cn.prepareStatement(s);
+                st.setFloat(1, minPrice);
+                st.setFloat(2, maxPrice);                
+                ResultSet rs = st.executeQuery();
+                if (rs != null) {
+                    while (rs.next()) {
+                        int id = rs.getInt("accessory_id");
+                        String name = rs.getString("name");
+                        float price = rs.getFloat("price");
+                        int quantity = rs.getInt("quantity");
+                        String description = rs.getString("description");
+                        String email_shop_staff = rs.getString("email_shop_staff");
+                        int cate_id = rs.getInt("cate_id");
+                        String email_platform_staff = rs.getString("email_platform_staff");
+
+                        Accessory Ac = new Accessory(id, name, price, quantity, description, email_shop_staff, cate_id, email_platform_staff);
+
+                        list.add(Ac);
+                    }
+                    return list;
+                }
+                cn.close();
+            } else {
+                System.out.println("Connection Error");
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    
     public static ArrayList<Accessory> getAccessoriesList2(String keyword) {
         try {
             Connection cn = DBUtils.makeConnection();
@@ -467,9 +744,18 @@ public class AccessoryDAO {
         }
         return false;
     }
-
+    
+    
+    
     public static void main(String[] args) {
-        System.out.println(AccessoryDAO.getAccessoryImg(1).get(0));
+        ArrayList<Accessory> list = new ArrayList<>();
+        list=getAccessoriesByPriceRange(0, 10);
+        for (Accessory accessory : list) {
+            System.out.println(accessory.getAccessory_id());
+        }
+        
     }
-
+    
+    
+    
 }

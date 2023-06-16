@@ -64,7 +64,8 @@ public class LoginServlet extends HttpServlet {
                     }
                     
                     if (acc.getRole_id().equals("cus")) {
-                        session.setAttribute("userName", acc.getUsername());                        
+                        session.setAttribute("userName", acc.getUsername());  
+                        session.setAttribute("email", acc.getEmail());
                         request.getRequestDispatcher("PrintProduct").forward(request, response);
                     }
                     else if (acc.getRole_id().equals("ad")) {

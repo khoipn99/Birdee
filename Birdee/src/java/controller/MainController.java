@@ -26,8 +26,6 @@ public class MainController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-
-
             /* TODO output your page here. You may use following sample code. */
             String url = "HomeServlet";
             String action = null;
@@ -70,6 +68,31 @@ public class MainController extends HttpServlet {
                 url = "UpdateAServlet";
             else if(action.equals("AddAccessory"))
                 url ="AddAccessoryServlet";
+            else if (action.equals("AddToCart"))
+                url = "AddToCartServlet";
+            else if (action.equals("VCI"))
+                url = "VCIServlet";
+            else if (action.equals("EditCusProfile"))
+                url = "EditCusProfileServlet";
+            else if(action.equals("viewOrderList"))
+                url = "ViewOrderListServlet";
+            else if (action.equals("sort"))
+                url = "SortServlet1";
+            else if (action.equals("sortup"))
+                url= "SortUpServlet";
+            else if (action.equals("sortNew"))
+                url= "SortProductNew";        
+            else if (action.equals("sortHot"))
+                url= "SortHotProductServlet"; 
+            else if (action.equals("Ramdom"))
+                url= "RamdomProductServlet"; 
+            else if(action.equals("ViewOrderDetail"))
+                url = "ViewOrderDetailServlet";
+            else if (action.equals("range"))
+                url= "birdRange.jsp"; 
+            else if(action.equals("sortbyrangeid"))
+                url="SortBirdsByPriceRange";
+          
             request.getRequestDispatcher(url).forward(request, response);
         }
     }

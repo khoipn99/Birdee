@@ -26,8 +26,9 @@ public class BirdDAO {
         try {
             cn = DBUtils.makeConnection();
             if (cn != null) {
-                String sql = "select * from Bird\n";
-                sql = sql + "where Bird.bird_name like ?";
+                String sql = "select * from Bird\n"               
+                 + "where Bird.bird_name like ?\n"
+                 + "ORDER BY Bird.bird_id DESC";
                 PreparedStatement pst = cn.prepareStatement(sql);
                 pst.setString(1, "%" + keyword + "%");
                 ResultSet rs = pst.executeQuery();
@@ -66,7 +67,8 @@ public class BirdDAO {
             cn = DBUtils.makeConnection();
             if (cn != null) {
                 String sql = "select * from Bird\n"
-                        + "where Bird.bird_id like ?";
+                        + "where Bird.bird_id like ?\n"
+                        + "ORDER BY Bird.bird_id DESC";
 
                 PreparedStatement pst = cn.prepareStatement(sql);
                 pst.setInt(1, BirdID);
@@ -174,6 +176,35 @@ public class BirdDAO {
                 while (rs != null && rs.next()) {
                     String url = rs.getString("url");
                     tmp.add(url);
+                }
+
+            }
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+        return tmp;
+    }
+    
+     public static String getMainBirdImg(int Bird_id) {
+        String tmp = "";
+
+        Connection cn = null;
+        try {
+            cn = DBUtils.makeConnection();
+            if (cn != null) {
+
+                String sql = "select url\n"
+                        + "from Bird join Bird_Img on Bird.bird_id = Bird_Img.bird_id \n"
+                        + "where Bird.bird_id like ? and Bird_Img.is_main_img like 1";
+                PreparedStatement pst = cn.prepareStatement(sql);
+                pst.setInt(1, Bird_id);
+                
+                ResultSet rs = pst.executeQuery();
+                while (rs != null && rs.next()) {
+                    String url = rs.getString("url");
+                    tmp = url;
                 }
 
             }
@@ -327,6 +358,256 @@ public class BirdDAO {
         }
         return null;
     }
+    
+    public static ArrayList<Bird> SortBirdPrice() {
+        ArrayList<Bird> list = new ArrayList<>();
+        Connection cn = null;
+        try {
+            cn = DBUtils.makeConnection();
+            if (cn != null) {
+                String sql = "select *\n"
+                        + "from [dbo].[Bird]\n"
+                        + "order by [dbo].[Bird].[price] desc";
+                PreparedStatement pst = cn.prepareStatement(sql);
+   
+                ResultSet rs = pst.executeQuery();
+                if (rs != null) {
+                    while (rs.next()) {
+                        int id = rs.getInt("bird_id");
+                        String name = rs.getString("bird_name");
+                        Date dob = rs.getDate("dob");
+                        boolean gender = rs.getBoolean("gender");
+                        float height = rs.getFloat("height");
+                        float weight = rs.getFloat("weight");
+                        String origin = rs.getString("origin");
+                        String description = rs.getString("description");
+                        int quantity = rs.getInt("quantity");
+                        float price = rs.getFloat("price");
+                        String email_shop_staff = rs.getString("email_shop_staff");
+                        int cate_id = rs.getInt("cate_id");
+                        String email_platform_staff = rs.getString("email_platform_staff");
+                        Bird bird = new Bird(id, name, dob, gender, height, weight, origin, description, quantity, price, email_shop_staff, cate_id, email_platform_staff);
+                        list.add(bird);
+
+                    }
+                }
+            }
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return list;
+    }
+    
+    public static ArrayList<Bird> SortBirdPriceUP() {
+        ArrayList<Bird> list = new ArrayList<>();
+        Connection cn = null;
+        try {
+            cn = DBUtils.makeConnection();
+            if (cn != null) {
+                String sql = "select *\n"
+                        + "from [dbo].[Bird]\n"
+                        + "order by [dbo].[Bird].[price] ASC";
+                PreparedStatement pst = cn.prepareStatement(sql);
+
+                ResultSet rs = pst.executeQuery();
+                if (rs != null) {
+                    while (rs.next()) {
+                        int id = rs.getInt("bird_id");
+                        String name = rs.getString("bird_name");
+                        Date dob = rs.getDate("dob");
+                        boolean gender = rs.getBoolean("gender");
+                        float height = rs.getFloat("height");
+                        float weight = rs.getFloat("weight");
+                        String origin = rs.getString("origin");
+                        String description = rs.getString("description");
+                        int quantity = rs.getInt("quantity");
+                        float price = rs.getFloat("price");
+                        String email_shop_staff = rs.getString("email_shop_staff");
+                        int cate_id = rs.getInt("cate_id");
+                        String email_platform_staff = rs.getString("email_platform_staff");
+                        Bird bird = new Bird(id, name, dob, gender, height, weight, origin, description, quantity, price, email_shop_staff, cate_id, email_platform_staff);
+                        list.add(bird);
+
+                    }
+                }
+            }
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return list;
+    }
+
+    public static ArrayList<Bird> SortNewBird() {
+        ArrayList<Bird> list = new ArrayList<>();
+        Connection cn = null;
+        try {
+            cn = DBUtils.makeConnection();
+            if (cn != null) {
+                String sql = "select *\n"
+                        + "from [dbo].[Bird]\n"
+                        + "order by [dbo].[Bird].[bird_id] DESC";
+                PreparedStatement pst = cn.prepareStatement(sql);
+
+                ResultSet rs = pst.executeQuery();
+                if (rs != null) {
+                    while (rs.next()) {
+                        int id = rs.getInt("bird_id");
+                        String name = rs.getString("bird_name");
+                        Date dob = rs.getDate("dob");
+                        boolean gender = rs.getBoolean("gender");
+                        float height = rs.getFloat("height");
+                        float weight = rs.getFloat("weight");
+                        String origin = rs.getString("origin");
+                        String description = rs.getString("description");
+                        int quantity = rs.getInt("quantity");
+                        float price = rs.getFloat("price");
+                        String email_shop_staff = rs.getString("email_shop_staff");
+                        int cate_id = rs.getInt("cate_id");
+                        String email_platform_staff = rs.getString("email_platform_staff");
+                        Bird bird = new Bird(id, name, dob, gender, height, weight, origin, description, quantity, price, email_shop_staff, cate_id, email_platform_staff);
+                        list.add(bird);
+
+                    }
+                }
+            }
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return list;
+    }
+
+    public static ArrayList<Bird> SortHotBird() {
+        ArrayList<Bird> list = new ArrayList<>();
+        Connection cn = null;
+        try {
+            cn = DBUtils.makeConnection();
+            if (cn != null) {
+                String sql = "select *\n"
+                        + "from [dbo].[Bird]\n"
+                        + "order by [dbo].[Bird].[quantity] desc";
+                PreparedStatement pst = cn.prepareStatement(sql);
+
+                ResultSet rs = pst.executeQuery();
+                if (rs != null) {
+                    while (rs.next()) {
+                        int id = rs.getInt("bird_id");
+                        String name = rs.getString("bird_name");
+                        Date dob = rs.getDate("dob");
+                        boolean gender = rs.getBoolean("gender");
+                        float height = rs.getFloat("height");
+                        float weight = rs.getFloat("weight");
+                        String origin = rs.getString("origin");
+                        String description = rs.getString("description");
+                        int quantity = rs.getInt("quantity");
+                        float price = rs.getFloat("price");
+                        String email_shop_staff = rs.getString("email_shop_staff");
+                        int cate_id = rs.getInt("cate_id");
+                        String email_platform_staff = rs.getString("email_platform_staff");
+                        Bird bird = new Bird(id, name, dob, gender, height, weight, origin, description, quantity, price, email_shop_staff, cate_id, email_platform_staff);
+                        list.add(bird);
+
+                    }
+                }
+            }
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return list;
+    }
+
+    public static ArrayList<Bird> SortRandomBird() {
+        ArrayList<Bird> list = new ArrayList<>();
+        Connection cn = null;
+        try {
+            cn = DBUtils.makeConnection();
+            if (cn != null) {
+                String sql = "select *\n"
+                        + "from [dbo].[Bird]\n"
+                        + "order by NEWID()";
+                PreparedStatement pst = cn.prepareStatement(sql);
+
+                ResultSet rs = pst.executeQuery();
+                if (rs != null) {
+                    while (rs.next()) {
+                        int id = rs.getInt("bird_id");
+                        String name = rs.getString("bird_name");
+                        Date dob = rs.getDate("dob");
+                        boolean gender = rs.getBoolean("gender");
+                        float height = rs.getFloat("height");
+                        float weight = rs.getFloat("weight");
+                        String origin = rs.getString("origin");
+                        String description = rs.getString("description");
+                        int quantity = rs.getInt("quantity");
+                        float price = rs.getFloat("price");
+                        String email_shop_staff = rs.getString("email_shop_staff");
+                        int cate_id = rs.getInt("cate_id");
+                        String email_platform_staff = rs.getString("email_platform_staff");
+                        Bird bird = new Bird(id, name, dob, gender, height, weight, origin, description, quantity, price, email_shop_staff, cate_id, email_platform_staff);
+                        list.add(bird);
+
+                    }
+                }
+            }
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return list;
+    }
+    
+   
+    
+        public  static ArrayList<Bird> getBirdsByPriceRange(float minPrice, float maxPrice) {
+         ArrayList<Bird> list = new ArrayList<>();
+            
+            try {
+            Connection cn = DBUtils.makeConnection();
+            if (cn != null) {
+                String s = "SELECT * FROM dbo.Bird WHERE price BETWEEN ? AND ?";
+                PreparedStatement ps = cn.prepareStatement(s);
+                ps.setFloat(1, minPrice);
+                ps.setFloat(2, maxPrice);
+                ResultSet rs = ps.executeQuery();
+               
+                while (rs.next()) {
+                    int id = rs.getInt("bird_id");
+                    String name = rs.getString("bird_name");
+                    Date dob = rs.getDate("dob");
+                    boolean gender = rs.getBoolean("gender");
+                    float height = rs.getFloat("height");
+                    float weight = rs.getFloat("weight");
+                    String origin = rs.getString("origin");
+                    int quantity = rs.getInt("quantity");
+                    String description = rs.getString("description");
+                    float price = rs.getFloat("price");
+                    String email_shop_staff = rs.getString("email_shop_staff");
+                    int cate_id = rs.getInt("cate_id");
+                    String email_platform_staff = rs.getString("email_platform_staff");
+                    Bird bird = new Bird(id, name, dob, gender, height, weight, origin, description, quantity, price, email_shop_staff, cate_id, email_platform_staff);
+                    list.add(bird);
+                }
+                cn.close();
+                return list;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    
+    
+    public static void main(String[] args) {
+       ArrayList<Bird> list = new ArrayList<>();
+       list = BirdDAO.getBirdsByPriceRange(50, 200);
+        for (Bird bird : list) {
+            System.out.println(bird.getBird_id());
+        }
+    }
+
 
     public static ArrayList<Bird> getBirdsList2(String keyword) {
         try {

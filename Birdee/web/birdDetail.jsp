@@ -4,6 +4,8 @@
     Author     : vudin
 --%>
 
+<%@page import="dao.ReviewDAO"%>
+<%@page import="dto.Review_Bird"%>
 <%@page import="dao.AccessoryDAO"%>
 <%@page import="dto.Accessory"%>
 <%@page import="java.util.List"%>
@@ -12,18 +14,23 @@
 <%@page import="dto.Bird"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Birdee</title>        
         <script src="mylib/bt5/bootstrap-5.0.2-dist/js/bootstrap.bundle.min.js"></script>
-        <header>
-            <%@include file="header.jsp" %>
-        </header>
-    </head>
-    <body>
-            <div class="container py-3">
+
+    <header>
+        <%@include file="header.jsp" %>
+    </header>
+    <link rel="stylesheet" href="style.css" type="text/css"/>
+</head>
+<body>
+    <section>
+        <div class="container py-3">
+            <div class="backgroundDetail">
                 <div class="row py-3">
                     <div class="col">
 
@@ -33,6 +40,7 @@
                             ArrayList<Bird> list = (ArrayList<Bird>) request.getAttribute("birdListDetail");
                             if (list != null && !list.isEmpty()) {
                                 for (Bird b : list) {
+
 
                         %> 
                         <div>             
@@ -76,7 +84,7 @@
 
                         <ul>
                             <h2><%= b.getBird_name()%></h2>                            
-                            <h5><a style="color: red"><%= BirdDAO.getBirdVote(b.getBird_id())%> Star | </a><a><%= BirdDAO.getBirdBuying(b.getBird_id())%> Ðã bán</a></h5>
+                            <div class="form-detail"><h5><a style="color: red"><%= BirdDAO.getBirdVote(b.getBird_id())%> Star | </a><a><%= BirdDAO.getBirdBuying(b.getBird_id())%> Ðã bán</a></h5></div>
                             <h5 style="color: red"><%= b.getPrice()%>00 VND</h5>
                             <br>
                             <br>
@@ -96,15 +104,20 @@
 
                         </ul>
                     </div>                    
-                    <%
-                            }
-                        }
-                    %>
+
                 </div>
-                <br>
-                <h5>Thông tin Shop</h5>    
-                <br>
-                <h5>CHI TIẾT SẢN PHẨM</h5>  
+            </div>
+            <br>
+            <div class="backgroundDetail">
+                <div class="form-detail">
+                    <h5>Thông tin Shop</h5>               
+                </div> 
+
+            </div>
+            <br>
+            <div class="backgroundDetail">
+                <div class="form-detail"><h5>CHI TIẾT SẢN PHẨM</h5></div>  
+
                 <br>
                 <div>
                     <div class="row">
@@ -119,12 +132,7 @@
                                 <h6>Gửi từ:</h6>
                             </ul>
                         </div>
-                        <%
-                            ArrayList<Bird> list2 = (ArrayList<Bird>) request.getAttribute("birdListDetail");
-                            if (list != null && !list.isEmpty()) {
-                                for (Bird b : list) {
 
-                        %> 
                         <div class="col" >
                             <ul>
                                 <h6><%= b.getDob().toString()%></h6>
@@ -148,31 +156,81 @@
 
                     </div>    
                 </div>
-                <br>
-                <hr>
-                <h5>MÔ TẢ SẢN PHẨM</h5>   
-                <hr>
-                <br>
-                <h6><%= b.getDescription()%></h6> 
+            </div>            
+            <br>
+            <div class="backgroundDetail">
+                <div class="form-detail"><h5>MÔ TẢ SẢN PHẨM</h5></div> 
 
+                <br>
+                <h6><%= b.getDescription()%></h6>
+                <br>
+            </div>
+            <br>
+
+            <div class="backgroundDetail">
+                <div class="form-detail" style=""><h5>ĐÁNH GIÁ SẢN PHẨM</h5></div>                
+
+                <div style="padding-top: 20px; padding-bottom: 20px; background-color: #fff4f4;">                   
+                    <p><h5 style="color: red"><%= BirdDAO.getBirdVote(b.getBird_id())%> Star trên 5</h5></p>
+                </div>
+                <br>
+                <%
+
+                    ArrayList<Review_Bird> list2 = (ArrayList<Review_Bird>) request.getAttribute("birdListReview");
+                    if (list != null && !list.isEmpty()) {
+                        for (Review_Bird r : list2) {
+
+
+                %>
+                <div style="border-bottom: 1px; border-top: 0px; border-right: 0px; border-left: 0px;border-style: solid;">
+
+                    <div><%= ReviewDAO.getReviewerBirdName(r.getEmail_customer()) %></div>
+                    <div style="color: red"><%= r.getRating()%> Star</div>
+                    <div><%= ReviewDAO.getReviewBirdDate(r.getOrder_detail_id_B()) %></div>
+                    <br>
+                    <div><%= r.getComment()%></div>                   
+                    <div>
+                        <%
+                            ArrayList<String> img = ReviewDAO.getReviewBirdImg(r.getOrder_detail_id_B());
+                            for (String elem : img) {
+                                    
+                                
+                            %>
+                            
+                            <img src="<%= elem %>" style="width: 10%; height: 130px;">
+                        
+                        <%
+                            }
+                            %>
+                    </div>
+                    <br>
+                </div> 
+                <br>
                 <%
                         }
                     }
                 %>
-                <br>        
-                <br>   
-                <h5>ĐÁNH GIÁ SẢN PHẨM</h5>
-                <br>        
-                <br>
-
-
             </div>
 
-        </section>
 
-        <footer>
-            <%@include file="footer.jsp" %>
-        </footer>
-    </body>
+            <%
+                    }
+                }
+            %>
+            <br>
+
+
+
+
+        </div>
+
+
+
+    </section>
+
+    <footer>
+        <%@include file="footer.jsp" %>
+    </footer>
+</body>
 </html>
 

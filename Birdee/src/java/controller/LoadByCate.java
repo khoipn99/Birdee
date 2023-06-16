@@ -1,19 +1,18 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
 package controller;
 
 import dao.AccessoryDAO;
 import dao.BirdDAO;
-import dao.ReviewDAO;
+import dao.CategoryDAO;
 import dto.Accessory;
 import dto.Bird;
-import dto.Review_Accessory;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -21,9 +20,9 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author vudin
+ * @author ACE
  */
-public class AccessoryDetail extends HttpServlet {
+public class LoadByCate extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,20 +36,25 @@ public class AccessoryDetail extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try ( PrintWriter out = response.getWriter()) {
+        try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            String keyword = request.getParameter("accessorydId");               
-                ArrayList<Accessory> list;
-                ArrayList<Review_Accessory> list2;
-                
-                list = AccessoryDAO.getAccessoryByID(Integer.parseInt(keyword));   
-                list2 = ReviewDAO.getReview_Accessory(Integer.parseInt(keyword)); 
-                
-                request.setAttribute("accessoryListDetail", list);                      
-                request.setAttribute("accessoryListReview", list2);
-                
-                RequestDispatcher dispatcher = request.getRequestDispatcher("accessoryDetail.jsp");
-                dispatcher.forward(request, response);
+            String id = request.getParameter("cateID");
+            String name = CategoryDAO.getCateName(Integer.parseInt(id));
+            if (Integer.parseInt(id) == 1) {
+                ArrayList<Bird> list = BirdDAO.getBirdsList();
+                request.setAttribute("cateID", id);
+                request.setAttribute("cateName", name);
+                request.setAttribute("listByCate", list);
+                request.getRequestDispatcher("displayByCate.jsp").forward(request, response);
+            }
+            else {
+                ArrayList<Accessory> list = new ArrayList<>();
+                list = AccessoryDAO.getAccessByCate(Integer.parseInt(id));
+                request.setAttribute("cateID", id);
+                request.setAttribute("cateName", name);
+                request.setAttribute("listByCate", list);
+                request.getRequestDispatcher("displayByCate.jsp").forward(request, response);
+            }                         
         }
     }
 

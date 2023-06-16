@@ -1,29 +1,25 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
 package controller;
 
-import dao.AccessoryDAO;
-import dao.BirdDAO;
-import dao.ReviewDAO;
-import dto.Accessory;
-import dto.Bird;
-import dto.Review_Accessory;
+import dao.AccountDAO;
+import dto.Account;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author vudin
+ * @author ACE
  */
-public class AccessoryDetail extends HttpServlet {
+public class EditCusProfileServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,21 +33,38 @@ public class AccessoryDetail extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try ( PrintWriter out = response.getWriter()) {
+        try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            String keyword = request.getParameter("accessorydId");               
-                ArrayList<Accessory> list;
-                ArrayList<Review_Accessory> list2;
-                
-                list = AccessoryDAO.getAccessoryByID(Integer.parseInt(keyword));   
-                list2 = ReviewDAO.getReview_Accessory(Integer.parseInt(keyword)); 
-                
-                request.setAttribute("accessoryListDetail", list);                      
-                request.setAttribute("accessoryListReview", list2);
-                
-                RequestDispatcher dispatcher = request.getRequestDispatcher("accessoryDetail.jsp");
-                dispatcher.forward(request, response);
+            HttpSession session = request.getSession();
+            String Uname = request.getParameter("UName");
+            if(Uname.equals("")|| Uname == null){
+                Account tmp = (Account) session.getAttribute("acc");
+                Uname = tmp.getUsername();
+            }
+            String UAddress = request.getParameter("UAddress");
+            if(UAddress.equals("")|| UAddress == null){
+                Account tmp = (Account) session.getAttribute("acc");
+                UAddress = tmp.getAddress();
+            }
+            String UphoneNumber = request.getParameter("UphoneNumber");
+            if(UphoneNumber.equals("") || UphoneNumber == null){
+                Account tmp = (Account) session.getAttribute("acc");
+                UphoneNumber = tmp.getPhone();
+            }
+            Account tmp = (Account) session.getAttribute("acc");
+            String email = tmp.getEmail();
+            int kq = AccountDAO.UpdateAccount(Uname, email, UAddress, UphoneNumber);
+            if(kq>0){
+                request.setAttribute("msg", "Update thanh cong");
+                Account tmp1 = AccountDAO.getAccountByEmail(email);
+                session.setAttribute("acc", tmp1);
+                request.getRequestDispatcher("viewCusInfor.jsp").forward(request, response);
+            }else{
+                request.setAttribute("msg", "Đã có lỗi xảy ra trong quá trình cập nhập vui lòng thử lại");
+                request.getRequestDispatcher("viewCusInfor.jsp").forward(request, response);
+            }
         }
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

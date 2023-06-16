@@ -9,7 +9,7 @@ import dao.BirdDAO;
 import dao.ReviewDAO;
 import dto.Accessory;
 import dto.Bird;
-import dto.Review_Accessory;
+import dto.Review_Bird;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -23,7 +23,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author vudin
  */
-public class AccessoryDetail extends HttpServlet {
+public class BirdDetail extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,17 +39,18 @@ public class AccessoryDetail extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try ( PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            String keyword = request.getParameter("accessorydId");               
-                ArrayList<Accessory> list;
-                ArrayList<Review_Accessory> list2;
+            
+            String keyword = request.getParameter("birdId");               
+                ArrayList<Bird> list;
+                ArrayList<Review_Bird> list2;
                 
-                list = AccessoryDAO.getAccessoryByID(Integer.parseInt(keyword));   
-                list2 = ReviewDAO.getReview_Accessory(Integer.parseInt(keyword)); 
+                list = BirdDAO.getBirdById(Integer.parseInt(keyword)); 
+                list2 = ReviewDAO.getReview_Bird(Integer.parseInt(keyword));
                 
-                request.setAttribute("accessoryListDetail", list);                      
-                request.setAttribute("accessoryListReview", list2);
+                request.setAttribute("birdListDetail", list);
+                request.setAttribute("birdListReview", list2);
                 
-                RequestDispatcher dispatcher = request.getRequestDispatcher("accessoryDetail.jsp");
+                RequestDispatcher dispatcher = request.getRequestDispatcher("birdDetail.jsp");
                 dispatcher.forward(request, response);
         }
     }

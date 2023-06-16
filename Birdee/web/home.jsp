@@ -18,12 +18,13 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Birdee</title>        
         <script src="mylib/bt5/bootstrap-5.0.2-dist/js/bootstrap.bundle.min.js"></script>
-        <header>
-            <%@include file="header.jsp" %>
-        </header>
+        <link rel="stylesheet" href="style.css" type="text/css"/>
+    
     </head>
     <body>
-        
+        <header class="head123">
+            <%@include file="header.jsp" %>
+        </header>
         
         <section class="body py-3">  
             <div class="container">
@@ -59,21 +60,21 @@
                     <div class="cate ">
                         <div class="row ">
                             <div class="col-md-3">
-                                <a href="#"><img src="mylib/img/chim.png" alt=""></a><br>
-                                <a href="#">Chim cảnh</a>
+                                <a href="LoadByCate?cateID=1"><img src="mylib/img/chim.png" alt=""></a><br>
+                                <a href="LoadByCate?cateID=1">Chim cảnh</a>
                             </div>
                             <div class="col-md-3">
-                                <a href="#"><img src="mylib/img/thucan.png" alt=""></a><br>
-                                <a href="#">Thức ăn cho chim</a>
+                                <a href="LoadByCate?cateID=2"><img src="mylib/img/thucan.png" alt=""></a><br>
+                                <a href="LoadByCate?cateID=2">Thức ăn cho chim</a>
 
                             </div>
                             <div class="col-md-3">
-                                <a href="#"><img src="mylib/img/mangan.png" alt=""></a><br>
-                                <a href="#">Máng ăn, cóng</a>
+                                <a href="LoadByCate?cateID=3"><img src="mylib/img/mangan.png" alt=""></a><br>
+                                <a href="LoadByCate?cateID=3">Máng ăn, cóng</a>
                             </div>
                             <div class="col-md-3">
-                                <a href="#"><img src="mylib/img/long.png" alt=""></a><br>
-                                <a href="#">Lồng chim</a>
+                                <a href="LoadByCate?cateID=4"><img src="mylib/img/long.png" alt=""></a><br>
+                                <a href="LoadByCate?cateID=4">Lồng chim</a>
                             </div>
                         </div>
                     </div>
@@ -101,8 +102,8 @@
                             %>
 
                             <div class="col">
-                                <div class="card" style="width: 18rem;">
-                                    <a href="MainController?action=viewBirdDetail&birdId=<%= b.getBird_id() %>"><img src="<%= BirdDAO.getBirdImg(b.getBird_id()).get(0) %>" class="card-img-top" alt="..."></a>
+                                <div class="card" style="width: 18rem; height: 30rem;">
+                                    <a href="MainController?action=viewBirdDetail&birdId=<%= b.getBird_id() %>"><img src="<%= BirdDAO.getMainBirdImg(b.getBird_id()) %>" class="card-img-top" alt="..."></a>
                                     
                                     <div class="card-body">
 
@@ -126,7 +127,7 @@
 
                                     </ul>
                                     <div class="card-body" style="background-color: rgba(1, 122, 71, 1)">                                      
-                                        <a href="#" class="card-link" style="color: white" >Add to cart</a>
+                                        <a href="MainController?action=AddToCart&birdID=<%= b.getBird_id() %>&cateID=<%= b.getCate_id() %>" class="card-link" style="color: white" >Add to cart</a>
                                     </div>
                                 </div>
                             </div>
@@ -189,27 +190,27 @@
                         %> 
 
                         <div class="col py-3">                       
-                            <div class="card" style="width: 15rem;">
-                                <a href="MainController?action=viewBirdDetail&birdId=<%= b.getBird_id() %>"><img src="<%= BirdDAO.getBirdImg(b.getBird_id()).get(0) %>" class="card-img-top2" alt="..."></a>
+                            <div class="card text-center" style="width: 15rem; height: 25rem; text-decoration: none;">
+                                <a href="MainController?action=viewBirdDetail&birdId=<%= b.getBird_id() %>"><img src="<%= BirdDAO.getMainBirdImg(b.getBird_id()) %>" class="card-img-top2" alt="..."></a>
                                 <div class="card-body">
                                     <a style="text-decoration: none; color: #000000 " href="MainController?action=viewBirdDetail&birdId=<%= b.getBird_id() %>"><h5 class="card-title"><%= b.getBird_name()%></h5></a>
 
                                 </div>
-                                <ul class="list-group list-group-flush">
-                                    <li class="list-group-item" style="color: red"><%= b.getPrice()%>00 VND</li>
-                                    <li class="list-group-item"><%= BirdDAO.getBirdAddress(b.getBird_id()) %></li>
+                                <div class="card-text">
+                                    <p class="" style="color: red"><%= b.getPrice()%>00 VND</p>
+                                    <p class=""><%= BirdDAO.getBirdAddress(b.getBird_id()) %></p>
                                         <%
                                             if (vote > 0) {
                                         %>
-                                    <li class="list-group-item"><a style="color: red"><%= vote%> Star</a><a>, đã mua <%= BirdDAO.getBirdBuying(b.getBird_id())%></a></li>
+                                    <p class=""><a style="color: red"><%= vote%> Star</a><a>, đã mua <%= BirdDAO.getBirdBuying(b.getBird_id())%></a></p>
                                         <%
                                         } else {
                                         %> 
-                                    <li class="list-group-item">đã mua <%= BirdDAO.getBirdBuying(b.getBird_id())%></li>
+                                    <p class="">đã mua <%= BirdDAO.getBirdBuying(b.getBird_id())%></p>
                                         <%
                                             }
                                         %>
-                                </ul>
+                                </div>
                                 <div class="card-body" style="background-color: rgba(1, 122, 71, 1)">
                                     <a href="#" class="card-link" style="color: white" >Add to cart</a>                                      
                                 </div>
@@ -241,7 +242,7 @@
                         %> 
                         <div class="col py-3">
                             <div class="card" style="width: 15rem;">
-                                <a href="MainController?action=viewAccessoryDetail&accessorydId=<%= a.getAccessory_id() %>"><img src="<%= AccessoryDAO.getAccessoryImg(a.getAccessory_id()).get(0) %>" class="card-img-top2" alt="..."></a>
+                                <a href="MainController?action=viewAccessoryDetail&accessorydId=<%= a.getAccessory_id() %>"><img src="<%= AccessoryDAO.getMainAccessoryImg(a.getAccessory_id()) %>" class="card-img-top2" alt="..."></a>
                                 <div class="card-body">
                                     <a style="text-decoration: none; color: #000000 " href="MainController?action=viewAccessoryDetail&accessorydId=<%= a.getAccessory_id() %>"><h5 class="card-title"><%= a.getName() %></h5></a>
 

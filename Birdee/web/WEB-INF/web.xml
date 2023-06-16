@@ -84,6 +84,54 @@
         <servlet-name>AddAccessoryServlet</servlet-name>
         <servlet-class>controller.AddAccessoryServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>LoadByCate</servlet-name>
+        <servlet-class>controller.LoadByCate</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddToCartServlet</servlet-name>
+        <servlet-class>controller.AddToCartServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditCusProfileServlet</servlet-name>
+        <servlet-class>controller.EditCusProfileServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>VCIServlet</servlet-name>
+        <servlet-class>controller.VCIServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ViewOrderListServlet</servlet-name>
+        <servlet-class>controller.ViewOrderListServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RamdomProductServlet</servlet-name>
+        <servlet-class>controller.RamdomProductServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SortHotProductServlet</servlet-name>
+        <servlet-class>controller.SortHotProductServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SortProductNew</servlet-name>
+        <servlet-class>controller.SortProductNew</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SortServlet1</servlet-name>
+        <servlet-class>controller.SortServlet1</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SortUpServlet</servlet-name>
+        <servlet-class>controller.SortUpServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ViewOrderDetailServlet</servlet-name>
+        <servlet-class>controller.ViewOrderDetailServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SortBirdsByPriceRange</servlet-name>
+        <servlet-class>controller.SortBirdsByPriceRange</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
         <url-pattern>/MainController</url-pattern>
@@ -167,6 +215,54 @@
     <servlet-mapping>
         <servlet-name>AddAccessoryServlet</servlet-name>
         <url-pattern>/AddAccessoryServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LoadByCate</servlet-name>
+        <url-pattern>/LoadByCate</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddToCartServlet</servlet-name>
+        <url-pattern>/AddToCartServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditCusProfileServlet</servlet-name>
+        <url-pattern>/EditCusProfileServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>VCIServlet</servlet-name>
+        <url-pattern>/VCIServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewOrderListServlet</servlet-name>
+        <url-pattern>/ViewOrderListServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RamdomProductServlet</servlet-name>
+        <url-pattern>/RamdomProductServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SortHotProductServlet</servlet-name>
+        <url-pattern>/SortHotProductServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SortProductNew</servlet-name>
+        <url-pattern>/SortProductNew</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SortServlet1</servlet-name>
+        <url-pattern>/SortServlet1</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SortUpServlet</servlet-name>
+        <url-pattern>/SortUpServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewOrderDetailServlet</servlet-name>
+        <url-pattern>/ViewOrderDetailServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SortBirdsByPriceRange</servlet-name>
+        <url-pattern>/SortBirdsByPriceRange</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>30</session-timeout>

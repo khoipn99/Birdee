@@ -39,7 +39,7 @@ public class HomeServlet extends HttpServlet {
             HttpSession session = request.getSession(true);
             String uName = (String) session.getAttribute("userName");
             if (uName != null) //Da dang nhap            
-                response.sendRedirect("PrintProduct");
+                request.getRequestDispatcher("PrintProduct").forward(request, response);
             else { // Chua dang nhap
                 Cookie[] cookies = request.getCookies();
                 String cEmail = null;
