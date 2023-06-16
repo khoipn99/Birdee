@@ -5,11 +5,12 @@
  */
 package controller;
 
-import dao.CartDAO;
-import dto.Accessory_Sub_Cart;
-import dto.Bird_Sub_Cart;
+import dao.OrderDAO;
+import dto.Order_Detail_Accessory;
+import dto.Order_Detail_Bird;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -19,7 +20,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author ACE
  */
-public class AddToCartServlet extends HttpServlet {
+public class ViewOrderDetailServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,35 +36,13 @@ public class AddToCartServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            String birdID = request.getParameter("birdID");
-            String cateID = request.getParameter("cateID");
-            String aryID = request.getParameter("aryID");
-            Bird_Sub_Cart bc = new Bird_Sub_Cart();
-            Accessory_Sub_Cart ac = new Accessory_Sub_Cart();
-            boolean kq = true;
-            int kq2 = 0;
-            if (birdID != null && !birdID.isEmpty()) {
-                bc = CartDAO.getBirdCart(Integer.parseInt(birdID));
-                kq = CartDAO.checkBirdCart(bc.getBird_id());
-                if (kq == true) {
-                    kq2 = CartDAO.addBirdCart(Integer.parseInt(cateID), 1, Integer.parseInt(birdID));
-                }
-                else {
-                    kq2 = CartDAO.addBirdQuantity(bc, 1);
-                }
-            }
-            if (aryID != null && !aryID.isEmpty()) {
-                ac = CartDAO.getAccessoryCart(Integer.parseInt(aryID));
-                kq = CartDAO.checkAccessoryCart(ac.getAccessory_id());
-                if (kq == true) {
-                    kq2 = CartDAO.addAccessoryCart(Integer.parseInt(cateID), 1, Integer.parseInt(aryID));
-                }
-                else {
-                    kq2 = CartDAO.addAccessoryQuantity(ac, 1);
-                }
-            }
-            
-            
+            String orderid = request.getParameter("orderid");
+            ArrayList<Order_Detail_Bird> Blist = OrderDAO.getOrderDetailBird(Integer.parseInt(orderid.trim()));
+            ArrayList<Order_Detail_Accessory> Alist = OrderDAO.getOrderDetailAcessory(Integer.parseInt(orderid.trim()));
+                request.setAttribute("oid", orderid);
+                request.setAttribute("Blist", Blist);
+                request.setAttribute("Alist", Alist);
+                request.getRequestDispatcher("viewOrderDetail.jsp").forward(request, response);
         }
     }
 

@@ -36,5 +36,11 @@ public class Cart {
     public void setCart_id(int cart_id) {
         this.cart_id = cart_id;
     }
+
+    @Override
+    public String toString() {
+        return "Cart{" + "email_customer=" + email_customer + ", cart_id=" + cart_id + '}';
+    }
+    
     
 }

@@ -81,6 +81,10 @@
         <servlet-class>controller.SortUpServlet</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>ViewOrderDetailServlet</servlet-name>
+        <servlet-class>controller.ViewOrderDetailServlet</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>SortBirdsByPriceRange</servlet-name>
         <servlet-class>controller.SortBirdsByPriceRange</servlet-class>
     </servlet>
@@ -163,6 +167,10 @@
     <servlet-mapping>
         <servlet-name>SortUpServlet</servlet-name>
         <url-pattern>/SortUpServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewOrderDetailServlet</servlet-name>
+        <url-pattern>/ViewOrderDetailServlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>SortBirdsByPriceRange</servlet-name>

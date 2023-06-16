@@ -85,6 +85,7 @@
                     <th>Shipping</th>
                     <th>OrderDate</th>
                     <th>Payment</th>
+                    <th>Action</th>
                 </tr>
                 <c:forEach var="Order" items="${OrderList}">
                     <tr>
@@ -127,6 +128,9 @@
                         <c:if test="${OPI ==3}">
                             <td>cod</td>
                         </c:if>
+                            <td>
+                                <a href="MainController?action=ViewOrderDetail&orderid=${Order.order_id}">View Detail</a>
+                            </td>    
                     </tr>
                 </c:forEach>
             </table>
