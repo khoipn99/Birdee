@@ -48,8 +48,28 @@ public class MainController extends HttpServlet {
                 url = "LogoutServlet";
             else if(action.equals("viewAccessoryDetail"))
                 url = "AccessoryDetail";
-
-
+            else if(action.equals("ShowBList"))
+                url = "ShowBlistServlet";
+            else if(action.equals("ShowAList"))
+                url = "ShowAListServlet";
+            else if(action.equals("addbird"))
+                url = "AddBirdServlet";
+            else if(action.equals("UpdateF"))
+                url ="UpdateFServlet";
+            else if(action.equals("UpdateB"))
+                url = "UpdateBServlet";
+            else if(action.equals("deleteTemp"))
+                url ="DeleteTmpServlet";
+            else if(action.equals("DeleP"))
+                url ="ShowDeleteTmpServlet";
+            else if(action.equals("restore"))
+                url="restoreServlet";
+            else if(action.equals("UpdateAccessoryF"))
+                url ="UpdateAccessoryFServlet";
+            else if(action.equals("UpdateA"))
+                url = "UpdateAServlet";
+            else if(action.equals("AddAccessory"))
+                url ="AddAccessoryServlet";
             request.getRequestDispatcher(url).forward(request, response);
         }
     }

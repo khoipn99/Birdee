@@ -55,7 +55,7 @@ public class AccessoryDAO {
         }
         return list;
     }
-    
+
     public static ArrayList<Accessory> getAccessoryByID(int ID) {
         ArrayList<Accessory> list = new ArrayList<>();
         Connection cn = null;
@@ -66,7 +66,7 @@ public class AccessoryDAO {
                         + "from Accessory "
                         + "where Accessory.accessory_id like ?";
                 PreparedStatement pst = cn.prepareStatement(sql);
-                 pst.setInt(1, ID);
+                pst.setInt(1, ID);
                 ResultSet rs = pst.executeQuery();
                 if (rs != null) {
                     while (rs.next()) {
@@ -308,6 +308,164 @@ public class AccessoryDAO {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public static ArrayList<Accessory> getAccessoriesList2(String keyword) {
+        try {
+            Connection cn = DBUtils.makeConnection();
+            if (cn != null) {
+                String s = "SELECT *\n"
+                        + "FROM Accessory\n"
+                        + "where quantity>0 and email_shop_staff=?";
+                PreparedStatement pst = cn.prepareStatement(s);
+                pst.setString(1, keyword);
+                ResultSet rs = pst.executeQuery();
+                ArrayList<Accessory> list = new ArrayList<>();
+                if (rs != null) {
+                    while (rs.next()) {
+                        int id = rs.getInt("accessory_id");
+                        String name = rs.getString("name");
+                        float price = rs.getFloat("price");
+                        int quantity = rs.getInt("quantity");
+                        String description = rs.getString("description");
+                        String email_shop_staff = rs.getString("email_shop_staff");
+                        int cate_id = rs.getInt("cate_id");
+                        String email_platform_staff = rs.getString("email_platform_staff");
+
+                        Accessory Ac = new Accessory(id, name, price, quantity, description, email_shop_staff, cate_id, email_platform_staff);
+
+                        list.add(Ac);
+                    }
+                    return list;
+                }
+                cn.close();
+            } else {
+                System.out.println("Connection Error");
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public static boolean updateAccessory(int accessory_id, String name, float price, int quantity, String description) {
+        try {
+            Connection cn = DBUtils.makeConnection();
+            if (cn != null) {
+                String sql = "UPDATE Accessory\n"
+                        + "SET name =?, price=?,quantity=?, description=?\n"
+                        + "WHERE accessory_id = ?";
+                PreparedStatement pst = cn.prepareStatement(sql);
+                pst.setString(1, name);
+                pst.setFloat(2, price);
+                pst.setInt(3, quantity);
+                pst.setString(4, description);
+                pst.setInt(5, accessory_id);
+                int rowsAffected = pst.executeUpdate();
+                return rowsAffected > 0;
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return false;
+    }
+
+    public static boolean deleteTmp(int accessory_id) {
+        try {
+            Connection cn = DBUtils.makeConnection();
+            if (cn != null) {
+                String sql = "UPDATE Accessory SET quantity = 0 WHERE accessory_id = ?";
+                PreparedStatement pst = cn.prepareStatement(sql);
+                pst.setInt(1, accessory_id);
+
+                int rowsAffected = pst.executeUpdate();
+                return rowsAffected > 0;
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return false;
+    }
+
+    public static ArrayList<Accessory> getAccessoriesDeletTmp(String keyword) {
+        try {
+            Connection cn = DBUtils.makeConnection();
+            if (cn != null) {
+                String s = "SELECT *\n"
+                        + "FROM Accessory\n"
+                        + "where quantity=0 and email_shop_staff=?";
+                PreparedStatement pst = cn.prepareStatement(s);
+                pst.setString(1, keyword);
+                ResultSet rs = pst.executeQuery();
+                ArrayList<Accessory> list = new ArrayList<>();
+                if (rs != null) {
+                    while (rs.next()) {
+                        int id = rs.getInt("accessory_id");
+                        String name = rs.getString("name");
+                        float price = rs.getFloat("price");
+                        int quantity = rs.getInt("quantity");
+                        String description = rs.getString("description");
+                        String email_shop_staff = rs.getString("email_shop_staff");
+                        int cate_id = rs.getInt("cate_id");
+                        String email_platform_staff = rs.getString("email_platform_staff");
+
+                        Accessory Ac = new Accessory(id, name, price, quantity, description, email_shop_staff, cate_id, email_platform_staff);
+
+                        list.add(Ac);
+                    }
+                    return list;
+                }
+                cn.close();
+            } else {
+                System.out.println("Connection Error");
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public static boolean RecoverA(int accessory_id) {
+        try {
+            Connection cn = DBUtils.makeConnection();
+            if (cn != null) {
+                String sql = "Update Accessory\n"
+                        + "SET quantity = 1 WHERE accessory_id = ?";
+                PreparedStatement pst = cn.prepareStatement(sql);
+                pst.setInt(1, accessory_id);
+
+                int rowsAffected = pst.executeUpdate();
+                return rowsAffected > 0;
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return false;
+    }
+
+    public static boolean addAccessory(String AccessoryName, String Description, int Quantity, float Price,String EmailS,String EmailP ) {
+        try {
+            Connection cn = DBUtils.makeConnection();
+            if (cn != null) {
+                String sql = "INSERT INTO Accessory(name, price, quantity, description,email_shop_staff,cate_id,email_platform_staff)\n"
+                        + "VALUES(?,?,?,?,?,2,?)";
+                PreparedStatement pst = cn.prepareStatement(sql);
+                pst.setString(1, AccessoryName);
+                pst.setFloat(2, Price);
+                pst.setInt(3, Quantity);
+                pst.setString(4, Description);
+                pst.setString(5, EmailS);
+                pst.setString(6, EmailP);
+
+                int rowsAffected = pst.executeUpdate();
+                return rowsAffected > 0;
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return false;
     }
 
     public static void main(String[] args) {

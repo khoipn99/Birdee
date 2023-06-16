@@ -40,6 +40,50 @@
         <servlet-name>BirdDetail</servlet-name>
         <servlet-class>controller.BirdDetail</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ShowBlistServlet</servlet-name>
+        <servlet-class>controller.ShowBlistServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ShowAListServlet</servlet-name>
+        <servlet-class>controller.ShowAListServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddBirdServlet</servlet-name>
+        <servlet-class>controller.AddBirdServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateBServlet</servlet-name>
+        <servlet-class>controller.UpdateBServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateFServlet</servlet-name>
+        <servlet-class>controller.UpdateFServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteTmpServlet</servlet-name>
+        <servlet-class>controller.DeleteTmpServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ShowDeleteTmpServlet</servlet-name>
+        <servlet-class>controller.ShowDeleteTmpServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>restoreServlet</servlet-name>
+        <servlet-class>controller.restoreServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateAccessoryFServlet</servlet-name>
+        <servlet-class>controller.UpdateAccessoryFServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateAServlet</servlet-name>
+        <servlet-class>controller.UpdateAServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddAccessoryServlet</servlet-name>
+        <servlet-class>controller.AddAccessoryServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
         <url-pattern>/MainController</url-pattern>
@@ -79,6 +123,50 @@
     <servlet-mapping>
         <servlet-name>BirdDetail</servlet-name>
         <url-pattern>/BirdDetail</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ShowBlistServlet</servlet-name>
+        <url-pattern>/ShowBlistServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ShowAListServlet</servlet-name>
+        <url-pattern>/ShowAListServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddBirdServlet</servlet-name>
+        <url-pattern>/AddBirdServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateBServlet</servlet-name>
+        <url-pattern>/UpdateBServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateFServlet</servlet-name>
+        <url-pattern>/UpdateFServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteTmpServlet</servlet-name>
+        <url-pattern>/DeleteTmpServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ShowDeleteTmpServlet</servlet-name>
+        <url-pattern>/ShowDeleteTmpServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>restoreServlet</servlet-name>
+        <url-pattern>/restoreServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateAccessoryFServlet</servlet-name>
+        <url-pattern>/UpdateAccessoryFServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateAServlet</servlet-name>
+        <url-pattern>/UpdateAServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddAccessoryServlet</servlet-name>
+        <url-pattern>/AddAccessoryServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>30</session-timeout>

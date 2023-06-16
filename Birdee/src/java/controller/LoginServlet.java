@@ -80,8 +80,10 @@ public class LoginServlet extends HttpServlet {
                         request.getRequestDispatcher("staffPage.jsp").forward(request, response);
                     }
                     else { //seller
+                        session.setAttribute("cEmail", email);
                         request.setAttribute("userName", acc.getUsername());                        
-                        request.getRequestDispatcher("home.jsp").forward(request, response);
+                        request.getRequestDispatcher("shopstaffPage.jsp").forward(request, response);
+                        
                     }
                 }
             }
