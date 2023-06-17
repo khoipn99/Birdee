@@ -26,9 +26,9 @@
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <ul class="navbar-nav mx-auto">
                 <li class="nav-item">
-                    <form action="shopstaffPage.jsp" method="post">
+                    <form action="MainController" method="post">
                         <input hidden="" name="shopEmail" value="${sessionScope.cEmail}"/>
-                        <button class="nav-link btn" type="submit" name="action">Home Staff</button>  
+                        <button class="nav-link btn" type="submit" value="ShowShopStaff" name="action">Home Staff</button>  
                     </form>
                 </li>
                 <li class="nav-item">

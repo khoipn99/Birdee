@@ -27,7 +27,9 @@
                     <div class="container text-center">
                         <div class="row">
                             <c:if test="${not empty requestScope.BirdList}">
+                                <div>tổng số tìm kiếm: ${requestScope.BirdList.size()}</div>
                                 <c:forEach var="BL" items="${requestScope.BirdList}">
+                                    
                                     <div class="col">
                                         <div class="card" style="width: 18rem;">
                                             <form action="MainController" method="post">
@@ -81,6 +83,7 @@
                     <div class="container text-center">
                         <div class="row">
                             <c:if test="${not empty requestScope.AccessoryList}">
+                                <div>tổng số tìm kiếm: ${requestScope.AccessoryList.size()}</div>
                                 <c:forEach var="AL" items="${requestScope.AccessoryList}">
                                     <div class="col">
                                         <div class="card" style="width: 18rem;">

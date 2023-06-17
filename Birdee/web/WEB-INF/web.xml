@@ -144,6 +144,10 @@
         <servlet-name>SortBirdsByPriceRange</servlet-name>
         <servlet-class>controller.SortBirdsByPriceRange</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ShowShopStaffServlet</servlet-name>
+        <servlet-class>controller.ShowShopStaffServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
         <url-pattern>/MainController</url-pattern>
@@ -287,6 +291,10 @@
     <servlet-mapping>
         <servlet-name>SortBirdsByPriceRange</servlet-name>
         <url-pattern>/SortBirdsByPriceRange</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ShowShopStaffServlet</servlet-name>
+        <url-pattern>/ShowShopStaffServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>30</session-timeout>

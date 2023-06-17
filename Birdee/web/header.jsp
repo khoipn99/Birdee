@@ -6,6 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page import="javax.servlet.http.HttpServletRequest" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -33,6 +34,9 @@
                     </div>
                     <div class="col-md-6 text-end ">
                         <div class="he666">
+                            <c:if test="${sessionScope.acc_role.equals('ss')}">
+                                <a href="MainController?action=ShowShopStaff&shopEmail=${sessionScope.cEmail}">Go to shopstaff Page</a>
+                            </c:if>
                             <i class="fa-regular fa-bell" style="color: #ffffff;"></i>
                             <a href="#">Thông báo</a>
                             <i class="fa-regular fa-circle-question" style="color: #ffffff;"></i>

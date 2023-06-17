@@ -33,7 +33,8 @@
         </style>
     </head>
     <body>
-        <div class="container">
+        <div class="container py-3">
+            <div class="row"  style="width: 80%; margin: 0 auto">
             <div id="alertContainer" class="container">
 
             </div>
@@ -95,7 +96,7 @@
                         <div class="table-header">Email:</div>
                         <div><input readonly="" type="text" name="emailShop" value="${sessionScope.cEmail}" class="form-control"></div>
                     </div>
-                    <div class="table-row">
+                    <div class="table-row py-3">
                         <div class="table-header">Email_platform_staff</div>
                         <div><input readonly="" type="text" name="emailPlatform" value="staff@gmail.com" class="form-control"></div>
                     </div> 
@@ -104,6 +105,7 @@
                     
                 </div>
             </form>
+                    </div>
         </div>
         
         <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
