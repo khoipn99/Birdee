@@ -31,7 +31,7 @@
         <header>
             <%@ include file = "Shopstaff_Navbar.jsp"%>
         </header>
-        <h1 style="text-align: center; color: green">Delete table</h1>
+        <h1 class="top1">Bird Table Deleted</h1>
         <div class="container">
             <div id="alertContainer" class="container">
             </div>
@@ -113,7 +113,7 @@
                 </form>
             </div>
         </div>
-        <h1 class="top1">Accessory</h1>
+        <h1 class="top1">Accessory Table Deleted</h1>
         <div class="container">
             <div class="border border-2 border-dark">
                 <table id="accessoryTable" class="display table-hoover align-middle" style="width:100%;">

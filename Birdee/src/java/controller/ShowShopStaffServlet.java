@@ -5,20 +5,25 @@
  */
 package controller;
 
+import dao.AccessoryDAO;
+import dao.BirdDAO;
+import dto.Accessory;
+import dto.Bird;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import org.apache.tomcat.jni.SSLContext;
 
 /**
  *
- * @author ACE
+ * @author ASUS
  */
-public class LogoutServlet extends HttpServlet {
+public class ShowShopStaffServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,23 +40,12 @@ public class LogoutServlet extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             HttpSession session = request.getSession();
-            session.removeAttribute("userName");
-            session.removeAttribute("isCustomer");
-            session.removeAttribute("acc_role");
-            Cookie[] cookies = request.getCookies();
-            if (cookies != null) {
-                for (Cookie c : cookies) {
-                    if (c.getName().equals("cEmail")) {
-                        c.setMaxAge(0);
-                        response.addCookie(c);
-                    }
-                    if (c.getName().equals("cPass")) {
-                        c.setMaxAge(0);
-                        response.addCookie(c);
-                    }
-                }
-            }
-            response.sendRedirect("PrintProduct");
+            String email = (String) session.getAttribute("cEmail");
+            ArrayList<Bird> bird = BirdDAO.getBirdsList2(email);
+            ArrayList<Accessory> accessory = AccessoryDAO.getAccessoriesList2(email);
+            request.setAttribute("bird", bird);
+            request.setAttribute("accessory", accessory);
+            request.getRequestDispatcher("shopstaffPage.jsp").forward(request, response);
         }
     }
 

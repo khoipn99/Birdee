@@ -46,7 +46,7 @@ public class SearchServlet extends HttpServlet {
         } else {
             ArrayList<Bird> Blist = BirdDAO.searchBird(keyword);
             ArrayList<Accessory> Alist = AccessoryDAO.searchAccessory(keyword);
-
+            
             if (Blist.isEmpty() && Alist.isEmpty()) {
                 request.setAttribute("ERROR", "Sorry we couldn't find anything from your request");
             } else {

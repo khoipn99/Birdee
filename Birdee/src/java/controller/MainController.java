@@ -106,7 +106,8 @@ public class MainController extends HttpServlet {
                 url= "birdRange.jsp"; 
             else if(action.equals("sortbyrangeid"))
                 url="SortBirdsByPriceRange";
-          
+            else if(action.equals("ShowShopStaff"))
+                url ="ShowShopStaffServlet";
             request.getRequestDispatcher(url).forward(request, response);
         }
     }

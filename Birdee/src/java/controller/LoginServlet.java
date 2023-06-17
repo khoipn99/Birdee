@@ -85,9 +85,11 @@ public class LoginServlet extends HttpServlet {
                     }
 
                     else if(acc.getRole_id().equals("ss")){ //seller
+                        session.setAttribute("userName", acc.getUsername());
+                        session.setAttribute("acc_role", acc.getRole_id());
                         session.setAttribute("cEmail", email);
                         request.setAttribute("userName", acc.getUsername());                        
-                        request.getRequestDispatcher("shopstaffPage.jsp").forward(request, response);
+                        request.getRequestDispatcher("MainController?action=ShowShopStaff").forward(request, response);
                         
                     }
                 }
