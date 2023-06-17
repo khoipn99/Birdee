@@ -36,9 +36,10 @@
                         <div class="row">
                             <c:if test="${list != null}">
                                 <c:if test="${cateID == 1}">  <!-- BIRD -->
+                                    <div><h5>Kết quả tìm được: ${list.size()}</h5></div>
                                     <c:forEach var="b" items="${list}">
                                         <c:set var="vote" value="${BirdDAO.getBirdVote(b.getBird_id())}"/>
-                                        <div class="col">
+                                        <div class="col py-3">
                                             <div class="card" style="width: 18rem;">
                                                 <a href="MainController?action=viewBirdDetail&birdId=${b.getBird_id()}"><img src="${BirdDAO.getBirdImg(b.getBird_id()).get(0)}" class="card-img-top" alt="..."></a>
                                                 <div class="card-body">
@@ -46,7 +47,7 @@
                                                 </div>
                                                 <ul class="list-group list-group-flush">
                                                     <li class="list-group-item" style="color: red">${b.getPrice()}00 VND</li>
-                                                    <li class="list-group-item">${BirdDAO.getBirdAddress(b.getBird_id())}</li>
+                                                    <li class="list-group-item" style="height: 5rem;">${BirdDAO.getBirdAddress(b.getBird_id())}</li>
                                                     <c:if test="${vote > 0}">
                                                         <li class="list-group-item"><a style="color: red">${vote} Star</a><a>, đã mua ${BirdDAO.getBirdBuying(b.getBird_id())}</a></li>
                                                     </c:if>
@@ -64,7 +65,9 @@
                                 </c:if>
                                 
                                 <c:if test="${cateID != 1}"> <!-- ACCESSORY -->
+                                    <div><h5>Kết quả tìm được: ${list.size()}</h5></div>
                                     <c:forEach var="a" items="${list}">
+                                        
                                         <c:set var="vote" value="${AccessoryDAO.getAccessoryVote(a.getAccessory_id())}"/>
                                         <div class="col">
                                             <div class="card" style="width: 18rem;">

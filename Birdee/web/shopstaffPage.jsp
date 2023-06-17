@@ -24,6 +24,9 @@
         <link rel="stylesheet" href="mylib/bt5/bootstrap-5.0.2-dist/css/bootstrap.min.css"/>     
         <script src="mylib/bt5/bootstrap-5.0.2-dist/js/popper.min.js"></script>
         <script src="mylib/bt5/bootstrap-5.0.2-dist/js/bootstrap.bundle.min.js"></script>
+        <script src="mylib/bt5/bootstrap-5.0.2-dist/js/bootstrap.bundle.min.js"></script>
+
+
         <title>ShopStaffPage</title>
     </head>
     <body> 

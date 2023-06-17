@@ -58,6 +58,7 @@ public class EditCusProfileServlet extends HttpServlet {
                 request.setAttribute("msg", "Update thanh cong");
                 Account tmp1 = AccountDAO.getAccountByEmail(email);
                 session.setAttribute("acc", tmp1);
+                session.setAttribute("userName", tmp1.getUsername());
                 request.getRequestDispatcher("viewCusInfor.jsp").forward(request, response);
             }else{
                 request.setAttribute("msg", "Đã có lỗi xảy ra trong quá trình cập nhập vui lòng thử lại");
