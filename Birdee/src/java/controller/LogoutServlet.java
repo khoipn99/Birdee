@@ -38,6 +38,7 @@ public class LogoutServlet extends HttpServlet {
             session.removeAttribute("userName");
             session.removeAttribute("isCustomer");
             session.removeAttribute("acc_role");
+            session.removeAttribute("OrderList");
             Cookie[] cookies = request.getCookies();
             if (cookies != null) {
                 for (Cookie c : cookies) {

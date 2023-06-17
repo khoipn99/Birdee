@@ -50,7 +50,7 @@
                                                 </div>
                                                 <ul class="list-group list-group-flush">
                                                     <li class="list-group-item" style="color: red">${BL.getPrice()} USD</li>
-                                                    <li class="list-group-item">${BirdDAO.getBirdAddress(BL.getBird_id())}</li>
+                                                    <li class="list-group-item" style="height: 5rem;">${BirdDAO.getBirdAddress(BL.getBird_id())}</li>
                                                         <c:set var="vote" value="${BirdDAO.getBirdVote(BL.getBird_id())}" />
                                                     <li class="list-group-item">
                                                         <c:if test="${vote > 0}">
@@ -97,7 +97,7 @@
                                                         <c:set var="mainImageUrl" value="${url}" />
                                                     </c:if>
                                                 </c:forEach>
-
+                                                <a href="MainController?action=viewAccessoryDetail&accessorydId=${a.getAccessory_id()}"><img class="card-img-top" alt="..." src="${mainImageUrl}"></a>
                                                 <img class="card-img-top" alt="..." src="${mainImageUrl}">
                                                 <div class="card-body">
                                                     <h5>${AL.getName()}</h5>
