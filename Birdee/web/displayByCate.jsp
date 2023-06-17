@@ -36,6 +36,7 @@
                         <div class="row">
                             <c:if test="${list != null}">
                                 <c:if test="${cateID == 1}">  <!-- BIRD -->
+                                    <div><h5>Kết quả tìm được: ${list.size()}</h5></div>
                                     <c:forEach var="b" items="${list}">
                                         <c:set var="vote" value="${BirdDAO.getBirdVote(b.getBird_id())}"/>
                                         <div class="col">
@@ -64,7 +65,9 @@
                                 </c:if>
                                 
                                 <c:if test="${cateID != 1}"> <!-- ACCESSORY -->
+                                    <div><h5>Kết quả tìm được: ${list.size()}</h5></div>
                                     <c:forEach var="a" items="${list}">
+                                        
                                         <c:set var="vote" value="${AccessoryDAO.getAccessoryVote(a.getAccessory_id())}"/>
                                         <div class="col">
                                             <div class="card" style="width: 18rem;">
