@@ -14,14 +14,41 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" href="style.css" type="text/css"/>
         <script src="mylib/bt5/bootstrap-5.0.2-dist/js/bootstrap.bundle.min.js"></script>
-
-
-
+        <link rel="icon" type="image/png" href="mylib/img/logo2.png">
+        <link rel="stylesheet" href="style.css"/>
+        <link rel="stylesheet" href="mylib/img"/>
+        <link rel="stylesheet" href="mylib/fontawesome-free-6.4.0-web/css/all.css"/>
+        <link rel="stylesheet" href="mylib/fontawesome-free-6.4.0-web/css/all.min.css"/>
+        <link rel="stylesheet" href="mylib/bt5/bootstrap-5.0.2-dist/css/bootstrap-grid.min.css"/>
+        <link rel="stylesheet" href="mylib/bt5/bootstrap-5.0.2-dist/css/bootstrap-grid.css"/>
+        <link rel="stylesheet" href="mylib/bt5/bootstrap-5.0.2-dist/css/bootstrap.min.css"/>     
+        <script src="mylib/bt5/bootstrap-5.0.2-dist/js/popper.min.js"></script>
+        <script src="mylib/bt5/bootstrap-5.0.2-dist/js/bootstrap.bundle.min.js"></script>
         <title>ShopStaffPage</title>
     </head>
     <body> 
+        <section class="head">
+            <div class="container py-3">
+                <div class="row">
+                    <div class="col-md-6 "></div>
+                    <div class="col-md-6 text-end ">
+                        <div class="he666">
+                            <c:set var="uName" value="${sessionScope.userName}"/>
+                            <c:if test="${uName != null}">
+                                <a href="MainController?action=VCI" style="color: white; text-decoration: none;"><strong>${uName}</strong></a>
+                                <a href="MainController?action=Logout" style="color: white; text-decoration: none;"><strong>Logout</strong></a>
+                            </c:if>
+                            <c:if test="${uName == null}">
+                                <a href="MainController?action=RegisterAccount" style="color: white; text-decoration: none;"><strong>Đăng Ký</strong></a>
+                                <i class="navbar__link-separator"></i>
+                                <a href="login.jsp" style="color: white; text-decoration: none;"><strong>Đăng Nhập</strong></a>
+                            </c:if>    
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
         <header>
-            <%@ include file="header.jsp" %>
             <%@ include file = "Shopstaff_Navbar.jsp"%>
         </header>     
         <div class="container mb-3">
