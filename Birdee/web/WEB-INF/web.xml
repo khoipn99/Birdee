@@ -1,305 +1,116 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
+    <context-param>
+        <param-name>numberOfNewestProduct</param-name>
+        <param-value>4</param-value>
+    </context-param>
     <servlet>
-        <servlet-name>MainController</servlet-name>
-        <servlet-class>controller.MainController</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>PrintProduct</servlet-name>
-        <servlet-class>controller.PrintProduct</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>registerServlet</servlet-name>
-        <servlet-class>controller.registerServlet</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>RegisterServlet</servlet-name>
-        <servlet-class>controller.RegisterServlet</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>SearchServlet</servlet-name>
-        <servlet-class>controller.SearchServlet</servlet-class>
+        <servlet-name>HomeServlet</servlet-name>
+        <servlet-class>Controllers.HomeServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>LoginServlet</servlet-name>
-        <servlet-class>controller.LoginServlet</servlet-class>
+        <servlet-class>Controllers.Authenticate.LoginServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>LoginEmailServlet</servlet-name>
+        <servlet-class>Controllers.Authenticate.LoginEmailServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>LogoutServlet</servlet-name>
-        <servlet-class>controller.LogoutServlet</servlet-class>
+        <servlet-class>Controllers.Authenticate.LogoutServlet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>HomeServlet</servlet-name>
-        <servlet-class>controller.HomeServlet</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>AccessoryDetail</servlet-name>
-        <servlet-class>controller.AccessoryDetail</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>BirdDetail</servlet-name>
-        <servlet-class>controller.BirdDetail</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>ShowBlistServlet</servlet-name>
-        <servlet-class>controller.ShowBlistServlet</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>ShowAListServlet</servlet-name>
-        <servlet-class>controller.ShowAListServlet</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>AddBirdServlet</servlet-name>
-        <servlet-class>controller.AddBirdServlet</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>UpdateBServlet</servlet-name>
-        <servlet-class>controller.UpdateBServlet</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>UpdateFServlet</servlet-name>
-        <servlet-class>controller.UpdateFServlet</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>DeleteTmpServlet</servlet-name>
-        <servlet-class>controller.DeleteTmpServlet</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>ShowDeleteTmpServlet</servlet-name>
-        <servlet-class>controller.ShowDeleteTmpServlet</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>restoreServlet</servlet-name>
-        <servlet-class>controller.restoreServlet</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>UpdateAccessoryFServlet</servlet-name>
-        <servlet-class>controller.UpdateAccessoryFServlet</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>UpdateAServlet</servlet-name>
-        <servlet-class>controller.UpdateAServlet</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>AddAccessoryServlet</servlet-name>
-        <servlet-class>controller.AddAccessoryServlet</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>LoadByCate</servlet-name>
-        <servlet-class>controller.LoadByCate</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>LoadProductForStaff</servlet-name>
-        <servlet-class>controller.LoadProductForStaff</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>staffDeleteBird</servlet-name>
-        <servlet-class>controller.staffDeleteBird</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>staffDeleteAccessory</servlet-name>
-        <servlet-class>controller.staffDeleteAccessory</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>AddToCartServlet</servlet-name>
-        <servlet-class>controller.AddToCartServlet</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>EditCusProfileServlet</servlet-name>
-        <servlet-class>controller.EditCusProfileServlet</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>VCIServlet</servlet-name>
-        <servlet-class>controller.VCIServlet</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>ViewOrderListServlet</servlet-name>
-        <servlet-class>controller.ViewOrderListServlet</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>RamdomProductServlet</servlet-name>
-        <servlet-class>controller.RamdomProductServlet</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>SortHotProductServlet</servlet-name>
-        <servlet-class>controller.SortHotProductServlet</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>SortProductNew</servlet-name>
-        <servlet-class>controller.SortProductNew</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>SortServlet1</servlet-name>
-        <servlet-class>controller.SortServlet1</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>SortUpServlet</servlet-name>
-        <servlet-class>controller.SortUpServlet</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>ViewOrderDetailServlet</servlet-name>
-        <servlet-class>controller.ViewOrderDetailServlet</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>SortBirdsByPriceRange</servlet-name>
-        <servlet-class>controller.SortBirdsByPriceRange</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>ShowShopStaffServlet</servlet-name>
-        <servlet-class>controller.ShowShopStaffServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>MainController</servlet-name>
-        <url-pattern>/MainController</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>PrintProduct</servlet-name>
-        <url-pattern>/PrintProduct</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>registerServlet</servlet-name>
-        <url-pattern>/registerServlet</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>RegisterServlet</servlet-name>
-        <url-pattern>/RegisterServlet</url-pattern>
-    </servlet-mapping>
+        <servlet-class>Controllers.Authenticate.RegisterServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ProductServlet</servlet-name>
+        <servlet-class>Controllers.Product.ProductServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SearchProductByTextServlet</servlet-name>
+        <servlet-class>Controllers.Product.SearchProductByTextServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ProductDetailServlet</servlet-name>
+        <servlet-class>Controllers.Product.ProductDetailServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UserProfileServlet</servlet-name>
+        <servlet-class>Controllers.UserProfileServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CreateProduct</servlet-name>
+        <servlet-class>Controllers.Shop.CreateProduct</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CartDetailsServlet</servlet-name>
+        <servlet-class>Controllers.Cart.CartDetailsServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>BillDetails</servlet-name>
+        <servlet-class>BillDetails</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>BillDetailsServlet</servlet-name>
+        <servlet-class>Controllers.Bill.BillDetailsServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
-        <servlet-name>SearchServlet</servlet-name>
-        <url-pattern>/SearchServlet</url-pattern>
+        <servlet-name>HomeServlet</servlet-name>
+        <url-pattern>/home</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
-        <url-pattern>/LoginServlet</url-pattern>
+        <url-pattern>/login</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LoginEmailServlet</servlet-name>
+        <url-pattern>/loginEmail</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>LogoutServlet</servlet-name>
-        <url-pattern>/LogoutServlet</url-pattern>
+        <url-pattern>/logout</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>HomeServlet</servlet-name>
-        <url-pattern>/HomeServlet</url-pattern>
+        <servlet-name>RegisterServlet</servlet-name>
+        <url-pattern>/register</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>AccessoryDetail</servlet-name>
-        <url-pattern>/AccessoryDetail</url-pattern>
+        <servlet-name>ProductServlet</servlet-name>
+        <url-pattern>/product</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>BirdDetail</servlet-name>
-        <url-pattern>/BirdDetail</url-pattern>
+        <servlet-name>SearchProductByTextServlet</servlet-name>
+        <url-pattern>/searchProductByText</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>ShowBlistServlet</servlet-name>
-        <url-pattern>/ShowBlistServlet</url-pattern>
+        <servlet-name>ProductDetailServlet</servlet-name>
+        <url-pattern>/productDetails</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>ShowAListServlet</servlet-name>
-        <url-pattern>/ShowAListServlet</url-pattern>
+        <servlet-name>UserProfileServlet</servlet-name>
+        <url-pattern>/userProfile</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>AddBirdServlet</servlet-name>
-        <url-pattern>/AddBirdServlet</url-pattern>
+        <servlet-name>CreateProduct</servlet-name>
+        <url-pattern>/createProduct</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>UpdateBServlet</servlet-name>
-        <url-pattern>/UpdateBServlet</url-pattern>
+        <servlet-name>CartDetailsServlet</servlet-name>
+        <url-pattern>/cartDetails</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>UpdateFServlet</servlet-name>
-        <url-pattern>/UpdateFServlet</url-pattern>
+        <servlet-name>BillDetails</servlet-name>
+        <url-pattern>/billDetails</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>DeleteTmpServlet</servlet-name>
-        <url-pattern>/DeleteTmpServlet</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>ShowDeleteTmpServlet</servlet-name>
-        <url-pattern>/ShowDeleteTmpServlet</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>restoreServlet</servlet-name>
-        <url-pattern>/restoreServlet</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>UpdateAccessoryFServlet</servlet-name>
-        <url-pattern>/UpdateAccessoryFServlet</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>UpdateAServlet</servlet-name>
-        <url-pattern>/UpdateAServlet</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>AddAccessoryServlet</servlet-name>
-        <url-pattern>/AddAccessoryServlet</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>LoadByCate</servlet-name>
-        <url-pattern>/LoadByCate</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>LoadProductForStaff</servlet-name>
-        <url-pattern>/LoadProductForStaff</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>staffDeleteBird</servlet-name>
-        <url-pattern>/staffDeleteBird</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>staffDeleteAccessory</servlet-name>
-        <url-pattern>/staffDeleteAccessory</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>AddToCartServlet</servlet-name>
-        <url-pattern>/AddToCartServlet</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>EditCusProfileServlet</servlet-name>
-        <url-pattern>/EditCusProfileServlet</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>VCIServlet</servlet-name>
-        <url-pattern>/VCIServlet</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>ViewOrderListServlet</servlet-name>
-        <url-pattern>/ViewOrderListServlet</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>RamdomProductServlet</servlet-name>
-        <url-pattern>/RamdomProductServlet</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>SortHotProductServlet</servlet-name>
-        <url-pattern>/SortHotProductServlet</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>SortProductNew</servlet-name>
-        <url-pattern>/SortProductNew</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>SortServlet1</servlet-name>
-        <url-pattern>/SortServlet1</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>SortUpServlet</servlet-name>
-        <url-pattern>/SortUpServlet</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>ViewOrderDetailServlet</servlet-name>
-        <url-pattern>/ViewOrderDetailServlet</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>SortBirdsByPriceRange</servlet-name>
-        <url-pattern>/SortBirdsByPriceRange</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>ShowShopStaffServlet</servlet-name>
-        <url-pattern>/ShowShopStaffServlet</url-pattern>
+        <servlet-name>BillDetailsServlet</servlet-name>
+        <url-pattern>/billDetail</url-pattern>
     </servlet-mapping>
     <session-config>
-        <session-timeout>30</session-timeout>
+        <session-timeout>
+            30
+        </session-timeout>
     </session-config>
-    <welcome-file-list>
-        <welcome-file>MainController</welcome-file>
-    </welcome-file-list>
 </web-app>
