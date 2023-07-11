@@ -1,0 +1,30 @@
+.group__left__account {
+  .left__account {
+    color: #333333;
+    cursor: pointer;
+  }
+  .left__account:hover {
+    color: #ff0000;
+  }
+  .left__account:focus,
+  .left__account.active {
+    color: #ff0000;
+  }
+}
+
+.container-home {
+  max-width: 1190px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 12px;
+  padding-right: 12px;
+  @media screen and (max-width: 992px) {
+    max-width: 960px;
+  }
+  @media screen and (max-width: 768px) {
+    max-width: 772px;
+  }
+  @media screen and (max-width: 576px) {
+    max-width: 540px;
+  }
+}

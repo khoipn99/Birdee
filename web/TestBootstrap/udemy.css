@@ -1,0 +1,140 @@
+.hover__effect:hover {
+  background-color: #1c1d1f10;
+}
+
+.list__course__wrapper {
+  .img__absolute {
+    opacity: 0;
+  }
+  .course__item__wrapper {
+    cursor: pointer;
+  }
+  .course__item__wrapper:hover .img__absolute {
+    opacity: 1;
+    transition: all 0.1s linear;
+  }
+
+  .couse__title__h1 {
+    color: #1c1d1f;
+    font-size: 15px;
+    font-weight: bold;
+    margin-bottom: 4px;
+  }
+  .course__subtitle {
+    color: #1c1d1f;
+    font-size: 14px;
+    font-weight: 400;
+    margin-bottom: 4px;
+  }
+  .course__article {
+    color: #1c1d1f90;
+    font-size: 13px;
+    font-weight: 400;
+    margin-bottom: 4px;
+  }
+  .course__star {
+    font-size: 14px;
+    font-weight: bold;
+    color: #b4690e;
+    margin-bottom: 0px;
+  }
+
+  .price__afer {
+    color: #1c1d1f;
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 4px;
+  }
+  .price__before {
+    color: #1c1d1f90;
+    font-size: 14px;
+    font-weight: 400;
+    margin-bottom: 4px;
+    text-decoration: line-through;
+  }
+
+  .add__to__cart__btn:hover div {
+    background-color: #7853b2;
+  }
+}
+
+.list__filter__wrapper {
+  .custom__header__filter {
+    background-color: transparent !important;
+    padding: 0px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    font-weight: bold;
+  }
+
+  .custom__content__filter {
+    font-size: 14px;
+    font-weight: 400;
+  }
+  .number__content {
+    font-weight: 300;
+  }
+}
+
+.smooth-transform {
+  transition: all 0.2s ease;
+}
+
+.course_body_h1 {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.udemy_carousel_starter {
+  .img__absolute_carousel {
+    opacity: 0;
+  }
+  .udemy_course_item {
+    .couse__title__h1 {
+      color: #1c1d1f;
+      font-size: 22px;
+      font-weight: bold;
+      margin-bottom: 4px;
+    }
+    .course__subtitle {
+      color: #1c1d1f;
+      font-size: 20px;
+      font-weight: 400;
+      margin-bottom: 4px;
+    }
+    .course__article {
+      color: #1c1d1f90;
+      font-size: 14px;
+      font-weight: 400;
+      margin-bottom: 4px;
+    }
+    .course__star {
+      font-size: 14px;
+      font-weight: bold;
+      color: #b4690e;
+      margin-bottom: 0px;
+    }
+
+    .price__afer {
+      color: #1c1d1f;
+      font-size: 18px;
+      font-weight: bold;
+      margin-bottom: 4px;
+    }
+    .price__before {
+      color: #1c1d1f90;
+      font-size: 18px;
+      font-weight: 400;
+      margin-bottom: 4px;
+      text-decoration: line-through;
+    }
+
+    .add__to__cart__btn:hover div {
+      background-color: #7853b2;
+    }
+  }
+  .udemy_course_item:hover .img__absolute_carousel {
+    opacity: 1;
+    transition: all 0.2s linear;
+  }
+}
