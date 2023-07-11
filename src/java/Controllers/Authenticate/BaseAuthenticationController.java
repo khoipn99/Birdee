@@ -24,9 +24,9 @@ public abstract class BaseAuthenticationController extends HttpServlet {
             throws ServletException, IOException {
         User acc = (User) request.getSession().getAttribute("account");
         if (acc != null) {
-            processGet();
+            processGet(request, response);
         } else {
-            response.getWriter().print("Hay dang nhap!");
+            response.sendRedirect("notFound");
         }
     }
 
@@ -41,17 +41,17 @@ public abstract class BaseAuthenticationController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       User acc = (User) request.getSession().getAttribute("account");
+        User acc = (User) request.getSession().getAttribute("account");
         if (acc != null) {
-            processGet();
+            processPost(request, response);
         } else {
-            response.getWriter().print("Hay dang nhap!");
+            response.sendRedirect("notFound");
         }
     }
 
-    protected abstract void processGet();
+    protected abstract void processGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException;
 
-    protected abstract void processPost();
+    protected abstract void processPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException;
 
     /**
      * Returns a short description of the servlet.

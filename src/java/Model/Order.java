@@ -5,6 +5,7 @@
 package Model;
 
 import java.sql.Date;
+import java.util.ArrayList;
 
 /**
  *
@@ -21,12 +22,14 @@ public class Order {
     private Date dateTime;
     private PaymentMethod paymentMethod;
     private double totalOrder;
-    private int status;
+    private StatusOrder statusOrder;
+    private boolean isRate;
+    private ArrayList<Product> productOrder;
 
     public Order() {
     }
 
-    public Order(int orderId, User orderFromUser, String customerName, String customerEmail, String customerPhone, String customerAddress, User employee, Date dateTime, PaymentMethod paymentMethod, double totalOrder, int status) {
+    public Order(int orderId, User orderFromUser, String customerName, String customerEmail, String customerPhone, String customerAddress, User employee, Date dateTime, PaymentMethod paymentMethod, double totalOrder, StatusOrder statusOrder, boolean isRate) {
         this.orderId = orderId;
         this.orderFromUser = orderFromUser;
         this.customerName = customerName;
@@ -37,7 +40,32 @@ public class Order {
         this.dateTime = dateTime;
         this.paymentMethod = paymentMethod;
         this.totalOrder = totalOrder;
-        this.status = status;
+        this.statusOrder = statusOrder;
+        this.isRate = isRate;
+    }
+
+    public Order(int orderId, User orderFromUser, String customerName, String customerEmail, String customerPhone, String customerAddress, User employee, Date dateTime, PaymentMethod paymentMethod, double totalOrder, StatusOrder statusOrder, boolean isRate, ArrayList<Product> productOrder) {
+        this.orderId = orderId;
+        this.orderFromUser = orderFromUser;
+        this.customerName = customerName;
+        this.customerEmail = customerEmail;
+        this.customerPhone = customerPhone;
+        this.customerAddress = customerAddress;
+        this.employee = employee;
+        this.dateTime = dateTime;
+        this.paymentMethod = paymentMethod;
+        this.totalOrder = totalOrder;
+        this.statusOrder = statusOrder;
+        this.isRate = isRate;
+        this.productOrder = productOrder;
+    }
+    
+    public ArrayList<Product> getProductOrder() {
+        return productOrder;
+    }
+
+    public void setProductOrder(ArrayList<Product> productOrder) {
+        this.productOrder = productOrder;
     }
 
     public int getOrderId() {
@@ -120,12 +148,23 @@ public class Order {
         this.totalOrder = totalOrder;
     }
 
-    public int getStatus() {
-        return status;
+    public StatusOrder getStatusOrder() {
+        return statusOrder;
     }
 
-    public void setStatus(int status) {
-        this.status = status;
+    public void setStatusOrder(StatusOrder statusOrder) {
+        this.statusOrder = statusOrder;
     }
+
+    public boolean isIsRate() {
+        return isRate;
+    }
+
+    public void setIsRate(boolean isRate) {
+        this.isRate = isRate;
+    }
+
+   
+
     
 }

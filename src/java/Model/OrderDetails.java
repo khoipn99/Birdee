@@ -13,6 +13,7 @@ public class OrderDetails {
     private Order order;
     private Product product;
     private int quantity;
+    private double rate;
 
     public OrderDetails() {
     }
@@ -22,6 +23,14 @@ public class OrderDetails {
         this.order = order;
         this.product = product;
         this.quantity = quantity;
+    }
+
+    public OrderDetails(int oderDetailsID, Order order, Product product, int quantity, double rate) {
+        this.oderDetailsID = oderDetailsID;
+        this.order = order;
+        this.product = product;
+        this.quantity = quantity;
+        this.rate = rate;
     }
 
     public int getOderDetailsID() {
@@ -54,6 +63,14 @@ public class OrderDetails {
 
     public void setQuantity(int quantity) {
         this.quantity = quantity;
+    }
+
+    public double getRate() {
+        return rate;
+    }
+
+    public void setRate(double rate) {
+        this.rate = rate;
     }
     
 }

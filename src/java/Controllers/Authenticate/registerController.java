@@ -61,6 +61,7 @@ public class registerController extends ReloadController {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        super.doGet(request, response);
         Date now = Date.valueOf(LocalDate.now());
         request.setAttribute("now", now);
         request.getRequestDispatcher("/views/Register.jsp").forward(request, response);

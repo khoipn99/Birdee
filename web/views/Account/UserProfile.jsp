@@ -15,6 +15,7 @@
         <link href="../../css/account.css" rel="stylesheet" type="text/css"/>
         <link href="../../css/style.css" rel="stylesheet" type="text/css"/>
         <link href="../../css/layout.css" rel="stylesheet" type="text/css"/>
+        <link href="../../css/MyModal.css" rel="stylesheet" type="text/css"/>
         <script src="script.js"></script>
     </head>
     <body>
@@ -42,7 +43,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-9 px-2">
+            <div class="col-lg-9 px-2 vh-80">
                 <!-- Right Section  -->
                 <div class="tab-content mb-3">
                     <!-- This section is use for account tab  -->
@@ -70,6 +71,7 @@
                                         <th scope="col">Địa chỉ</th>
                                         <th scope="col">Giá trị đơn hàng</th>
                                         <th scope="col">TT thanh toán</th>
+                                        <th scope="col">Trạng thái đơn hàng</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -83,10 +85,56 @@
                                                 <fmt:formatNumber value="${sessionScope.orders.get(i).totalOrder}" pattern="#,##0.000" var="formattedNumber" />
                                                 <td> ${formattedNumber}đ</td>
                                                 <td>${sessionScope.orders.get(i).paymentMethod.paymentMethod}</td>
+                                                <td>${sessionScope.orders.get(i).statusOrder.statusValue}</td>
+
+                                                <c:if test="${sessionScope.orders.get(i).statusOrder.statusOrderID == 3 and sessionScope.orders.get(i).isRate == false}">
+                                                    <td><a href="#" style="text-decoration: none" id="myBtn">Đánh giá</a></td>
+                                                    <!-- The Modal -->
+                                            <div id="myModal" class="modal">
+                                                <!-- Modal content -->
+                                                <div class="modal-content">
+                                                    <span class="close">&times;</span>
+                                                    <div id="cart">
+                                                        <!-- Firt item -->
+                                                        <div id="product" style="display: block">
+                                                            <div class="mb-2 d-flex gap-2">
+                                                                <div class="">
+                                                                    <a href="/be-lua-bong-winnie" class="ajaxcart__product-image cart_image"
+                                                                       title="item-cart-1">
+                                                                        <img id="productImage" class="img_item_in_cart"
+                                                                             src="https://bizweb.dktcdn.net/thumb/compact/100/450/808/products/cfa1d6c5-ffa0-4fcd-8349-51e83792254e.jpg"
+                                                                             alt="Bé lừa bông Winnie">
+                                                                    </a>
+                                                                </div>
+                                                                <div class="w-100">
+                                                                    <h6 class="mb-1" id="productName">Bé lừa bông Winnie</h6>
+                                                                    <div class="mb-1 d-flex justify-content-between gap-1 align-items-center">
+                                                                        <div class="cart_quantity" id="productValue">
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="mb-1 d-flex justify-content-between gap-1 align-items-center">
+                                                                        <div class="cart_quantity">
+                                                                            Số lượng
+                                                                        </div>
+                                                                        <p class="mb-0" style="color: #c83252; font-weight: bold;" id="productPrice">300000 đ</p>
+                                                                    </div>
+                                                                    <div class="mb-1 d-flex justify-content-between gap-1 align-items-center">
+                                                                        <div class="input-group">
+                                                                            <input id="productQuantity" type="number" min="1" class="input_cart_width" name="quantity" value="1"
+                                                                                   onkeydown="handleKeyDown(event)" onpaste="handlePaste(event)"/>
+                                                                        </div>
+                                                                        <p class="mb-0 cart_quantity prd-name" id="deleteProduct">xóa</p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </c:if>
                                             </tr>
                                         </c:forEach>
                                     </c:if>
-                                </tbody>
+                                    </tbody>
                             </table>
                         </div>
                     </section>
@@ -108,7 +156,7 @@
                                 <h6 class="mt-3">XÁC NHẬN LẠI MẬT KHẨU <span class="text-danger">*</span></h6>
                                 <input type="password" class="form-control mb-2" placeholder="Xác nhận lại mật khẩu"
                                        aria-label="Username" required
-                                       
+
                                        >
                                 <button type="submit" class="btn btn-dark mt-4">Đặt lại mật khẩu</button>
                             </form>
@@ -127,4 +175,31 @@
         <script src="https://kit.fontawesome.com/8d39de38b8.js" crossorigin="anonymous"></script>
     </body>
     <%@ include file="../../includes/footer.jsp" %>
+    <script>
+// Get the modal
+                                                                                       var modal = document.getElementById("myModal");
+
+// Get the button that opens the modal
+                                                                                       var btn = document.getElementById("myBtn");
+
+// Get the <span> element that closes the modal
+                                                                                       var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks the button, open the modal 
+                                                                                       btn.onclick = function () {
+                                                                                           modal.style.display = "block";
+                                                                                       };
+
+// When the user clicks on <span> (x), close the modal
+                                                                                       span.onclick = function () {
+                                                                                           modal.style.display = "none";
+                                                                                       };
+
+// When the user clicks anywhere outside of the modal, close it
+                                                                                       window.onclick = function (event) {
+                                                                                           if (event.target === modal) {
+                                                                                               modal.style.display = "none";
+                                                                                           }
+                                                                                       };
+    </script>
 </html>

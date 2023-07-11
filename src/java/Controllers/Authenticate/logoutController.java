@@ -54,6 +54,7 @@ public class logoutController extends ReloadController {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
+        super.doGet(request, response);
         request.getSession().setAttribute("account", null);
         response.sendRedirect("home");
     } 

@@ -4,6 +4,7 @@
  */
 package Controllers.User;
 
+import Controllers.Authenticate.BaseAuthenticationController;
 import Model.User;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -17,7 +18,7 @@ import jakarta.servlet.http.HttpSession;
  *
  * @author dell
  */
-public class UserInformationController extends HttpServlet {
+public class UserInformationController extends BaseAuthenticationController {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -55,7 +56,7 @@ public class UserInformationController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+    protected void processGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
         User account = (User) session.getAttribute("account");
@@ -73,7 +74,7 @@ public class UserInformationController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    protected void processPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }
@@ -87,5 +88,6 @@ public class UserInformationController extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
 
 }

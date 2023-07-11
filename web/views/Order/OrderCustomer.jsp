@@ -87,7 +87,7 @@
                                     </div>
                                     <div class="col-12">
                                         <label for="username" class="form-label">Họ và tên</label>
-                                        <input type="text" name="fullName" required maxlength="255" oninput="validateName(this)"
+                                        <input id="input-name" type="text" name="fullName" required maxlength="255" oninput="validateName(this)"
                                                class="form-control mb-3" placeholder="Nhập Họ và Tên" value="${account.fullName}"
                                                aria-label="Username">
                                         <span id="error-fullName" style="color: red; display: none;"></span>
@@ -95,7 +95,7 @@
 
                                     <div class="col-12">
                                         <label for="address" class="form-label">Địa chỉ</label>
-                                        <input type="text" class="form-control" name="address" id="addressID" placeholder="Địa chỉ nhận hàng" oninput="validateAddress(this)"
+                                        <input type="text" class="form-control" name="address" id="input-address" placeholder="Địa chỉ nhận hàng" oninput="validateAddress(this)"
                                                required>
                                         <span style="color: red;display: none" id="error-address"></span>
                                     </div>
@@ -219,13 +219,13 @@
 
 
 
-            var checkFullName = false;
             var checkPhone = false;
             var checkEmail = false;
-            var checkAddress = false;
 
             function orderProduct() {
-                if (checkFullName && checkPhone && checkEmail && checkAddress) {
+                var inputName = document.getElementById('input-name').value;
+                var inputAddress = document.getElementById('input-address').value;
+                if (inputName !== '' && inputAddress !== '' && checkEmail && checkPhone) {
                     document.getElementById('orderDetailCustomer').submit();
                 } else {
                     alert('Vui lòng kiểm tra lại thông tin đặt hàng!');
@@ -263,33 +263,6 @@
                     document.getElementById('error-email').textContent = "";
                     document.getElementById('error-email').style.display = "none";
                     checkEmail = true;
-                }
-            }
-
-            function validateName(input) {
-                var value = input.value;
-
-                if (value.trim().length === 0) {
-                    document.getElementById('error-fullName').textContent = "Bạn chưa nhập tên";
-                    document.getElementById('error-fullName').style.display = "block";
-                    checkFullName = false;
-                } else {
-                    document.getElementById('error-fullName').textContent = "";
-                    document.getElementById('error-fullName').style.display = "none";
-                    checkFullName = true;
-                }
-            }
-
-            function validateAddress(input) {
-                var value = input.value;
-                if (value.trim().length === 0) {
-                    document.getElementById('error-address').textContent = "Bạn chưa điền địa chỉ giao hàng";
-                    document.getElementById('error-address').style.display = "block";
-                    checkAddress = false;
-                } else {
-                    document.getElementById('error-address').textContent = "";
-                    document.getElementById('error-address').style.display = "none";
-                    checkAddress = true;
                 }
             }
 

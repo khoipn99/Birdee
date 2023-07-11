@@ -102,8 +102,8 @@ public class HomeController extends ReloadController {
 //    
 //
 //    public static void main(String[] args) {
-//        double a = 22222.000;
-//        System.out.println(String.valueOf(a));
+//        BestSellerDAO bDao = new BestSellerDAO();
+//        ArrayList<BestSeller> bestSellers = bDao.getAllNew(false, true);
 //    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -39,8 +39,6 @@
         </div>
     </div>
 
-        <%@ include file="new/AbsoluteBtn.jsp" %>
-
         <%@ include file="../includes/footer.jsp" %>
         <!--Script go to top, copy to every single page-->
         <script>

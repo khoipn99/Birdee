@@ -6,8 +6,10 @@ package Controllers.Order;
 
 import Controllers.ReloadController;
 import DAL.OrderDAO;
+import DAL.OrderDetailsDAO;
 import DAL.ProductDAO;
 import Model.Order;
+import Model.OrderDetails;
 import Model.PaymentMethod;
 import Model.User;
 import java.io.IOException;
@@ -21,6 +23,7 @@ import jakarta.servlet.http.HttpSession;
 import jakarta.websocket.Session;
 import java.sql.Date;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 /**
  *
@@ -116,8 +119,17 @@ public class OrderCustomer extends ReloadController {
 
         order.setOrderId(orderID);
 
+        order.setIsRate(false);
+
         oDao.insert(order);
 
+        OrderDetailsDAO odDao = new OrderDetailsDAO();
+        //add orderdetail to database
+        ArrayList<OrderDetails> cart = (ArrayList<OrderDetails>) request.getSession().getAttribute("cart");
+        for (OrderDetails orderDetails : cart) {
+            odDao.insertProductDetails(orderDetails);
+        }
+        
         //clear cookies
         String cookieName = "cart" + account.getUserID();
         String priceName = "totalP" + account.getUserID();

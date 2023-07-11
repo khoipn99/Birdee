@@ -96,13 +96,13 @@ public class ReloadController extends HttpServlet {
         request.getSession().setAttribute("totalPrice", totalPrice);
         request.getSession().setAttribute("totalProduct", totalProduct);
 
-        ArrayList<Order> orderStatus = new ArrayList<>();
+        ArrayList<Order> orders = new ArrayList<>();
         //lay thong tin gio hang
         if (acc != null) {
             OrderDAO oDao = new OrderDAO();
-            orderStatus = oDao.getOrdersByUser(acc.getUserID());
+            orders = oDao.getOrdersByUser(acc.getUserID());
         }
-        request.getSession().setAttribute("orders", orderStatus);
+        request.getSession().setAttribute("orders", orders);
 
         TagDAO tDao = new TagDAO();
         ArrayList<Tag> tags = tDao.getAll();
@@ -116,5 +116,12 @@ public class ReloadController extends HttpServlet {
 
         request.getSession().setAttribute("tags", tags);
 
+    }
+
+    public static void main(String[] args) {
+        ArrayList<Order> orderStatus = new ArrayList<>();
+        OrderDAO oDao = new OrderDAO();
+        orderStatus = oDao.getOrdersByUser(18);
+        System.out.println(orderStatus.get(0).getStatusOrder().getStatusValue());
     }
 }
