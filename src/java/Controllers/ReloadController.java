@@ -103,5 +103,18 @@ public class ReloadController extends HttpServlet {
             orderStatus = oDao.getOrdersByUser(acc.getUserID());
         }
         request.getSession().setAttribute("orders", orderStatus);
+
+        TagDAO tDao = new TagDAO();
+        ArrayList<Tag> tags = tDao.getAll();
+
+        //get all categories belong to tag
+        for (Tag tag : tags) {
+            CategoryDAO cDao = new CategoryDAO();
+            ArrayList<Category> categories = cDao.getAllByTagID(tag.getTagId());
+            tag.setCategories(categories);
+        }
+
+        request.getSession().setAttribute("tags", tags);
+
     }
 }

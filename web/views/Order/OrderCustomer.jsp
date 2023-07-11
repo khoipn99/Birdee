@@ -60,9 +60,9 @@
                         </ul>
 
                         <div class="p-2 d-flex justify-content-between align-items-center gap-2">
-                            <a href="orderDetail" style="color: black; text-decoration: none;">
+                            <a href="#" style="color: black; text-decoration: none;">
                                 <i class="fa-solid fa-arrow-left-long"></i>
-                                Quay về giỏ hàng
+                                Quay về
                             </a>
                             <button type="submit" class="btn btn-dark" onclick="orderProduct()">Đặt hàng</button>
                         </div>

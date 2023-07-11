@@ -24,6 +24,7 @@ public class Product {
     private Product parent;
     private Category category;
     private boolean isParent;
+    private User shop;
     private String description;
     private ArrayList<ImageProduct> images;
     private ArrayList<Product> children = new ArrayList<>();
@@ -76,6 +77,49 @@ public class Product {
         this.images = images;
     }
 
+    public Product(int productId, String name, double price, int quantity, boolean status, Type classType, String classValue, Date createDate, Product parent, Category category, boolean isParent, User shop, String description, ArrayList<ImageProduct> images) {
+        this.productId = productId;
+        this.name = name;
+        this.price = price;
+        this.quantity = quantity;
+        this.status = status;
+        this.classType = classType;
+        this.classValue = classValue;
+        this.createDate = createDate;
+        this.parent = parent;
+        this.category = category;
+        this.isParent = isParent;
+        this.shop = shop;
+        this.description = description;
+        this.images = images;
+    }
+
+    public Product(int productId, String name, double price, int quantity, boolean status, Type classType, String classValue, Date createDate, Product parent, Category category, boolean isParent, User shop, String description) {
+        this.productId = productId;
+        this.name = name;
+        this.price = price;
+        this.quantity = quantity;
+        this.status = status;
+        this.classType = classType;
+        this.classValue = classValue;
+        this.createDate = createDate;
+        this.parent = parent;
+        this.category = category;
+        this.isParent = isParent;
+        this.shop = shop;
+        this.description = description;
+    }
+
+    
+    
+    public User getShop() {
+        return shop;
+    }
+
+    public void setShop(User shop) {
+        this.shop = shop;
+    }
+    
     public int getProductId() {
         return productId;
     }

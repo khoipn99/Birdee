@@ -9,6 +9,7 @@ import Model.Constants;
 import Model.ImageProduct;
 import Model.Product;
 import Model.Type;
+import Model.User;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -39,9 +40,11 @@ public class ProductDAO extends DBContext {
             Product product = new Product();
             Category category = new Category();
             ArrayList<ImageProduct> listImage;
+            UserDAO uDao = new UserDAO();
 
             while (rs.next()) {
 
+                User shop = uDao.getUserByID(rs.getInt("ShopID"),Constants.Active);
                 Type type = tDao.getTypeByID(rs.getInt("ClassType"));
 
                 category = cDao.getCategoryByID(rs.getInt("CategoryId"));
@@ -59,6 +62,7 @@ public class ProductDAO extends DBContext {
                     product.setCreateDate(rs.getDate("createDate"));
                     product.setCategory(category);
                     product.setIsParent(isParent);
+                    product.setShop(shop);
                     product.setDescription(rs.getString("Description"));
 
                     listImage = imageDao.getImageByProductID(product.getProductId(), Constants.DeleteFalse);
@@ -76,6 +80,7 @@ public class ProductDAO extends DBContext {
                             product,
                             category,
                             isParent,
+                            shop,
                             rs.getString("Description"));
                     listImage = new ArrayList<>();
                     listImage = imageDao.getImageByProductID(product.getProductId(), Constants.DeleteFalse);

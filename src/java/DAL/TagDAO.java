@@ -23,6 +23,8 @@ public class TagDAO extends DBContext {
             String sql = "SELECT *\n"
                     + "  FROM [Tags] Where TagId = ? and Status = ?";
             PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setInt(1, tagID);
+            stm.setBoolean(2, status);
             ResultSet rs = stm.executeQuery();
             if (rs.next()) {
                 return new Tag(tagID,

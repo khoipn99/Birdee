@@ -5,8 +5,10 @@
 package Controllers.product;
 
 import Controllers.ReloadController;
+import DAL.BirdDetailsDAO;
 import DAL.ImageProductDAO;
 import DAL.ProductDAO;
+import Model.BirdDetails;
 import Model.Constants;
 import Model.ImageProduct;
 import Model.Product;
@@ -74,11 +76,26 @@ public class ProductDetailsController extends ReloadController {
             request.setAttribute("product", product);
             request.setAttribute("images", images);
 
+            if (product.getCategory().getTag().getTagId() == 1) {
+                BirdDetailsDAO bDao = new BirdDetailsDAO();
+                BirdDetails birdDetails = bDao.getBirdByProductID(product.getProductId(), Constants.Active);
+                request.setAttribute("birdDetails", birdDetails);
+            }
+
             request.getRequestDispatcher("views/Product/ProductDetails.jsp").forward(request, response);
         } else {
             response.sendRedirect("product");
         }
     }
+
+//    public static void main(String[] args) {
+//        ProductDAO pDao = new ProductDAO();
+//        Product product = pDao.getProductByID(1, Constants.Active);
+//
+//        BirdDetailsDAO bDao = new BirdDetailsDAO();
+//        BirdDetails birdDetails = bDao.getBirdByProductID(1, Constants.Active);
+//        System.out.println(birdDetails.getDate());
+//    }
 
     /**
      * Handles the HTTP <code>POST</code> method.

@@ -5,6 +5,9 @@
 package DAL;
 
 import Model.Category;
+import Model.Constants;
+import Model.Tag;
+import com.oracle.wls.shaded.org.apache.bcel.classfile.Constant;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -40,11 +43,14 @@ public class CategoryDAO extends DBContext {
             PreparedStatement stm = connection.prepareStatement(sql);
             stm.setInt(1, CategoryID);
             ResultSet rs = stm.executeQuery();
+            TagDAO tDao = new TagDAO();
             if (rs.next()) {
+                Tag tag = tDao.getTagByID(rs.getInt("TagId"), Constants.Active);
                 return new Category(rs.getInt("CategoryID"),
                         rs.getString("CategoryName"),
                         rs.getBoolean("Status"),
-                        rs.getString("Description"));
+                        rs.getString("Description"),
+                        tag);
             }
         } catch (Exception e) {
             System.out.println("get category by id");
