@@ -172,7 +172,7 @@
                             <div class="mt-3 mb-4">
                                 <p>Giới tính: <span style="font-weight: bold;">
                                         <c:if test="${birdDetails.gender == true}">
-                                            Đuc
+                                            Đực
                                         </c:if>
                                         <c:if test="${birdDetails.gender == false}">
                                             Cái
