@@ -6,9 +6,11 @@ package DAL;
 
 import Model.Role;
 import Model.User;
+import com.oracle.wls.shaded.org.apache.regexp.recompile;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -27,8 +29,10 @@ public class UserDAO extends DBContext {
                     + "           ,[Phone]\n"
                     + "           ,[DOB]\n"
                     + "           ,[Address])\n"
+                    + "           ,[Gender])\n"
                     + "     VALUES\n"
                     + "           (?\n"
+                    + "           ,?\n"
                     + "           ,?\n"
                     + "           ,?\n"
                     + "           ,?\n"
@@ -41,6 +45,7 @@ public class UserDAO extends DBContext {
             stm.setString(4, user.getPhone());
             stm.setDate(5, user.getDob());
             stm.setString(6, user.getAddress());
+            stm.setNString(7, user.getGender());
             stm.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -189,7 +194,7 @@ public class UserDAO extends DBContext {
         return false;
     }
 
-    User getUserByID(int id, boolean status) {
+    public User getUserByID(int id, boolean status) {
         try {
             String sql = "SELECT *\n"
                     + "  FROM [User] where UserID like ? and Status = ?";
@@ -224,4 +229,96 @@ public class UserDAO extends DBContext {
         return null;
     }
 
+    public ArrayList<User> getAllUsers() {
+        try {
+            String sql = "SELECT *\n"
+                    + "  FROM [User]";
+            PreparedStatement stm = connection.prepareStatement(sql);
+
+            ResultSet rs = stm.executeQuery();
+
+            RoleDAO rDao = new RoleDAO();
+
+            ArrayList<User> users = new ArrayList<>();
+
+            while (rs.next()) {
+
+                Role role = rDao.getRoleByID(rs.getInt("RoleID"));
+                System.out.println(rs.getInt("RoleID"));
+                User manager = getUserByID(rs.getInt("ManagerID"));
+
+                User user = new User(rs.getInt("UserID"),
+                        rs.getNString("FullName"),
+                        rs.getString("Phone"),
+                        rs.getString("Email"),
+                        rs.getString("EmailID"),
+                        rs.getDate("DOB"),
+                        rs.getString("Address"),
+                        rs.getString("Avatar"),
+                        role,
+                        manager,
+                        rs.getBoolean("Status"),
+                        rs.getString("Description"),
+                        rs.getNString("gender"));
+
+                users.add(user);
+            }
+
+            return users;
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
+    public boolean updateUser(User user) {
+        try {
+            String sql = "UPDATE [User] \n"
+                    + "SET Fullname = ?, \n"
+                    + "DOB = ?, \n"
+                    + "Gender = ?, \n"
+                    + "Email = ?, \n"
+                    + "Address = ? \n"
+                    + "WHERE UserID = ?";
+            PreparedStatement stm = connection.prepareStatement(sql);
+
+            stm.setNString(1, user.getFullName());
+            stm.setDate(2, user.getDob());
+            stm.setNString(3, user.getGender());
+            stm.setString(4, user.getEmail());
+            stm.setString(5, user.getAddress());
+            stm.setInt(6, user.getUserID());
+
+            int result = stm.executeUpdate();
+
+            if (result > 0) {
+                return true;
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return false;
+    }
+
+    public boolean deleteUserById(int id) {
+        try {
+            String sql = "DELETE FROM [User] WHERE UserID = ?";
+            PreparedStatement stm = connection.prepareStatement(sql);
+
+            stm.setInt(1, id);
+
+            int result = stm.executeUpdate();
+
+            if (result > 0) {
+                return true;
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return false;
+    }
 }

@@ -27,10 +27,16 @@ public class Constants {
     public final static boolean DeleteTrue = true;
 
     public final static boolean Active = true;
-    
+
     public final static boolean Deactive = false;
-    
+
     public final static boolean Parent = true;
-    
+
     public final static boolean Children = false;
+
+    public static final String REGEX_PHONE = "^\\d{10,11}$";
+
+    public static final String REGEX_EMAIL = "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$";
+    
+    public static final String REGEX_PASSWORD = "\\d{6,}";
 }
