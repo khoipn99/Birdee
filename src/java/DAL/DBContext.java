@@ -21,8 +21,8 @@ public class DBContext {
         //Edit user, pass, url variables to fit your system configuration
         try {
             String user = "sa";
-            String pass = "1234";
-            String url = "jdbc:sqlserver://localhost:1433;databaseName=SWP391_QN";
+            String pass = "123456";
+            String url = "jdbc:sqlserver://localhost:1433;databaseName=BirdeePlatform";
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             connection = DriverManager.getConnection(url, user, pass);
         } catch (ClassNotFoundException | SQLException ex) {

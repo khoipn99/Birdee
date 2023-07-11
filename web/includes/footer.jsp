@@ -18,7 +18,7 @@
                         </div>
                         <div class="text-decoration-none mb-2">
                             <a class="text-decoration-none" style="color: #333;"
-                                href="mailto:meeko.vn@gmail.com">meeko.vn@gmail.com</a>
+                                href="mailto:meeko.vn@gmail.com">Birdee@gmail.com</a>
                         </div>
                         <div class="mb-2">
                             <a class="text-decoration-none" style="color: #333;" href="tel:0862204080">0862204080</a>
@@ -59,7 +59,7 @@
                     <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3">
                         <h6 class="text-uppercase mb-4 font-weight-bold" style="color: #c83252; font-weight: bold;">
                             About</h6>
-                        <div>1% Happier Everyday
+                        <div>Về chúng tôi
                         </div>
                     </div>
                     <!-- Grid column -->
@@ -88,7 +88,7 @@
         <!-- Copyright -->
 
         <div class="text-center p-3" style="background-color: #fafafa">
-            Copyright © 2022 Meeko.
+            Copyright © 2022 Birdee.
         </div>
         <!-- Copyright -->
     </footer>

@@ -22,8 +22,7 @@ crossorigin="anonymous"></script>
             <div class="row align-items-center">
                 <div class="col-xl-3 col-lg-3 d-lg-block d-none block-logo">
                     <a href="home" class="logo">
-                        <img src="//bizweb.dktcdn.net/100/450/808/themes/855625/assets/logo.png?1681832246171"
-                             alt="Meeko">
+                        <img style="width: 110px;" src="images/logo2.png" alt="birdee">
                     </a>
                 </div>
                 <div class="col-xl-7 col-lg-6 block-search">
@@ -191,17 +190,8 @@ crossorigin="anonymous"></script>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link dropdown-toggle" data-bs-toggle="modal"
-                                       data-bs-target="#exampleModalCenteredScrollable" style="cursor: pointer;">Sản
+                                       data-bs-target="#exampleModalCenteredScrollable" style="cursor: pointer;"> Khám phá sản
                                         phẩm</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="premium">Premium</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="notFound">Blog</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="notFound">Story</a>
                                 </li>
                             </ul>
                         </div>
