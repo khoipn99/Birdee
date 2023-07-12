@@ -11,7 +11,7 @@
     <body>
 
         <%@ include file="../../includes/admin_header.jsp" %>
-        <%@ include file="../../includes/admin_left.jsp" %>
+        <%@ include file="navbarStaff.jsp" %>
 
         <!-- Admin Products wrapper -->
         <section style="margin-left: 280px; height: calc(100vh - 83px); overflow-y: auto;">
