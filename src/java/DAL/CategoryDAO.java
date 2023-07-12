@@ -21,14 +21,22 @@ public class CategoryDAO extends DBContext {
     public ArrayList<Category> getAll() {
         ArrayList<Category> list = new ArrayList<>();
         try {
-            String sql = "";
+            String sql = "SELECT [CategoryID]\n"
+                    + "      ,[CategoryName]\n"
+                    + "      ,[Status]\n"
+                    + "      ,[Description]\n"
+                    + "      ,[TagId]\n"
+                    + "  FROM [BirdeePlatform].[dbo].[Categories]";
             PreparedStatement stm = connection.prepareStatement(sql);
             ResultSet rs = stm.executeQuery();
+            TagDAO tagDAO = new TagDAO();
             while (rs.next()) {
+                Tag tag = tagDAO.getTagByID(rs.getInt("TagId"), true);
                 list.add(new Category(rs.getInt("CategoryID"),
                         rs.getString("CategoryName"),
                         rs.getBoolean("Status"),
-                        rs.getString("Description")));
+                        rs.getString("Description"),
+                        tag));
             }
         } catch (Exception e) {
             System.out.println("get list categories");

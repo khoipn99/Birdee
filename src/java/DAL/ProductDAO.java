@@ -16,6 +16,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -44,7 +46,7 @@ public class ProductDAO extends DBContext {
 
             while (rs.next()) {
 
-                User shop = uDao.getUserByID(rs.getInt("ShopID"),Constants.Active);
+                User shop = uDao.getUserByID(rs.getInt("ShopID"), Constants.Active);
                 Type type = tDao.getTypeByID(rs.getInt("ClassType"));
 
                 category = cDao.getCategoryByID(rs.getInt("CategoryId"));
@@ -173,6 +175,53 @@ public class ProductDAO extends DBContext {
                 product.setPrice(rs.getDouble("Price"));
                 product.setQuantity(rs.getInt("Quantity"));
                 product.setStatus(status);
+                product.setClassType(type);
+                product.setClassValue(rs.getString("ClassValue"));
+                product.setCreateDate(rs.getDate("createDate"));
+                product.setCategory(category);
+                product.setIsParent(Constants.Parent);
+                product.setDescription(rs.getString("Description"));
+
+                images = imageDao.getImageByProductID(product.getProductId(), Constants.DeleteFalse);
+                product.setImages(images);
+
+                list.add(product);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+    public ArrayList<Product> getAllProduct() {
+        ArrayList<Product> list = new ArrayList<>();
+        try {
+            String sql = "SELECT *\n"
+                    + "FROM [Products]";
+
+            PreparedStatement stm = connection.prepareStatement(sql);
+            ResultSet rs = stm.executeQuery();
+
+            TypeDAO tDao = new TypeDAO();
+            CategoryDAO cDao = new CategoryDAO();
+            ImageProductDAO imageDao = new ImageProductDAO();
+
+            Product product = new Product();
+            Category category = new Category();
+            Type type = new Type();
+            ArrayList<ImageProduct> images = new ArrayList<>();
+
+            while (rs.next()) {
+
+                type = tDao.getTypeByID(rs.getInt("ClassType"));
+                category = cDao.getCategoryByID(rs.getInt("CategoryId"));
+
+                product = new Product();
+                product.setProductId(rs.getInt("ProductId"));
+                product.setName(rs.getString("Name"));
+                product.setPrice(rs.getDouble("Price"));
+                product.setQuantity(rs.getInt("Quantity"));
+                product.setStatus(rs.getBoolean("Status"));
                 product.setClassType(type);
                 product.setClassValue(rs.getString("ClassValue"));
                 product.setCreateDate(rs.getDate("createDate"));
@@ -366,5 +415,73 @@ public class ProductDAO extends DBContext {
             e.printStackTrace();
         }
         return 0;
+    }
+
+    public Integer insert(Product product) {
+        try {
+            String sql = "INSERT INTO Products\n"
+                    + "  (\n"
+                    + "      Name,\n"
+                    + "      Price,\n"
+                    + "      Quantity,\n"
+                    + "      Status,\n"
+                    + "      ClassType,\n"
+                    + "      ClassValue,\n"
+                    + "      createDate,\n"
+                    + "      ParentId,\n"
+                    + "      CategoryId,\n"
+                    + "      IsParent,\n"
+                    + "      Description\n"
+                    + "  )\n"
+                    + "  VALUES\n"
+                    + "  (   ?, -- Name - nvarchar(255)\n"
+                    + "      ?, -- Price - money\n"
+                    + "      ?, -- Quantity - int\n"
+                    + "      0, -- Status - bit\n"
+                    + "      null, -- ClassType - int\n"
+                    + "      null, -- ClassValue - nvarchar(50)\n"
+                    + "      ?, -- createDate - date\n"
+                    + "      null, -- ParentId - int\n"
+                    + "      ?, -- CategoryId - int\n"
+                    + "      null, -- IsParent - bit\n"
+                    + "      ?  -- Description - nvarchar(max)\n"
+                    + "      )";
+            PreparedStatement stm = connection.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
+            stm.setString(1, product.getName());
+            stm.setDouble(2, product.getPrice());
+            stm.setInt(3, product.getQuantity());
+            stm.setDate(4, product.getCreateDate());
+            stm.setInt(5, product.getCategory().getCategoryId());
+            stm.setNString(6, product.getDescription());
+            stm.executeUpdate();
+            ResultSet re = stm.getGeneratedKeys();
+            if (re.next()) {
+                return re.getInt(1);
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
+    public Boolean publishProduct(int productId) {
+        try {
+            String sql = "UPDATE Products SET Status = 1 WHERE ProductId = ?";
+            PreparedStatement stm = connection.prepareStatement(sql);
+
+            stm.setInt(1, productId);
+
+            int result = stm.executeUpdate();
+
+            if (result > 0) {
+                return true;
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return false;
     }
 }
