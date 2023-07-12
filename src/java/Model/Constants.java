@@ -34,9 +34,9 @@ public class Constants {
 
     public final static boolean Children = false;
 
-    public static final String REGEX_PHONE = "^\\d{10,11}$";
+    public static final String REGEX_PHONE = "^\\d{10}$";
 
     public static final String REGEX_EMAIL = "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$";
     
-    public static final String REGEX_PASSWORD = "\\d{6,}";
+    public static final String REGEX_PASSWORD = "^[a-zA-Z\\d]{6,}$";
 }

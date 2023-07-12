@@ -13,7 +13,7 @@ import jakarta.servlet.http.HttpServletResponse;
  *
  * @author nguyenson
  */
-@WebServlet(name = "DeleteUser", urlPatterns = {"/admin/user/delete"})
+@WebServlet(name = "DeleteUser", urlPatterns = {"/adminUserDelete"})
 public class DeleteUser extends HttpServlet {
 
     @Override
@@ -28,7 +28,7 @@ public class DeleteUser extends HttpServlet {
         int userID = Integer.valueOf(request.getParameter("userID"));
         UserDAO userDAO = new UserDAO();
         userDAO.deleteUserById(userID);
-        response.sendRedirect("/admin/user");
+        response.sendRedirect("/adminUser");
     }
 
 }

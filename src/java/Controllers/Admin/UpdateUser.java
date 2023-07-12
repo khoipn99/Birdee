@@ -15,7 +15,7 @@ import java.sql.Date;
  *
  * @author nguyenson
  */
-@WebServlet(name = "UpdateUser", urlPatterns = {"/admin/user/update"})
+@WebServlet(name = "UpdateUser", urlPatterns = {"/adminUserUpdate"})
 public class UpdateUser extends HttpServlet {
 
     private static String VIEW_PATH = "/views/Admin/AllUser.jsp";
@@ -64,7 +64,7 @@ public class UpdateUser extends HttpServlet {
         user.setAddress(address);
         
         userDAO.updateUser(user);
-        response.sendRedirect("/admin/user");
+        response.sendRedirect("/adminUser");
     }
 
 }

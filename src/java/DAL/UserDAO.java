@@ -144,6 +144,50 @@ public class UserDAO extends DBContext {
         }
     }
 
+    public void insertStaff(User user) {
+        try {
+            String sql = "INSERT INTO [User]\n"
+                    + "           ([FullName]\n"
+                    + "           ,[Email]\n"
+                    + "           ,[EmailID]\n"
+                    + "           ,[Password]\n"
+                    + "           ,[Phone]\n"
+                    + "           ,[DOB]\n"
+                    + "           ,[gender]\n"
+                    + "           ,[Address]\n"
+                    + "           ,[Avatar]\n"
+                    + "           ,[RoleID]\n"
+                    + "           ,[Status])\n"
+                    + "     VALUES\n"
+                    + "           (?\n"
+                    + "           ,?\n"
+                    + "           ,?\n"
+                    + "           ,?\n"
+                    + "           ,?\n"
+                    + "           ,?\n"
+                    + "           ,?\n"
+                    + "           ,?\n"
+                    + "           ,?\n"
+                    + "           ,?\n"
+                    + "		  ,?)";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setString(1, user.getFullName());
+            stm.setString(2, user.getEmail());
+            stm.setString(3, user.getEmailID());
+            stm.setString(4, user.getPassword());
+            stm.setString(5, user.getPhone());
+            stm.setDate(6, user.getDob());
+            stm.setDate(7, user.getDob());
+            stm.setString(8, user.getAddress());
+            stm.setString(9, null);
+            stm.setInt(10, user.getRole().getId());
+            stm.setBoolean(11, true);
+            stm.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
     public User getUserGoogle(String EmailID) {
         try {
             String sql = "SELECT *\n"
@@ -320,5 +364,47 @@ public class UserDAO extends DBContext {
         }
 
         return false;
+    }
+
+    public ArrayList<User> getAllUsersSatff() {
+        try {
+            String sql = "SELECT *\n"
+                    + "  FROM [User] Where RoleID = 2";
+            PreparedStatement stm = connection.prepareStatement(sql);
+
+            ResultSet rs = stm.executeQuery();
+
+            RoleDAO rDao = new RoleDAO();
+
+            ArrayList<User> users = new ArrayList<>();
+
+            while (rs.next()) {
+
+                Role role = rDao.getRoleByID(rs.getInt("RoleID"));
+                System.out.println(rs.getInt("RoleID"));
+                User manager = getUserByID(rs.getInt("ManagerID"));
+
+                User user = new User(rs.getInt("UserID"),
+                        rs.getNString("FullName"),
+                        rs.getString("Phone"),
+                        rs.getString("Email"),
+                        rs.getString("EmailID"),
+                        rs.getDate("DOB"),
+                        rs.getString("Address"),
+                        rs.getString("Avatar"),
+                        role,
+                        manager,
+                        rs.getBoolean("Status"),
+                        rs.getString("Description"),
+                        rs.getNString("gender"));
+
+                users.add(user);
+            }
+
+            return users;
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
 }

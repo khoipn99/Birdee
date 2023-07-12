@@ -2,6 +2,7 @@ package Controllers.Admin;
 
 import DAL.UserDAO;
 import Model.Constants;
+import Model.Role;
 import Model.User;
 import Utils.EncodeMD5;
 import java.io.IOException;
@@ -16,7 +17,7 @@ import java.sql.Date;
  *
  * @author nguyenson
  */
-@WebServlet(name = "AddUser", urlPatterns = {"/admin/user/add"})
+@WebServlet(name = "AddUser", urlPatterns = {"/adminUserAdd"})
 public class AddUser extends HttpServlet {
 
     @Override
@@ -69,22 +70,32 @@ public class AddUser extends HttpServlet {
             return;
         }
         user.setPhone(request.getParameter("phone"));
-        
+
         String password = request.getParameter("password").trim();
-        if (!password.matches(Constants.REGEX_PASSWORD)) {
+        if (password.length() < 6) {
             request.setAttribute("message", "Thêm thất bại: Password phải có ít nhất 6 ký tự!");
             viewAllUser.doGet(request, response);
             return;
         }
         user.setPassword(encode.EncoderMD5(password));
 
+        Role role = new Role();
+        role.setId(2);
+
+        user.setRole(role);
+
         boolean isExist = userDAO.isUserExist(user.getEmail());
 
         if (!isExist) {
-            userDAO.insert(user);
+            userDAO.insertStaff(user);
         }
 
-        response.sendRedirect("/admin/user");
+        response.sendRedirect("/adminUser");
     }
 
+    public static void main(String[] args) {
+        UserDAO userDAO = new UserDAO();
+        User user = new User();
+        userDAO.insert(user);
+    }
 }

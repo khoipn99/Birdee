@@ -19,70 +19,9 @@
     </head>
 
     <body>
-        <!-- This container belong to HEADER ADMIN; DONT copy to JSP, JUST INCLUDE -->
-        <header style="background-color: #deded540;" class="d-flex flex-wrap justify-content-center py-3 border-bottom">
-            <a href="/" class="d-flex align-items-center ms-4 mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
-                <img style="width: 200px; height: 50px; object-fit: contain;" src="/images/logo.png" alt="logo">
-            </a>
 
-            <div class="d-flex align-items-center gap-2 me-3">
-                <!-- <li class="nav-item"><a href="#san-pham" class="nav-link link-dark">Products</a></li> -->
-                <div class="nav-item"><a href="/cart.html" class="nav-link link-dark">
-                        <i class="fa-solid fa-cart-shopping"></i>
-                        Cart: 2 products</a></div>
-
-                <!-- If do not login, show this      -->
-                <a href="/login.html" type="button" class="btn btn-outline-none me-2">
-                    <i class="fa-solid fa-user-plus me-1"></i>
-                    Log in</a>
-
-                <!-- If login, show this      -->
-                <div class="dropdown">
-                    <a href="#" class="d-flex align-items-center link-dark text-decoration-none dropdown-toggle"
-                       id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="fa-solid fa-user"></i>
-                        Hello:<strong>Elizabeth</strong>
-                    </a>
-                    <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2">
-                        <li><a class="dropdown-item" href="#">Sign out</a></li>
-                    </ul>
-                </div>
-            </div>
-        </header>
-
-        <!-- Nav bar ADMIN wrapper, DONOT COPY THIS, JUST INCLUDE -->
-        <section class="position-absolute d-flex flex-column flex-shrink-0 p-3 bg-light"
-                 style="width: 280px; height: calc(100vh - 83px);">
-            <ul class="nav nav-pills flex-column mb-auto">
-                <li class="nav-item">
-                    <a href="#" class="nav-link active">
-                        <svg class="bi me-2" width="16" height="16">
-                        <use xlink:href="#speedometer2"></use>
-                        </svg>
-                        Dashboard
-                    </a>
-                </li>
-                <li>
-                    <a href="#" class="nav-link link-dark">
-                        <svg class="bi me-2" width="16" height="16">
-                        <use xlink:href="#grid"></use>
-                        </svg>
-                        Products
-                    </a>
-                </li>
-            </ul>
-            <hr>
-            <div class="dropdown">
-                <a href="#" class="d-flex align-items-center link-dark text-decoration-none dropdown-toggle"
-                   id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
-                    <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2">
-                    <strong>Admin</strong>
-                </a>
-                <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2">
-                    <li><a class="dropdown-item" href="#">Sign out</a></li>
-                </ul>
-            </div>
-        </section>
+        <%@ include file="../../includes/admin_header.jsp" %>
+        <%@ include file="navbarAdmin.jsp" %>
 
         <!-- Dashboard Products wrapper -->
         <section style="margin-left: 280px; height: calc(100vh - 83px); overflow-y: auto;">
@@ -166,52 +105,52 @@
                             </div>
                         </div>
                     </div>
-<!--
-                     Earnings (Monthly) Card Example 
-                    <div class="col-xl-3 col-md-6 mb-4">
-                        <div class="card border-left-info shadow h-100 py-2">
-                            <div class="card-body">
-                                <div class="row no-gutters align-items-center">
-                                    <div class="col mr-2">
-                                        <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Tasks
-                                        </div>
-                                        <div class="row no-gutters align-items-center">
-                                            <div class="col-auto">
-                                                <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">50%</div>
-                                            </div>
-                                            <div class="col">
-                                                <div class="progress progress-sm mr-2">
-                                                    <div class="progress-bar bg-info" role="progressbar" style="width: 50%"
-                                                         aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                    <!--
+                                         Earnings (Monthly) Card Example 
+                                        <div class="col-xl-3 col-md-6 mb-4">
+                                            <div class="card border-left-info shadow h-100 py-2">
+                                                <div class="card-body">
+                                                    <div class="row no-gutters align-items-center">
+                                                        <div class="col mr-2">
+                                                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Tasks
+                                                            </div>
+                                                            <div class="row no-gutters align-items-center">
+                                                                <div class="col-auto">
+                                                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">50%</div>
+                                                                </div>
+                                                                <div class="col">
+                                                                    <div class="progress progress-sm mr-2">
+                                                                        <div class="progress-bar bg-info" role="progressbar" style="width: 50%"
+                                                                             aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-auto">
+                                                            <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="col-auto">
-                                        <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                     Pending Requests Card Example 
-                    <div class="col-xl-3 col-md-6 mb-4">
-                        <div class="card border-left-warning shadow h-100 py-2">
-                            <div class="card-body">
-                                <div class="row no-gutters align-items-center">
-                                    <div class="col mr-2">
-                                        <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                                            Pending Requests</div>
-                                        <div class="h5 mb-0 font-weight-bold text-gray-800">18</div>
-                                    </div>
-                                    <div class="col-auto">
-                                        <i class="fas fa-comments fa-2x text-gray-300"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>-->
+                    
+                                         Pending Requests Card Example 
+                                        <div class="col-xl-3 col-md-6 mb-4">
+                                            <div class="card border-left-warning shadow h-100 py-2">
+                                                <div class="card-body">
+                                                    <div class="row no-gutters align-items-center">
+                                                        <div class="col mr-2">
+                                                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                                                                Pending Requests</div>
+                                                            <div class="h5 mb-0 font-weight-bold text-gray-800">18</div>
+                                                        </div>
+                                                        <div class="col-auto">
+                                                            <i class="fas fa-comments fa-2x text-gray-300"></i>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>-->
                 </div>
 
                 <!-- Content Row -->
@@ -261,10 +200,7 @@
                     </div>
                 </div>
             </div>
-            <!-- This container belong to FOOTER of ADMIN; DONT copy to JSP, JUST INCLUDE -->
-            <footer class="position-absolute bottom-0 end-0 start-0 text-center p-3" style="background-color: #deded540">
-                © 2023 Copyright by Football Shop
-            </footer>
+            <%@ include file="../../includes/admin_footer.jsp" %>
 
         </section>
 

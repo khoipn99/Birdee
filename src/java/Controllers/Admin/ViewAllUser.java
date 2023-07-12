@@ -14,25 +14,29 @@ import java.util.ArrayList;
  *
  * @author nguyenson
  */
-@WebServlet(name="ViewAllUser", urlPatterns={"/admin/user"})
+@WebServlet(name = "ViewAllUser", urlPatterns = {"/adminUser"})
 public class ViewAllUser extends HttpServlet {
-    
+
     private static String VIEW_PATH = "/views/Admin/AllUser.jsp";
 
-    
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
+            throws ServletException, IOException {
         UserDAO userDAO = new UserDAO();
-        ArrayList<User> users = userDAO.getAllUsers();
+        ArrayList<User> users = userDAO.getAllUsersSatff();
         request.setAttribute("users", users);
         request.getRequestDispatcher(VIEW_PATH).forward(request, response);
-    } 
+    }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
-        
+            throws ServletException, IOException {
+
     }
 
+    public static void main(String[] args) {
+        UserDAO userDAO = new UserDAO();
+        ArrayList<User> users = userDAO.getAllUsers();
+        System.out.println(users.size());
+    }
 }
