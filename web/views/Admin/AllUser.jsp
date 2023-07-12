@@ -20,76 +20,9 @@
     </head>
 
     <body>
-        <!-- This container belong to HEADER ADMIN, DIFFERENT FROM NORMAL HEADER; DONT copy to JSP, JUST INCLUDE -->
-        <header style="background-color: #21D192;" class="d-flex flex-wrap justify-content-center py-3 border-bottom">
-            <a href="/admin-product.html"
-               class="d-flex align-items-center ms-4 mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
-                <img style="width: 200px; height: 50px; object-fit: cover;" src="/images/logo2.png" alt="logo">
-            </a>
 
-            <div class="d-flex align-items-center gap-2 me-3">
-                <!-- ABC -->
-            </div>
-        </header>
-
-        <!-- Nav bar ADMIN wrapper, DONOT COPY THIS, JUST INCLUDE -->
-        <section class="position-absolute d-flex flex-column flex-shrink-0 p-3"
-                 style="width: 280px; height: calc(100vh - 83px); z-index: 10; background-color: #21D19270;">
-            <ul class="nav nav-pills flex-column mb-auto">
-                <li class="nav-item">
-                    <a href="#" class="nav-link active">
-                        <svg class="bi me-2" width="16" height="16">
-                        <use xlink:href="#speedometer2"></use>
-                        </svg>
-                        <i class="fa-solid fa-chart-line me-2"></i>Thống kê
-                    </a>
-                </li>
-                <li>
-                    <a href="/admin-request.html" class="nav-link link-dark">
-                        <svg class="bi me-2" width="16" height="16">
-                        <use xlink:href="#grid"></use>
-                        </svg>
-                        <i class="fa-solid fa-cart-shopping me-2"></i>Yêu cầu bán
-                    </a>
-                </li>
-                <li>
-                    <a href="/admin-category.html" class="nav-link link-dark">
-                        <svg class="bi me-2" width="16" height="16">
-                        <use xlink:href="#grid"></use>
-                        </svg>
-                        <i class="fa-regular fa-copyright me-2"></i>Loại sản phẩm
-                    </a>
-                </li>
-                <li>
-                    <a href="/admin-product.html" class="nav-link link-dark">
-                        <svg class="bi me-2" width="16" height="16">
-                        <use xlink:href="#grid"></use>
-                        </svg>
-                        <i class="fa-solid fa-dove me-2"></i>Sản phẩm
-                    </a>
-                </li>
-                <!-- Only show in Admin role  -->
-                <li>
-                    <a href="/admin-staff.html" class="nav-link link-dark">
-                        <svg class="bi me-2" width="16" height="16">
-                        <use xlink:href="#grid"></use>
-                        </svg>
-                        <i class="fa-solid fa-user-tie me-2"></i>Nhân viên
-                    </a>
-                </li>
-            </ul>
-            <hr>
-            <div class="dropdown">
-                <a href="#" class="d-flex align-items-center link-dark text-decoration-none dropdown-toggle"
-                   id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
-                    <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2">
-                    <strong>Admin</strong>
-                </a>
-                <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2">
-                    <li><a class="dropdown-item" href="#">Sign out</a></li>
-                </ul>
-            </div>
-        </section>
+        <%@ include file="../../includes/admin_header.jsp" %>
+        <%@ include file="navbarAdmin.jsp" %>
 
         <!-- Admin Products wrapper -->
         <section style="margin-left: 280px; height: calc(100vh - 83px); overflow-y: auto;">
@@ -248,7 +181,7 @@
                                                     </div>
 
                                                     <div class="modal-body">
-                                                        <form method="POST" action="/admin/user/update" class="update-form"
+                                                        <form method="POST" action="/adminUserUpdate" class="update-form"
                                                               id="update-form" >
                                                             <div class="col mb-3">
                                                                 <input type="hidden" name="userID" value="${user.userID}">
@@ -374,7 +307,7 @@
                                                     <div class="modal-body">
                                                         ${user.fullName}
                                                     </div>
-                                                    <form action="/admin/user/delete" method="post">
+                                                    <form action="/adminUserDelete" method="post">
                                                         <input type="hidden" class="form-control" id="id" name="userID"
                                                                value="${user.userID}">
                                                         <div class="modal-footer">
@@ -413,7 +346,7 @@
                     </div>
 
                     <div class="modal-body">
-                        <form method="POST" action="/admin/user/add" class="register-form" id="register-form"
+                        <form method="POST" action="/adminUserAdd" class="register-form" id="register-form"
                               >
                             <div class="col mb-3">
                                 <div class="row">

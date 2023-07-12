@@ -77,7 +77,7 @@ crossorigin="anonymous"></script>
                                                 </a>
                                             </div>
                                             <div class="w-100">
-                                                <h6 class="mb-1" id="productName">Bé lừa bông Winnie</h6>
+                                                <h6 class="mb-1" id="productName">zzzzzzzzzzzz</h6>
                                                 <div class="mb-1 d-flex justify-content-between gap-1 align-items-center">
                                                     <div class="cart_quantity" id="productValue">
                                                     </div>

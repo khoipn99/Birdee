@@ -8,6 +8,7 @@ import Controllers.ReloadController;
 import DAL.UserDAO;
 import Model.User;
 import Utils.EncodeMD5;
+import com.sun.accessibility.internal.resources.accessibility;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -82,15 +83,20 @@ public class loginController extends ReloadController {
             throws ServletException, IOException {
         String email = request.getParameter("email");
         String pwd = request.getParameter("pwd");
-        
+
         EncodeMD5 encode = new EncodeMD5();
         String encodePwd = encode.EncoderMD5(pwd);
-        
+
         UserDAO uDAO = new UserDAO();
         User user = uDAO.doLogin(email, encodePwd);
         if (user != null) {
-            request.getSession().setAttribute("account", user);
-            response.sendRedirect("home");
+            if (user.getRole().getId() == 1) {
+                request.getSession().setAttribute("account", user);
+                response.sendRedirect("adminDashboard");
+            } else {
+                request.getSession().setAttribute("account", user);
+                response.sendRedirect("home");
+            }
         } else {
             request.setAttribute("isFail", true);
             request.getRequestDispatcher("views/Login.jsp").forward(request, response);

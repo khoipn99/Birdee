@@ -127,6 +127,7 @@ public class OrderCustomer extends ReloadController {
         //add orderdetail to database
         ArrayList<OrderDetails> cart = (ArrayList<OrderDetails>) request.getSession().getAttribute("cart");
         for (OrderDetails orderDetails : cart) {
+            orderDetails.setOrder(order);
             odDao.insertProductDetails(orderDetails);
         }
         

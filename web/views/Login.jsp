@@ -56,7 +56,7 @@
                             </div>
                             <button type="submit" class="btn btn-dark w-100 mb-2">Đăng nhập</button>
                             <div class="text-center commit-meeko mb-3">
-                                Meeko cam kết bảo mật và sẽ không bao giờ đăng<br />hay chia sẻ thông tin mà chưa có
+                                Birdee cam kết bảo mật và sẽ không bao giờ đăng<br />hay chia sẻ thông tin mà chưa có
                                 được sự
                                 đồng ý của bạn.
                             </div>

@@ -15,14 +15,14 @@ import java.time.LocalDate;
  *
  * @author nguyenson
  */
-@WebServlet(name="DashBoard", urlPatterns={"/admin/dashboard"})
-public class DashBoard extends HttpServlet {
+@WebServlet(name = "DashBoard", urlPatterns = {"/adminDashboard"})
+public class DashBoard extends BaseAdminAuthenticationController {
 
     private static final String VIEW_PATH = "/views/Admin/DashBoard.jsp";
-    
+
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
+    protected void processGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         ProductAnalysisDAO productAnalysisDAO = new ProductAnalysisDAO();
         Date currentDate = Date.valueOf(LocalDate.now());
         Date lastWeekStartDate = Date.valueOf(LocalDate.now().minusDays(7));
@@ -37,12 +37,11 @@ public class DashBoard extends HttpServlet {
         request.setAttribute("currentTotalProduct", currentTotalProduct);
         request.setAttribute("currentMonthTotalProduct", currentMonthTotalProduct);
         request.getRequestDispatcher(VIEW_PATH).forward(request, response);
-    } 
+    }
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
-        
+    protected void processPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
     }
 
 }

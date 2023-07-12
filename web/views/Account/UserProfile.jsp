@@ -17,6 +17,49 @@
         <link href="../../css/layout.css" rel="stylesheet" type="text/css"/>
         <link href="../../css/MyModal.css" rel="stylesheet" type="text/css"/>
         <script src="script.js"></script>
+        <style>
+            *{
+                margin: 0;
+                padding: 0;
+            }
+            .rate {
+                float: left;
+                height: 46px;
+                padding: 0 10px;
+            }
+            .rate:not(:checked) > input {
+                position:absolute;
+                top:-9999px;
+            }
+            .rate:not(:checked) > label {
+                float:right;
+                width:1em;
+                overflow:hidden;
+                white-space:nowrap;
+                cursor:pointer;
+                font-size:30px;
+                color:#ccc;
+            }
+            .rate:not(:checked) > label:before {
+                content: '★ ';
+            }
+            .rate > input:checked ~ label {
+                color: #ffc700;
+            }
+            .rate:not(:checked) > label:hover,
+            .rate:not(:checked) > label:hover ~ label {
+                color: #deb217;
+            }
+            .rate > input:checked + label:hover,
+            .rate > input:checked + label:hover ~ label,
+            .rate > input:checked ~ label:hover,
+            .rate > input:checked ~ label:hover ~ label,
+            .rate > label:hover ~ input:checked ~ label {
+                color: #c59b08;
+            }
+
+            /* Modified from: https://github.com/mukulkant/Star-rating-using-pure-css */
+        </style>
     </head>
     <body>
         <%@ include file="../../includes/header.jsp" %>
@@ -96,7 +139,7 @@
                                                     <span class="close">&times;</span>
                                                     <div id="cart">
                                                         <!-- Firt item -->
-                                                        <div id="product" style="display: block">
+                                                        <div id="product">
                                                             <div class="mb-2 d-flex gap-2">
                                                                 <div class="">
                                                                     <a href="/be-lua-bong-winnie" class="ajaxcart__product-image cart_image"
@@ -116,14 +159,25 @@
                                                                         <div class="cart_quantity">
                                                                             Số lượng
                                                                         </div>
-                                                                        <p class="mb-0" style="color: #c83252; font-weight: bold;" id="productPrice">300000 đ</p>
+                                                                        <div class="rate">
+                                                                            <input type="radio" id="star5" name="rate" value="5" />
+                                                                            <label for="star5" title="text">5 stars</label>
+                                                                            <input type="radio" id="star4" name="rate" value="4" />
+                                                                            <label for="star4" title="text">4 stars</label>
+                                                                            <input type="radio" id="star3" name="rate" value="3" />
+                                                                            <label for="star3" title="text">3 stars</label>
+                                                                            <input type="radio" id="star2" name="rate" value="2" />
+                                                                            <label for="star2" title="text">2 stars</label>
+                                                                            <input type="radio" id="star1" name="rate" value="1" />
+                                                                            <label for="star1" title="text">1 star</label>
+                                                                        </div>
                                                                     </div>
                                                                     <div class="mb-1 d-flex justify-content-between gap-1 align-items-center">
                                                                         <div class="input-group">
                                                                             <input id="productQuantity" type="number" min="1" class="input_cart_width" name="quantity" value="1"
-                                                                                   onkeydown="handleKeyDown(event)" onpaste="handlePaste(event)"/>
+                                                                                   onkeydown="handleKeyDown(event)" onpaste="handlePaste(event)" readonly/>
                                                                         </div>
-                                                                        <p class="mb-0 cart_quantity prd-name" id="deleteProduct">xóa</p>
+                                                                        <input type="text" name="comment" placeholder="Nhận xét"/>
                                                                     </div>
                                                                 </div>
                                                             </div>
