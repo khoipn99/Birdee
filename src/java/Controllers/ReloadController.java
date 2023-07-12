@@ -9,6 +9,7 @@ import DAL.CategoryDAO;
 import DAL.CollectionDAO;
 import DAL.NewArrivalDAO;
 import DAL.OrderDAO;
+import DAL.OrderDetailsDAO;
 import DAL.ProductDAO;
 import DAL.TagDAO;
 import Model.BestSeller;
@@ -45,6 +46,7 @@ public class ReloadController extends HttpServlet {
 
         HttpSession sesion = request.getSession();
         ProductDAO pDao = new ProductDAO();
+        OrderDetailsDAO odDao = new OrderDetailsDAO();
 
         User acc = (User) sesion.getAttribute("account");
 
@@ -115,6 +117,10 @@ public class ReloadController extends HttpServlet {
         }
 
         request.getSession().setAttribute("tags", tags);
+        for (Order od : orders) {
+            ArrayList<OrderDetails> orderDetails = odDao.getOrderDetailsByOrderID(od.getOrderId());
+            od.setProductOrder(orderDetails);
+        }
 
     }
 

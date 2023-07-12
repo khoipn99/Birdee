@@ -224,6 +224,25 @@
         <servlet-name>PublishProduct</servlet-name>
         <url-pattern>/staff/product/publish</url-pattern>
     </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>RateOrder</servlet-name>
+        <servlet-class>Controllers.Order.RateOrder</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RateProduct</servlet-name>
+        <servlet-class>Controllers.Order.RateProduct</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>RateOrder</servlet-name>
+        <url-pattern>/rateOrder</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RateProduct</servlet-name>
+        <url-pattern>/rateProduct</url-pattern>
+    </servlet-mapping>
+    
     <session-config>
         <session-timeout>
             30

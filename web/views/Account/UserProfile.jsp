@@ -131,64 +131,13 @@
                                                 <td>${sessionScope.orders.get(i).statusOrder.statusValue}</td>
 
                                                 <c:if test="${sessionScope.orders.get(i).statusOrder.statusOrderID == 3 and sessionScope.orders.get(i).isRate == false}">
-                                                    <td><a href="#" style="text-decoration: none" id="myBtn">Đánh giá</a></td>
+                                                    <td><a href="#" style="text-decoration: none" onclick="rateOrder('${sessionScope.orders.get(i).orderId}')">Đánh giá</a></td>
                                                     <!-- The Modal -->
-                                            <div id="myModal" class="modal">
-                                                <!-- Modal content -->
-                                                <div class="modal-content">
-                                                    <span class="close">&times;</span>
-                                                    <div id="cart">
-                                                        <!-- Firt item -->
-                                                        <div id="product">
-                                                            <div class="mb-2 d-flex gap-2">
-                                                                <div class="">
-                                                                    <a href="/be-lua-bong-winnie" class="ajaxcart__product-image cart_image"
-                                                                       title="item-cart-1">
-                                                                        <img id="productImage" class="img_item_in_cart"
-                                                                             src="https://bizweb.dktcdn.net/thumb/compact/100/450/808/products/cfa1d6c5-ffa0-4fcd-8349-51e83792254e.jpg"
-                                                                             alt="Bé lừa bông Winnie">
-                                                                    </a>
-                                                                </div>
-                                                                <div class="w-100">
-                                                                    <h6 class="mb-1" id="productName">Bé lừa bông Winnie</h6>
-                                                                    <div class="mb-1 d-flex justify-content-between gap-1 align-items-center">
-                                                                        <div class="cart_quantity" id="productValue">
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="mb-1 d-flex justify-content-between gap-1 align-items-center">
-                                                                        <div class="cart_quantity">
-                                                                            Số lượng
-                                                                        </div>
-                                                                        <div class="rate">
-                                                                            <input type="radio" id="star5" name="rate" value="5" />
-                                                                            <label for="star5" title="text">5 stars</label>
-                                                                            <input type="radio" id="star4" name="rate" value="4" />
-                                                                            <label for="star4" title="text">4 stars</label>
-                                                                            <input type="radio" id="star3" name="rate" value="3" />
-                                                                            <label for="star3" title="text">3 stars</label>
-                                                                            <input type="radio" id="star2" name="rate" value="2" />
-                                                                            <label for="star2" title="text">2 stars</label>
-                                                                            <input type="radio" id="star1" name="rate" value="1" />
-                                                                            <label for="star1" title="text">1 star</label>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="mb-1 d-flex justify-content-between gap-1 align-items-center">
-                                                                        <div class="input-group">
-                                                                            <input id="productQuantity" type="number" min="1" class="input_cart_width" name="quantity" value="1"
-                                                                                   onkeydown="handleKeyDown(event)" onpaste="handlePaste(event)" readonly/>
-                                                                        </div>
-                                                                        <input type="text" name="comment" placeholder="Nhận xét"/>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </c:if>
+                                                </c:if>
                                             </tr>
                                         </c:forEach>
                                     </c:if>
-                                    </tbody>
+                                </tbody>
                             </table>
                         </div>
                     </section>
@@ -231,29 +180,32 @@
     <%@ include file="../../includes/footer.jsp" %>
     <script>
 // Get the modal
-                                                                                       var modal = document.getElementById("myModal");
+                                                        var modal = document.getElementById("myModal");
 
 // Get the button that opens the modal
-                                                                                       var btn = document.getElementById("myBtn");
+                                                        var btn = document.getElementById("myBtn");
 
 // Get the <span> element that closes the modal
-                                                                                       var span = document.getElementsByClassName("close")[0];
+                                                        var span = document.getElementsByClassName("close")[0];
 
 // When the user clicks the button, open the modal 
-                                                                                       btn.onclick = function () {
-                                                                                           modal.style.display = "block";
-                                                                                       };
+                                                        btn.onclick = function () {
+                                                            modal.style.display = "block";
+                                                        };
 
 // When the user clicks on <span> (x), close the modal
-                                                                                       span.onclick = function () {
-                                                                                           modal.style.display = "none";
-                                                                                       };
+                                                        span.onclick = function () {
+                                                            modal.style.display = "none";
+                                                        };
 
 // When the user clicks anywhere outside of the modal, close it
-                                                                                       window.onclick = function (event) {
-                                                                                           if (event.target === modal) {
-                                                                                               modal.style.display = "none";
-                                                                                           }
-                                                                                       };
+                                                        window.onclick = function (event) {
+                                                            if (event.target === modal) {
+                                                                modal.style.display = "none";
+                                                            }
+                                                        };
+                                                        function rateOrder(id) {
+                                                            window.location.href = 'rateOrder?id=' + id;
+                                                        }
     </script>
 </html>
