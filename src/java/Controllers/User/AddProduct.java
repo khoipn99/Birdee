@@ -36,7 +36,8 @@ public class AddProduct extends HttpServlet {
         List<Category> categories = categoryDAO.getAll();
         request.setAttribute("tags", tags);
         request.setAttribute("categories", categories);
-        requestDispatcher.forward(request, response);
+//        requestDispatcher.forward(request, response);
+        response.sendRedirect("/home");
     }
 
     @Override
