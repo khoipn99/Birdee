@@ -345,6 +345,29 @@ public class UserDAO extends DBContext {
 
         return false;
     }
+    
+    public boolean changePass(int id, String pass) {
+        try {
+            String sql = "UPDATE [User] \n"
+                    + "SET Password = ? \n"
+                    + "WHERE UserID = ?";
+            PreparedStatement stm = connection.prepareStatement(sql);
+
+            stm.setString(1, pass);
+            stm.setInt(2, id);
+
+            int result = stm.executeUpdate();
+
+            if (result > 0) {
+                return true;
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return false;
+    }
 
     public boolean deleteUserById(int id) {
         try {

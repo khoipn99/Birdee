@@ -89,6 +89,7 @@ public class loginController extends ReloadController {
 
         UserDAO uDAO = new UserDAO();
         User user = uDAO.doLogin(email, encodePwd);
+        user.setPassword(encodePwd);
         if (user != null) {
             if (user.getRole().getId() == 1) {
                 request.getSession().setAttribute("account", user);
