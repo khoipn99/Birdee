@@ -24,7 +24,7 @@ public class Order {
     private double totalOrder;
     private StatusOrder statusOrder;
     private boolean isRate;
-    private ArrayList<Product> productOrder;
+    private ArrayList<OrderDetails> productOrder;
 
     public Order() {
     }
@@ -44,7 +44,7 @@ public class Order {
         this.isRate = isRate;
     }
 
-    public Order(int orderId, User orderFromUser, String customerName, String customerEmail, String customerPhone, String customerAddress, User employee, Date dateTime, PaymentMethod paymentMethod, double totalOrder, StatusOrder statusOrder, boolean isRate, ArrayList<Product> productOrder) {
+    public Order(int orderId, User orderFromUser, String customerName, String customerEmail, String customerPhone, String customerAddress, User employee, Date dateTime, PaymentMethod paymentMethod, double totalOrder, StatusOrder statusOrder, boolean isRate, ArrayList<OrderDetails> productOrder) {
         this.orderId = orderId;
         this.orderFromUser = orderFromUser;
         this.customerName = customerName;
@@ -57,14 +57,6 @@ public class Order {
         this.totalOrder = totalOrder;
         this.statusOrder = statusOrder;
         this.isRate = isRate;
-        this.productOrder = productOrder;
-    }
-    
-    public ArrayList<Product> getProductOrder() {
-        return productOrder;
-    }
-
-    public void setProductOrder(ArrayList<Product> productOrder) {
         this.productOrder = productOrder;
     }
 
@@ -164,7 +156,11 @@ public class Order {
         this.isRate = isRate;
     }
 
-   
+    public ArrayList<OrderDetails> getProductOrder() {
+        return productOrder;
+    }
 
-    
+    public void setProductOrder(ArrayList<OrderDetails> productOrder) {
+        this.productOrder = productOrder;
+    }
 }

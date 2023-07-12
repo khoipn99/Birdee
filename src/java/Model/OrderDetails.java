@@ -13,7 +13,8 @@ public class OrderDetails {
     private Order order;
     private Product product;
     private int quantity;
-    private double rate;
+    private int rate;
+    private String comment;
 
     public OrderDetails() {
     }
@@ -25,12 +26,13 @@ public class OrderDetails {
         this.quantity = quantity;
     }
 
-    public OrderDetails(int oderDetailsID, Order order, Product product, int quantity, double rate) {
+    public OrderDetails(int oderDetailsID, Order order, Product product, int quantity, int rate, String comment) {
         this.oderDetailsID = oderDetailsID;
         this.order = order;
         this.product = product;
         this.quantity = quantity;
         this.rate = rate;
+        this.comment = comment;
     }
 
     public int getOderDetailsID() {
@@ -65,12 +67,22 @@ public class OrderDetails {
         this.quantity = quantity;
     }
 
-    public double getRate() {
+    public int getRate() {
         return rate;
     }
 
-    public void setRate(double rate) {
+    public void setRate(int rate) {
         this.rate = rate;
     }
+
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
+
+   
     
 }

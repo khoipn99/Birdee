@@ -121,4 +121,41 @@ public class OrderDAO extends DBContext {
         return list;
     }
     
+    public Order getOrdersByID(int orderID) {
+        try {
+            String sql = "  SELECT *\n"
+                    + "  FROM [Orders] where OrderID = ?";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setInt(1, orderID);
+            ResultSet rs = stm.executeQuery();
+            
+            StatusOrderDAO soDao = new StatusOrderDAO();
+            while (rs.next()) {
+                User fromUser = new User();
+                fromUser.setUserID(rs.getInt("OrderFromUser"));
+                
+                StatusOrder st = soDao.getStatusByID(rs.getInt("Status"));
+                
+                PaymentMethodDAO pmDao = new PaymentMethodDAO();
+                PaymentMethod pm = pmDao.getPaymentByID(rs.getInt("PaymentMethod"));
+                
+                return new Order(rs.getInt("OrderID"),
+                        fromUser,
+                        rs.getString("Customer_Name"),
+                        rs.getString("Customer_Email"),
+                        rs.getString("Customer_Phone"),
+                        rs.getString("Customer_Address"),
+                        null,
+                        rs.getDate("DateTime"),
+                        pm,
+                        rs.getDouble("TotalOrder"),
+                        st,
+                        rs.getBoolean("IsRated"));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(OrderDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+    
 }
