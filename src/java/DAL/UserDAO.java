@@ -99,7 +99,37 @@ public class UserDAO extends DBContext {
         return null;
     }
 
-    private User getUserByID(int userID) {
+    public User getUserByID(int userID) {
+        try {
+            String sql = "SELECT *\n"
+                    + "  FROM [User] where UserID like ?";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setInt(1, userID);
+            ResultSet rs = stm.executeQuery();
+
+            RoleDAO rDao = new RoleDAO();
+
+            if (rs.next()) {
+
+                Role role = rDao.getRoleByID(rs.getInt("RoleID"));
+                User manager = getUserByID(rs.getInt("ManagerID"));
+
+                return new User(rs.getInt("UserID"),
+                        rs.getString("FullName"),
+                        rs.getString("Phone"),
+                        rs.getString("Email"),
+                        rs.getString("EmailID"),
+                        rs.getDate("DOB"),
+                        rs.getString("Address"),
+                        rs.getString("Avatar"),
+                        role,
+                        manager,
+                        rs.getBoolean("Status"),
+                        rs.getString("Description"));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
         return null;
     }
 
@@ -345,7 +375,7 @@ public class UserDAO extends DBContext {
 
         return false;
     }
-    
+
     public boolean changePass(int id, String pass) {
         try {
             String sql = "UPDATE [User] \n"
@@ -430,4 +460,5 @@ public class UserDAO extends DBContext {
         }
         return null;
     }
+
 }

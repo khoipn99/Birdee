@@ -13,6 +13,12 @@
         <script src="../../js/script.js" type="text/javascript"></script>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
               integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <style>
+            .checked {
+                color: orange;
+            }
+        </style>
         <style>
             @media (max-width: 767px) {
                 .carousel-inner .carousel-item>div {
@@ -49,6 +55,7 @@
                 transform: translateX(0);
             }
         </style>
+
     </head>
 
     <body>
@@ -249,7 +256,13 @@
                                 Ðánh giá
                             </div>
                             <div>
-                                5 sao
+                                <c:forEach items="${product.rate}" var="rate">
+                                    <div class="gap-5">
+                                        <h6 style="font-style: initial"> <a href="#">${rate.order.orderFromUser.fullName}</a></h6>
+                                        <p>${rate.rate}<span class="fa fa-star checked"></span></p>
+                                        <p>${rate.comment}</p>
+                                    </div>
+                                </c:forEach>
                             </div>
                         </div>
                     </div>

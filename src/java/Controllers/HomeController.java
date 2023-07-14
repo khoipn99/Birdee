@@ -78,6 +78,7 @@ public class HomeController extends ReloadController {
         String regiester = (String) sesion.getAttribute("register");
         String orderStatus = (String) sesion.getAttribute("orderStatus");
         String emptyCart = (String) sesion.getAttribute("emptyCart");
+        String login = (String) sesion.getAttribute("notLogin");
 
         if (regiester != null) {
             request.setAttribute("msg", "Bạn đã đăng ký tài khoản thành công!");
@@ -90,6 +91,10 @@ public class HomeController extends ReloadController {
         if (emptyCart != null) {
             request.setAttribute("msg", "Bạn không có sản phẩm nào trong giỏ hàng!");
             sesion.setAttribute("emptyCart", null);
+        }
+        if (login != null) {
+            request.setAttribute("msg", "Vui lòng đăng nhập để mua hàng!");
+            sesion.setAttribute("notLogin", null);
         }
 
         request.getSession().setAttribute("tags", tags);

@@ -28,6 +28,7 @@ public class Product {
     private String description;
     private ArrayList<ImageProduct> images;
     private ArrayList<Product> children = new ArrayList<>();
+    private ArrayList<OrderDetails> rate = new ArrayList<>();
 
     public Product() {
     }
@@ -50,8 +51,6 @@ public class Product {
         this.shop = shop;
         this.description = description;
     }
-    
-    
 
     public Product(int productId, String name, double price, int quantity, boolean status, Type classType, String classValue, Product productParent, Category category, boolean isParent, String description) {
         this.productId = productId;
@@ -129,8 +128,8 @@ public class Product {
         this.isParent = isParent;
         this.shop = shop;
         this.description = description;
-    }    
-    
+    }
+
     public User getShop() {
         return shop;
     }
@@ -138,7 +137,7 @@ public class Product {
     public void setShop(User shop) {
         this.shop = shop;
     }
-    
+
     public int getProductId() {
         return productId;
     }
@@ -251,6 +250,12 @@ public class Product {
         this.children = children;
     }
 
-    
+    public ArrayList<OrderDetails> getRate() {
+        return rate;
+    }
+
+    public void setRate(ArrayList<OrderDetails> rate) {
+        this.rate = rate;
+    }
 
 }

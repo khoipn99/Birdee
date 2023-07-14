@@ -2,10 +2,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package Controllers.Order;
+package Controllers.Shop;
 
 import DAL.OrderDetailsDAO;
 import Model.OrderDetails;
+import Model.User;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -18,9 +19,11 @@ import java.util.ArrayList;
  *
  * @author dell
  */
-public class RateProduct extends HttpServlet {
+public class OrderRequestController extends HttpServlet {
 
-    int orderID = 0;
+    private final int recordsPerPage = 5;
+    String textSearch = "";
+    int sortOption = -1;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,10 +42,10 @@ public class RateProduct extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet RateProduct</title>");
+            out.println("<title>Servlet OrderRequestController</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet RateProduct at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet OrderRequestController at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -60,24 +63,46 @@ public class RateProduct extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        if (request.getParameter("id") != null) {
-            OrderDetailsDAO odDao = new OrderDetailsDAO();
-            orderID = Integer.parseInt(request.getParameter("id"));
-            OrderDetails details = odDao.getOrderDetailsByID(orderID);
 
-            request.setAttribute("orderID", orderID);
-            request.setAttribute("details", details);
-            request.getRequestDispatcher("views/Account/RateProduct.jsp").forward(request, response);
-        } else {
-            response.sendRedirect("home");
+        User account = (User) request.getSession().getAttribute("account");
+
+        int page = 1;
+        if (request.getParameter("page") != null) {
+            page = Integer.parseInt(
+                    request.getParameter("page"));
+
         }
+
+        if (textSearch == null) {
+            textSearch = "";
+        }
+
+        OrderDetailsDAO odDao = new OrderDetailsDAO();
+        ArrayList<OrderDetails> list = odDao.getAllOrderDetailsByShop((page - 1) * recordsPerPage,
+                recordsPerPage, textSearch, sortOption, 12, 1);
+
+        int noOfRecords = odDao.getNoOfRecords(textSearch, 12, 1);
+
+        int noOfPages = (int) Math.ceil((double) noOfRecords
+                / recordsPerPage);
+
+        request.setAttribute("list", list);
+
+        request.setAttribute("textSearch", textSearch);
+        request.setAttribute("sortOption", sortOption);
+        request.setAttribute("noOfPages", noOfPages);
+        request.setAttribute("currentPage", page);
+        request.setAttribute("noOfRecords", noOfRecords);
+
+        request.getRequestDispatcher("views/Shop/OrderRequest.jsp").forward(request, response);
     }
 
 //    public static void main(String[] args) {
 //        OrderDetailsDAO odDao = new OrderDetailsDAO();
-//        int orderID = 1;
-//        OrderDetails details = odDao.getOrderDetailsByID(orderID);
-//        System.out.println(details.getProduct().getImages().get(0));
+//        ArrayList<OrderDetails> list = odDao.getAllOrderDetailsByShop(0,
+//                3, "", -1, 12);
+//        int noOfRecords = odDao.getNoOfRecords("", 12);
+//        System.out.println(noOfRecords);
 //    }
     /**
      * Handles the HTTP <code>POST</code> method.
@@ -90,20 +115,26 @@ public class RateProduct extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        orderID = Integer.parseInt(request.getParameter("orderID"));
-        if (request.getParameter("rate") != null) {
-            int rate = Integer.parseInt(request.getParameter("rate"));
-            OrderDetailsDAO odDao = new OrderDetailsDAO();
-            odDao.rateStar(orderID, rate);
-        }
-        if (request.getParameter("comment") != null || !request.getParameter("comment").equalsIgnoreCase("")) {
-            String comment = request.getParameter("comment");
-            OrderDetailsDAO odDao = new OrderDetailsDAO();
-            odDao.rateComment(orderID, comment);
-        }
         OrderDetailsDAO odDao = new OrderDetailsDAO();
-        odDao.RateProduct(orderID, true);
-        response.sendRedirect("home");
+
+        String action = request.getParameter("action");
+        switch (action) {
+            case "approve":
+                int orderDetailsID = Integer.parseInt(request.getParameter("id"));
+                if (request.getParameter(action).equalsIgnoreCase("true")) {
+                    odDao.changeStatus(orderDetailsID, 2);
+                    doGet(request, response);
+                } else if (request.getParameter(action).equalsIgnoreCase("false")) {
+                    odDao.changeStatus(orderDetailsID, 5);
+                    doGet(request, response);
+                }
+                break;
+            case "search":
+                textSearch = request.getParameter("textSearch");
+                sortOption = Integer.parseInt(request.getParameter("sortOption"));
+                doGet(request, response);
+                break;
+        }
     }
 
     /**

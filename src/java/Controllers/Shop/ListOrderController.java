@@ -2,25 +2,29 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package Controllers.Authenticate;
+package Controllers.Shop;
 
-import Controllers.ReloadController;
-import DAL.UserDAO;
+import DAL.OrderDetailsDAO;
+import Model.OrderDetails;
 import Model.User;
-import Utils.EncodeMD5;
-import com.sun.accessibility.internal.resources.accessibility;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
 
 /**
  *
  * @author dell
  */
-public class loginController extends ReloadController {
+public class ListOrderController extends HttpServlet {
+
+    private final int recordsPerPage = 5;
+    String textSearch = "";
+    int sortOption = -1;
+    int statusID = 0;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,10 +43,10 @@ public class loginController extends ReloadController {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet LoginController</title>");
+            out.println("<title>Servlet OrderRequestController</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet LoginController at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet OrderRequestController at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -60,15 +64,46 @@ public class loginController extends ReloadController {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        super.doGet(request, response);
-        request.getRequestDispatcher("/views/Login.jsp").forward(request, response);
-    }
 
+        User account = (User) request.getSession().getAttribute("account");
+
+        int page = 1;
+        if (request.getParameter("page") != null) {
+            page = Integer.parseInt(
+                    request.getParameter("page"));
+
+        }
+
+        if (textSearch == null) {
+            textSearch = "";
+        }
+
+        OrderDetailsDAO odDao = new OrderDetailsDAO();
+        ArrayList<OrderDetails> list = odDao.getAllOrderDetailsByShop((page - 1) * recordsPerPage,
+                recordsPerPage, textSearch, sortOption, 12, statusID);
+
+        int noOfRecords = odDao.getNoOfRecords(textSearch, 12, statusID);
+
+        int noOfPages = (int) Math.ceil((double) noOfRecords
+                / recordsPerPage);
+
+        request.setAttribute("list", list);
+
+        request.setAttribute("textSearch", textSearch);
+        request.setAttribute("sortOption", sortOption);
+        request.setAttribute("noOfPages", noOfPages);
+        request.setAttribute("currentPage", page);
+        request.setAttribute("noOfRecords", noOfRecords);
+
+        request.getRequestDispatcher("views/Shop/ListOrder.jsp").forward(request, response);
+    }
+//
 //    public static void main(String[] args) {
-//        EncodeMD5 encode = new EncodeMD5();
-//        UserDAO uDAO = new UserDAO();
-//        User user = uDAO.doLogin("cus1@gmail.com", encode.EncoderMD5("123@123"));
-//        System.out.println(user);
+//        OrderDetailsDAO odDao = new OrderDetailsDAO();
+//        ArrayList<OrderDetails> list = odDao.getAllOrderDetailsByShop(0,
+//                3, "", -1, 12,0);
+//        int noOfRecords = odDao.getNoOfRecords("", 12,0);
+//        System.out.println(list.size());
 //    }
     /**
      * Handles the HTTP <code>POST</code> method.
@@ -81,30 +116,23 @@ public class loginController extends ReloadController {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String email = request.getParameter("email");
-        String pwd = request.getParameter("pwd");
+        OrderDetailsDAO odDao = new OrderDetailsDAO();
 
-        EncodeMD5 encode = new EncodeMD5();
-        String encodePwd = encode.EncoderMD5(pwd);
-
-        UserDAO uDAO = new UserDAO();
-        User user = uDAO.doLogin(email, encodePwd);
-        if (user != null) {
-            request.getSession().setAttribute("account", user);
-            switch (user.getRole().getId()) {
-                case 1:
-                    response.sendRedirect("adminDashboard");
-                    break;
-                case 4:
-                    response.sendRedirect("orderRequest");
-                    break;
-                default:
-                    response.sendRedirect("home");
-                    break;
-            }
-        } else {
-            request.setAttribute("isFail", true);
-            request.getRequestDispatcher("views/Login.jsp").forward(request, response);
+        String action = request.getParameter("action");
+        switch (action) {
+            case "approve":
+                int orderDetailsID = Integer.parseInt(request.getParameter("id"));
+                if (request.getParameter(action).equalsIgnoreCase("true")) {
+                    odDao.changeStatus(orderDetailsID, 3);
+                    doGet(request, response);
+                }
+                break;
+            case "search":
+                textSearch = request.getParameter("textSearch");
+                sortOption = Integer.parseInt(request.getParameter("sortOption"));
+                statusID = Integer.parseInt(request.getParameter("statusID"));
+                doGet(request, response);
+                break;
         }
     }
 
@@ -118,9 +146,4 @@ public class loginController extends ReloadController {
         return "Short description";
     }// </editor-fold>
 
-    public static void main(String[] args) {
-        EncodeMD5 encode = new EncodeMD5();
-        String encodePwd = encode.EncoderMD5("123@123");
-        System.out.println(encodePwd);
-    }
 }

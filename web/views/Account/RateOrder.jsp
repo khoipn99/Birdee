@@ -64,54 +64,121 @@
     <body>
         <%@ include file="../../includes/header.jsp" %>
         <div style="margin: 5%">
-            <c:if test="${list.size() != 0}">
-                <c:forEach var="o" items="${list}">
-                    <!-- Firt item -->
-                    <div id="product m-3">
-                        <div class="mb-2 d-flex gap-2">
-                            <div class="">
-                                <a href="/be-lua-bong-winnie" class="ajaxcart__product-image cart_image"
-                                   title="item-cart-1">
-                                    <img id="productImage" class="img_item_in_cart"
-                                         src="${o.product.images.get(0).image}"
-                                         alt="Bé lừa bông Winnie">
-                                </a>
-                            </div>
-                            <div class="w-100">
-                                <h6 class="mb-1" id="productName">${o.product.name}</h6>
-                                <div class="mb-1 d-flex justify-content-between gap-1 align-items-center">
-                                    <div class="cart_quantity" id="productValue">
-                                    </div>
-                                </div>
-                                <div class="mb-1 d-flex justify-content-between gap-1 align-items-center">
-                                    <div class="cart_quantity">
-                                        Số lượng
-                                    </div>
-                                </div>
-                                <div class="mb-1 d-flex justify-content-between gap-1 align-items-center">
-                                    <div class="input-group">
-                                        <input id="productQuantity" type="number" min="1" class="input_cart_width" name="quantity" value="${o.quantity}" readonly/>
-                                        <a href="rateProduct?id=${o.oderDetailsID}" style="margin-left: 5%">Đánh giá</a>
-                                    </div>
-                                </div>
-                                <div class="mb-1 d-flex justify-content-between gap-1 align-items-center">
-                                    
-                                </div>
-                            </div>
-                        </div>
+            <!-- Admin Products wrapper -->
+            <section>
+                <div class="p-4 mb-5">
+                    <h5>
+                        Đơn hàng
+                    </h5>
+                    <div class="mt-3">
+                        <table class="table">
+                            <thead>
+                                <tr style="background-color: #21D19240;">
+                                    <th scope="col">Đơn hàng</th>
+                                    <th scope="col">Số lượng</th>
+                                    <th scope="col">Ngày đặt hàng</th>
+                                    <th scope="col">Số điện thoại đặt hàng</th>
+                                    <th scope="col">Thành tiền</th>
+                                    <th scope="col">Địa chỉ</th>
+                                    <th scope="col">Trạng thái</th>
+                                    <th scope="col" style="width: 110px;">Hành động</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <c:forEach var="od" items="${list}">
+                                    <tr>
+                                        <td style="height: 78px;">
+                                            <div class="d-flex align-items-center" style="height: 100%;">
+                                                <h6>
+                                                    ${od.product.name}
+                                                    <c:if test="${od.product.classValue != null}">
+                                                        <p style="font-size: 12px;color: gray">- ${od.product.classValue}</p>
+                                                    </c:if>
+                                                </h6>
+                                            </div>
+                                        </td>
+                                        <td style="height: 78px;">
+                                            <div class="d-flex align-items-center" style="height: 100%;">
+                                                ${od.quantity}
+                                            </div>
+                                        </td>
+                                        <td style="height: 78px;">
+                                            <div class="d-flex align-items-center" style="height: 100%;">
+                                                ${od.order.dateTime}
+                                            </div>
+                                        </td>
+                                        <td style="height: 78px;">
+                                            <div class="d-flex align-items-center" style="height: 100%;">
+                                                ${od.order.customerPhone}
+                                            </div>
+                                        </td>
+                                        <td style="height: 78px;">
+                                            <div class="d-flex align-items-center" style="height: 100%;">
+                                                <c:set var="totalPrice" value="${od.product.price * od.quantity}">
+                                                </c:set>
+
+                                                <fmt:formatNumber value="${totalPrice}" pattern="#,##0.000" var="formattedNumber" />
+                                                ${formattedNumber}đ
+                                            </div>
+                                        </td>
+                                        <td style="height: 78px;">
+                                            <div class="d-flex align-items-center" style="height: 100%;">
+                                                ${od.order.customerAddress}
+                                            </div>
+                                        </td>
+                                        <td style="height: 78px;">
+                                            <div class="d-flex align-items-center" style="height: 100%;">
+                                                ${od.statusOrder.statusValue}
+                                            </div>
+                                        </td>
+                                        <td style=" height: 78px;">
+                                            <c:if test="${od.statusOrder.statusOrderID == 3 && od.isRated == false}">
+                                                <div class="d-flex align-items-center" style="height: 100%;">
+                                                    <button onclick="rateProduct('${od.oderDetailsID}')" style="border: none;border-radius: 5px; background-color: greenyellow;padding: 5px">
+                                                        Đánh giá
+                                                    </button>
+                                                </div>
+                                            </c:if>
+                                            <c:if test="${od.statusOrder.statusOrderID == 2 || od.statusOrder.statusOrderID == 1}">
+                                                <form id="cancel_${od.oderDetailsID}" action="rateOrder" method="post">
+                                                    <input type="hidden" value="${orderDetailID}" name="id">
+                                                    <input type="hidden" value="cancel" name="action">
+                                                    <input type="hidden" value="${od.oderDetailsID}" name="idOrder">
+                                                    <button type="button" onclick="cancelOrder('${od.oderDetailsID}')" style="border: none;border-radius: 5px; background-color: red;padding: 5px">
+                                                        Hủy
+                                                    </button>
+                                                </form>
+                                            </c:if>
+                                            <c:if test="${od.isRated == true}">
+                                                <div class="d-flex align-items-center" style="height: 100%;">
+                                                    <span>Đã đánh giá</span>
+                                                </div>
+                                            </c:if>
+                                        </td>
+                                    </tr>
+                                </c:forEach>
+                            </tbody>
+                        </table>
                     </div>
-                </c:forEach>
-            </c:if>
-            <c:if test="${list.size() == 0}">
-                <div class="d-flex justify-content-center">
-                    <p style="color: red">Không còn sản phẩm để đánh giá</p>
                 </div>
-            </c:if>
+            </section>
         </div>
         <%@ include file="../../includes/footer.jsp" %>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
                 integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
         crossorigin="anonymous"></script>
         <script src="https://kit.fontawesome.com/8d39de38b8.js" crossorigin="anonymous"></script>
+        <script>
+                                                        function cancelOrder(id) {
+                                                            var isCancel = confirm("Bạn có chắc hủy đơn hàng này?");
+                                                            if (isCancel) {
+                                                                document.getElementById('cancel_' + id).submit();
+                                                            }
+                                                        }
+
+                                                        function rateProduct(id) {
+                                                            window.location.href = "rateProduct?id=" + id;
+                                                        }
+        </script>
     </body>
 </html>

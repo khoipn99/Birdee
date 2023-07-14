@@ -18,47 +18,27 @@ public class Order {
     private String customerEmail;
     private String customerPhone;
     private String customerAddress;
-    private User employee;
     private Date dateTime;
     private PaymentMethod paymentMethod;
     private double totalOrder;
-    private StatusOrder statusOrder;
-    private boolean isRate;
     private ArrayList<OrderDetails> productOrder;
 
     public Order() {
     }
 
-    public Order(int orderId, User orderFromUser, String customerName, String customerEmail, String customerPhone, String customerAddress, User employee, Date dateTime, PaymentMethod paymentMethod, double totalOrder, StatusOrder statusOrder, boolean isRate) {
+    public Order(int orderId, User orderFromUser, String customerName, String customerEmail, String customerPhone, String customerAddress, Date dateTime, PaymentMethod paymentMethod, double totalOrder) {
         this.orderId = orderId;
         this.orderFromUser = orderFromUser;
         this.customerName = customerName;
         this.customerEmail = customerEmail;
         this.customerPhone = customerPhone;
         this.customerAddress = customerAddress;
-        this.employee = employee;
         this.dateTime = dateTime;
         this.paymentMethod = paymentMethod;
         this.totalOrder = totalOrder;
-        this.statusOrder = statusOrder;
-        this.isRate = isRate;
     }
-
-    public Order(int orderId, User orderFromUser, String customerName, String customerEmail, String customerPhone, String customerAddress, User employee, Date dateTime, PaymentMethod paymentMethod, double totalOrder, StatusOrder statusOrder, boolean isRate, ArrayList<OrderDetails> productOrder) {
-        this.orderId = orderId;
-        this.orderFromUser = orderFromUser;
-        this.customerName = customerName;
-        this.customerEmail = customerEmail;
-        this.customerPhone = customerPhone;
-        this.customerAddress = customerAddress;
-        this.employee = employee;
-        this.dateTime = dateTime;
-        this.paymentMethod = paymentMethod;
-        this.totalOrder = totalOrder;
-        this.statusOrder = statusOrder;
-        this.isRate = isRate;
-        this.productOrder = productOrder;
-    }
+    
+    
 
     public int getOrderId() {
         return orderId;
@@ -108,14 +88,6 @@ public class Order {
         this.customerAddress = customerAddress;
     }
 
-    public User getEmployee() {
-        return employee;
-    }
-
-    public void setEmployee(User employee) {
-        this.employee = employee;
-    }
-
     public Date getDateTime() {
         return dateTime;
     }
@@ -138,22 +110,6 @@ public class Order {
 
     public void setTotalOrder(double totalOrder) {
         this.totalOrder = totalOrder;
-    }
-
-    public StatusOrder getStatusOrder() {
-        return statusOrder;
-    }
-
-    public void setStatusOrder(StatusOrder statusOrder) {
-        this.statusOrder = statusOrder;
-    }
-
-    public boolean isIsRate() {
-        return isRate;
-    }
-
-    public void setIsRate(boolean isRate) {
-        this.isRate = isRate;
     }
 
     public ArrayList<OrderDetails> getProductOrder() {

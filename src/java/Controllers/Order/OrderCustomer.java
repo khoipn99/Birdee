@@ -11,6 +11,8 @@ import DAL.ProductDAO;
 import Model.Order;
 import Model.OrderDetails;
 import Model.PaymentMethod;
+import Model.Product;
+import Model.StatusOrder;
 import Model.User;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -45,6 +47,13 @@ public class OrderCustomer extends ReloadController {
             throws ServletException, IOException {
         super.doGet(request, response);
 
+        ProductDAO pDao = new ProductDAO();
+
+        double totalPrice = 0.0;
+        int totalProduct = 0;
+
+        ArrayList<OrderDetails> cart = new ArrayList<>();
+
         HttpSession session = request.getSession();
         User account = (User) session.getAttribute("account");
 
@@ -59,7 +68,6 @@ public class OrderCustomer extends ReloadController {
 
         // Get the cookies from the request
         Cookie[] cookies = request.getCookies();
-
         String cartValue = "";
         if (cookies != null) {
             for (Cookie cookie : cookies) {
@@ -68,10 +76,44 @@ public class OrderCustomer extends ReloadController {
                 }
             }
         }
-        if (account == null || cartValue.trim().equalsIgnoreCase("")) {
+        //check if cookies exist or not
+        if (!cartValue.equals("")) {
+            String[] products = cartValue.split("_");
+            for (String product : products) {
+                //check the length of the product cookie
+                if (product.length() != 0) {
+                    String[] proQua = product.split("-");
+                    OrderDetails order = new OrderDetails();
+                    Product pro = pDao.getProductDetailsByID(Integer.parseInt(proQua[0]), true);
+
+                    //check quantity of product
+                    int quantityBuy = Integer.parseInt(proQua[1]);
+                    if (quantityBuy > pro.getQuantity()) {
+                        quantityBuy = pro.getQuantity();
+                        request.setAttribute("overQuantity", "true");
+                    } 
+
+                    order.setProduct(pro);
+                    order.setQuantity(quantityBuy);
+                    cart.add(order);
+
+                    totalPrice += pro.getPrice() * order.getQuantity();
+                    totalProduct += order.getQuantity();
+                }
+            }
+
+        }
+
+        if (account == null) {
+            request.getSession().setAttribute("notLogin", "True");
+            response.sendRedirect("home");
+        } else if (cartValue.trim().equalsIgnoreCase("")) {
             request.getSession().setAttribute("emptyCart", "True");
             response.sendRedirect("home");
         } else {
+            request.getSession().setAttribute("cart", cart);
+            request.getSession().setAttribute("totalPrice", totalPrice);
+            request.getSession().setAttribute("totalProduct", totalProduct);
             request.getRequestDispatcher("views/Order/OrderCustomer.jsp").forward(request, response);
         }
     }
@@ -119,18 +161,23 @@ public class OrderCustomer extends ReloadController {
 
         order.setOrderId(orderID);
 
-        order.setIsRate(false);
-
         oDao.insert(order);
 
         OrderDetailsDAO odDao = new OrderDetailsDAO();
         //add orderdetail to database
         ArrayList<OrderDetails> cart = (ArrayList<OrderDetails>) request.getSession().getAttribute("cart");
         for (OrderDetails orderDetails : cart) {
+            
+            orderDetails.setIsRated(false);
+            
+            StatusOrder statusOrder = new StatusOrder();
+            statusOrder.setStatusOrderID(1);
+            orderDetails.setStatusOrder(statusOrder);
+            
             orderDetails.setOrder(order);
             odDao.insertProductDetails(orderDetails);
         }
-        
+
         //clear cookies
         String cookieName = "cart" + account.getUserID();
         String priceName = "totalP" + account.getUserID();
