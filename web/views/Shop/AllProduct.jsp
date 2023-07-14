@@ -11,7 +11,7 @@
     <body>
 
         <%@ include file="../../includes/admin_header.jsp" %>
-        <%@ include file="navbarStaff.jsp" %>
+        <%@ include file="navbarShop.jsp" %>
 
         <!-- Admin Products wrapper -->
         <section style="margin-left: 280px; height: calc(100vh - 83px); overflow-y: auto;">
@@ -62,7 +62,7 @@
                                     <th class="d-flex align-items-center" style="height: 78px;" scope="row">1</thc>
                                     <td style="width: 30%; height: 78px;">
                                         <div class="d-flex gap-2 align-items-center">
-                                            <img src="${product.images[0]}"
+                                            <img src="${product.images.get(0).image}"
                                                  class="rounded-2" style="width: 60px; height: 60px; object-fit: contain;" />
                                             <h6>${product.name}</h6>
                                         </div>
@@ -96,11 +96,11 @@
                                     <td class="d-flex gap-2 align-items-center" style="width: 180px; height: 78px;">
                                         <button href="/admin-product-detail.html" type="button"
                                                 class="btn btn-outline-success me-2" data-bs-toggle="modal"
-                                                data-bs-target="#itemDetail">
+                                                data-bs-target="#view-${product.productId}">
                                             <i class="fa-solid fa-eye"></i>
                                         </button>
                                         <!--Modal View Detail-->
-                                        <div class="modal fade" id="itemDetail" tabindex="-1"
+                                        <div class="modal fade" id="view-${product.productId}" tabindex="-1"
                                              aria-labelledby="exampleModalLabel" aria-hidden="true">
                                             <div class="modal-dialog modal-lg modal-dialog-centered">
                                                 <div class="modal-content">
@@ -139,7 +139,7 @@
                                                                     style="height: 1px; width: 100%; background-color: #33333330;">
                                                                 </div>
                                                                 <div class="mt-3 mb-4">
-                                                                    <div class="row">
+<!--                                                                    <div class="row">
                                                                         <div class="col-6">
                                                                             <p class="mb-0"><span
                                                                                     style="font-weight: bold;">Giới tính:</span>
@@ -166,7 +166,7 @@
                                                                                     style="font-weight: bold;">Xuất sứ:</span>
                                                                                 Việt Nam</p>
                                                                         </div>
-                                                                    </div>
+                                                                    </div>-->
                                                                     <p class="mb-0 mt-1"><span style="font-weight: bold;">Mô tả
                                                                             chi tiết:</span> ${product.description}
                                                                     </p>
@@ -185,11 +185,11 @@
 
                                         <!--Edit button--> 
                                         <button type="button" class="btn btn-success me-2" data-bs-toggle="modal"
-                                                data-bs-target="#updateItem">
+                                                data-bs-target="#update-${product.productId}">
                                             <i class="fa-solid fa-pen-to-square"></i>
                                         </button>
-<!--                                        Modal Edit Detail
-                                        <div class="modal fade" id="updateItem" tabindex="-1"
+                                        <!--Modal Edit Detail-->
+                                        <div class="modal fade" id="update-${product.productId}" tabindex="-1"
                                              aria-labelledby="exampleModalLabel" aria-hidden="true">
                                             <div class="modal-dialog modal-lg modal-dialog-centered">
                                                 <div class="modal-content">
@@ -200,8 +200,9 @@
                                                     </div>
 
                                                     <div class="modal-body">
-                                                        <form method="POST" action="/Product/Edit" class="register-form"
-                                                              id="register-form" enctype="multipart/form-data">
+                                                        <form method="POST" action="${pageContext.request.contextPath}/shop/product/update" class="register-form"
+                                                              id="register-form">
+                                                            <input type="hidden" name="id" value="${product.productId}">
                                                             <div class="col">
                                                                 <div class="row">
                                                                     <div class="col-6">
@@ -218,21 +219,22 @@
                                                                     <div class="col-6">
                                                                         <label for="category-film" class="col-form-label">Loại sản phẩm: </label>
                                                                         <select class="form-select" aria-label="Default select example" id="theloai"
-                                                                                name="loaisach" required>
+                                                                                name="category" required>
                                                                             <option disabled selected value="">Chọn loại sản phẩm</option>
                                                                             <c:forEach items="${sessionScope.tags}" var="t">
                                                                                 <c:forEach var="c" items="${t.categories}">
-                                                                                    <option>${c.categoryName}</option>
+                                                                                    <option value="${c.categoryId}">${c.categoryName}</option>
                                                                                 </c:forEach>
                                                                             </c:forEach>
                                                                         </select>
                                                                     </div>
-                                                                </div>
-                                                                <div class="row mt-2">
                                                                     <div class="col-6">
                                                                         <label for="category-film" class="col-form-label">Số lượng:</label>
                                                                         <input value="${product.quantity}" type="text" class="form-control" id="category-film" name="quantity">
                                                                     </div>
+                                                                </div>
+<!--                                                                <div class="row mt-2">
+                                                                    
                                                                     <div class="col-6">
                                                                         <label for="category-film" class="col-form-label">Trạng thái:</label>
                                                                         <select class="form-select" aria-label="Default select example" id="theloai"
@@ -242,12 +244,12 @@
                                                                             <option>Dừng bán</option>
                                                                         </select>
                                                                     </div>
-                                                                </div>
-                                                                <div class="mb-3 mt-3">
+                                                                </div>-->
+<!--                                                                <div class="mb-3 mt-3">
                                                                     <label for="exampleFormControlFile1">Ảnh:</label>
-                                                                    <input type="file" class="form-control-file mt-2" name="file" id="file" accept="image/*"
+                                                                    <input type="file" class="form-control-file mt-2" name="image" id="file" accept="image/*"
                                                                            required>
-                                                                </div>
+                                                                </div>-->
                                                                 <div class="mb-3">
                                                                     <label for="category-film" class="col-form-label">Mô
                                                                         tả:</label>
@@ -265,13 +267,13 @@
                                             </div>
                                         </div>
 
-                                        Delete button  
+                                        <!--Delete button-->  
                                         <button type="button" class="btn btn-outline-danger me-2" data-bs-toggle="modal"
-                                                data-bs-target="#deleteItem">
+                                                data-bs-target="#delete-${product.productId}">
                                             <i class="fa-solid fa-trash"></i>
                                         </button>
-                                        Modal Delete Detail
-                                        <div class="modal fade" id="deleteItem" tabindex="-1"
+                                        <!--Modal Delete Detail-->
+                                        <div class="modal fade" id="delete-${product.productId}" tabindex="-1"
                                              aria-labelledby="exampleModalLabel" aria-hidden="true">
                                             <div class="modal-dialog modal-dialog-centered">
                                                 <div class="modal-content">
@@ -286,9 +288,9 @@
                                                     <div class="modal-body">
                                                         ${product.name} - ${product.price}d
                                                     </div>
-                                                    <form action="/Product/Delete" method="post">
+                                                    <form action="${pageContext.request.contextPath}/shop/product/delete" method="post">
                                                         <input type="hidden" class="form-control" id="id" name="id"
-                                                               value="@item.id_book">
+                                                               value="${product.productId}">
                                                         <div class="modal-footer">
                                                             <button style="width:100px" type="button" class="btn btn-secondary"
                                                                     data-bs-dismiss="modal">
@@ -300,14 +302,14 @@
                                                     </form>
                                                 </div>
                                             </div>
-                                        </div>-->
-
-                                        <!--Publish button-->  
+                                        </div>
+<!--
+                                        Publish button  
                                         <button type="button" class="btn btn-outline-danger me-2" data-bs-toggle="modal"
                                                 data-bs-target="#publish-${product.productId}">
                                             <i class="fa-solid fa-thumbs-up"></i>
                                         </button>
-                                        <!--Modal Delete Detail-->
+                                        Modal Delete Detail
                                         <div class="modal fade" id="publish-${product.productId}" tabindex="-1"
                                              aria-labelledby="exampleModalLabel" aria-hidden="true">
                                             <div class="modal-dialog modal-dialog-centered">
@@ -337,7 +339,7 @@
                                                     </form>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </div>-->
                                     </td>
                                 </tr>
                             </c:forEach>
@@ -362,7 +364,7 @@
                     </div>
 
                     <div class="modal-body">
-                        <form method="POST" action="/Product/Add" class="register-form" id="register-form"
+                        <form method="POST" action="${pageContext.request.contextPath}/shop/product/add" class="register-form" id="register-form"
                               enctype="multipart/form-data">
                             <div class="col">
                                 <div class="row">
@@ -379,26 +381,46 @@
                                 <div class="row">
                                     <div class="col-6">
                                         <label for="category-film" class="col-form-label">Loại sản phẩm: </label>
-                                        <select class="form-select" aria-label="Default select example" id="type"
-                                                name="loaisach" required>
+                                        <select class="form-select" aria-label="Default select example" id="category"
+                                                name="category" required>
                                             <option disabled selected value="">Chọn loại sản phẩm</option>
                                             <c:forEach items="${sessionScope.tags}" var="t">
                                                 <c:forEach var="c" items="${t.categories}">
-                                                    <option>${c.categoryName}</option>
+                                                    <option value="${c.categoryId}">${c.categoryName}</option>
                                                 </c:forEach>
                                             </c:forEach>
                                         </select>
                                     </div>
+                                    <div class="col-6">
+                                        <label for="category-film" class="col-form-label">Số lượng:</label>
+                                        <input type="number" class="form-control" id="category-film" name="quantity">
+                                    </div>
                                 </div>
                                 <div class="row mt-2">
                                     <div class="col-6">
-                                        <label for="category-film" class="col-form-label">Số lượng:</label>
-                                        <input type="text" class="form-control" id="category-film" name="quantity">
+                                        <label for="category-film" class="col-form-label">Xuất xứ:</label>
+                                        <input type="text" class="form-control" id="category-film" name="origin">
                                     </div>
                                     <div class="col-6">
-                                        <label for="category-film" class="col-form-label">Trạng thái:</label>
-                                        <input type="text" class="form-control" id="category-film" name="price">
+                                        <label for="category-film" class="col-form-label">Cân
+                                            nặng:</label>
+                                        <input type="number" class="form-control" id="category-film" name="weight">
                                     </div>
+                                    <div class="col-6">
+                                        <label for="category-film" class="col-form-label">Chiều
+                                            cao:</label>
+                                        <input type="number" class="form-control" id="category-film" name="height">
+                                    </div>
+                                    <div class="col-6">
+                                        <label for="category-film" class="col-form-label">Giới
+                                            tính:</label>
+                                        <select name="gender" class="form-select" style="width: 200px;" id="city" required>
+                                            <option disabled>Chọn giới tính</option>
+                                            <option value="true">Đực</option>
+                                            <option value="false">Cái</option>
+                                        </select>
+                                    </div>
+
                                 </div>
                                 <div class="mb-3 mt-3">
                                     <label for="exampleFormControlFile1">Ảnh:</label>

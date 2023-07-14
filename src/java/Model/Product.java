@@ -41,6 +41,18 @@ public class Product {
         this.description = description;
     }
 
+    public Product(String name, double price, int quantity, Date createDate, Category category, User shop, String description) {
+        this.name = name;
+        this.price = price;
+        this.quantity = quantity;
+        this.createDate = createDate;
+        this.category = category;
+        this.shop = shop;
+        this.description = description;
+    }
+    
+    
+
     public Product(int productId, String name, double price, int quantity, boolean status, Type classType, String classValue, Product productParent, Category category, boolean isParent, String description) {
         this.productId = productId;
         this.name = name;
@@ -117,9 +129,7 @@ public class Product {
         this.isParent = isParent;
         this.shop = shop;
         this.description = description;
-    }
-
-    
+    }    
     
     public User getShop() {
         return shop;

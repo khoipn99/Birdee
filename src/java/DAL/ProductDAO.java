@@ -97,6 +97,79 @@ public class ProductDAO extends DBContext {
         }
         return null;
     }
+    
+    public Product getProductByID(int productID) {
+        try {
+            String sql = "SELECT *\n"
+                    + "  FROM [Products] Where ProductId = ? or ParentId = ?";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setInt(1, productID);
+            stm.setInt(2, productID);
+
+            ResultSet rs = stm.executeQuery();
+
+            TypeDAO tDao = new TypeDAO();
+            CategoryDAO cDao = new CategoryDAO();
+            ImageProductDAO imageDao = new ImageProductDAO();
+
+            Product product = new Product();
+            Category category = new Category();
+            ArrayList<ImageProduct> listImage;
+            UserDAO uDao = new UserDAO();
+
+            while (rs.next()) {
+
+                User shop = uDao.getUserByID(rs.getInt("ShopID"), Constants.Active);
+                Type type = tDao.getTypeByID(rs.getInt("ClassType"));
+
+                category = cDao.getCategoryByID(rs.getInt("CategoryId"));
+
+                boolean isParent = rs.getBoolean("IsParent");
+                if (isParent) {
+                    listImage = new ArrayList<>();
+                    product.setProductId(rs.getInt("ProductId"));
+                    product.setName(rs.getString("Name"));
+                    product.setPrice(rs.getDouble("Price"));
+                    product.setQuantity(rs.getInt("Quantity"));
+                    product.setStatus(rs.getBoolean("Status"));
+                    product.setClassType(type);
+                    product.setClassValue(rs.getString("ClassValue"));
+                    product.setCreateDate(rs.getDate("createDate"));
+                    product.setCategory(category);
+                    product.setIsParent(isParent);
+                    product.setShop(shop);
+                    product.setDescription(rs.getString("Description"));
+
+                    listImage = imageDao.getImageByProductID(product.getProductId(), Constants.DeleteFalse);
+                    product.setImages(listImage);
+                } else {
+                    Product children = new Product(
+                            rs.getInt("ProductId"),
+                            rs.getString("Name"),
+                            rs.getDouble("Price"),
+                            rs.getInt("Quantity"),
+                            rs.getBoolean("Status"),
+                            type,
+                            rs.getString("ClassValue"),
+                            rs.getDate("createDate"),
+                            product,
+                            category,
+                            isParent,
+                            shop,
+                            rs.getString("Description"));
+                    listImage = new ArrayList<>();
+                    listImage = imageDao.getImageByProductID(product.getProductId(), Constants.DeleteFalse);
+                    children.setImages(listImage);
+                    product.getChildren().add(children);
+                }
+
+            }
+            return product;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 
     public Product getProductDetailsByID(int productID, boolean status) {
         try {
@@ -200,6 +273,56 @@ public class ProductDAO extends DBContext {
                     + "FROM [Products]";
 
             PreparedStatement stm = connection.prepareStatement(sql);
+            ResultSet rs = stm.executeQuery();
+
+            TypeDAO tDao = new TypeDAO();
+            CategoryDAO cDao = new CategoryDAO();
+            ImageProductDAO imageDao = new ImageProductDAO();
+
+            Product product = new Product();
+            Category category = new Category();
+            Type type = new Type();
+            ArrayList<ImageProduct> images = new ArrayList<>();
+
+            while (rs.next()) {
+
+                type = tDao.getTypeByID(rs.getInt("ClassType"));
+                category = cDao.getCategoryByID(rs.getInt("CategoryId"));
+
+                product = new Product();
+                product.setProductId(rs.getInt("ProductId"));
+                product.setName(rs.getString("Name"));
+                product.setPrice(rs.getDouble("Price"));
+                product.setQuantity(rs.getInt("Quantity"));
+                product.setStatus(rs.getBoolean("Status"));
+                product.setClassType(type);
+                product.setClassValue(rs.getString("ClassValue"));
+                product.setCreateDate(rs.getDate("createDate"));
+                product.setCategory(category);
+                product.setIsParent(Constants.Parent);
+                product.setDescription(rs.getString("Description"));
+
+                images = imageDao.getImageByProductID(product.getProductId(), Constants.DeleteFalse);
+                product.setImages(images);
+
+                list.add(product);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+    
+    public ArrayList<Product> getAllProductOfShop(int shopId) {
+        ArrayList<Product> list = new ArrayList<>();
+        try {
+            String sql = "SELECT *\n"
+                    + "FROM [Products] WHERE ShopID = ?";
+
+            PreparedStatement stm = connection.prepareStatement(sql);
+           
+            stm.setInt(1, shopId);
+            
             ResultSet rs = stm.executeQuery();
 
             TypeDAO tDao = new TypeDAO();
@@ -431,7 +554,8 @@ public class ProductDAO extends DBContext {
                     + "      ParentId,\n"
                     + "      CategoryId,\n"
                     + "      IsParent,\n"
-                    + "      Description\n"
+                    + "      Description,\n"
+                    + "      ShopID\n"
                     + "  )\n"
                     + "  VALUES\n"
                     + "  (   ?, -- Name - nvarchar(255)\n"
@@ -443,8 +567,9 @@ public class ProductDAO extends DBContext {
                     + "      ?, -- createDate - date\n"
                     + "      null, -- ParentId - int\n"
                     + "      ?, -- CategoryId - int\n"
-                    + "      null, -- IsParent - bit\n"
-                    + "      ?  -- Description - nvarchar(max)\n"
+                    + "      1, -- IsParent - bit\n"
+                    + "      ?,  -- Description - nvarchar(max)\n"
+                    + "      ?"
                     + "      )";
             PreparedStatement stm = connection.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
             stm.setString(1, product.getName());
@@ -453,6 +578,7 @@ public class ProductDAO extends DBContext {
             stm.setDate(4, product.getCreateDate());
             stm.setInt(5, product.getCategory().getCategoryId());
             stm.setNString(6, product.getDescription());
+            stm.setInt(7, product.getShop().getUserID());
             stm.executeUpdate();
             ResultSet re = stm.getGeneratedKeys();
             if (re.next()) {
@@ -471,6 +597,52 @@ public class ProductDAO extends DBContext {
             PreparedStatement stm = connection.prepareStatement(sql);
 
             stm.setInt(1, productId);
+
+            int result = stm.executeUpdate();
+
+            if (result > 0) {
+                return true;
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return false;
+    }
+    
+    public Boolean updateProduct(Product product) {
+        try {
+            String sql = "UPDATE Products SET Name = ?, Price = ?, Quantity = ?, "
+                    + "CategoryId = ?, Description = ? WHERE ProductId = ?";
+            PreparedStatement stm = connection.prepareStatement(sql);
+
+            stm.setString(1, product.getName());
+            stm.setDouble(2, product.getPrice());
+            stm.setInt(3, product.getQuantity());
+            stm.setInt(4, product.getCategory().getCategoryId());
+            stm.setNString(5, product.getDescription());
+            stm.setInt(6, product.getProductId());
+
+            int result = stm.executeUpdate();
+
+            if (result > 0) {
+                return true;
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return false;
+    }
+    
+    public boolean deleteProductById(int id) {
+        try {
+            String sql = "DELETE FROM Products WHERE ProductId = ?";
+            PreparedStatement stm = connection.prepareStatement(sql);
+
+            stm.setInt(1, id);
 
             int result = stm.executeUpdate();
 

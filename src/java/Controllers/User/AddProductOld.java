@@ -22,7 +22,7 @@ import java.util.List;
  *
  * @author nguyenson
  */
-public class AddProduct extends HttpServlet {
+public class AddProductOld extends HttpServlet {
 
     private static final String FORM_PATH = "/views/Product/AddProduct.jsp";
 
@@ -68,6 +68,7 @@ public class AddProduct extends HttpServlet {
             }
         } catch (Exception ex) {
         }
+        
         response.sendRedirect("/home");
     }
 

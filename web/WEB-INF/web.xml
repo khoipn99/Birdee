@@ -102,7 +102,7 @@
     </servlet>
     <servlet>
         <servlet-name>AddProduct</servlet-name>
-        <servlet-class>Controllers.User.AddProduct</servlet-class>
+        <servlet-class>Controllers.User.AddProductOld</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ViewAllProduct</servlet-name>
@@ -224,7 +224,6 @@
         <servlet-name>PublishProduct</servlet-name>
         <url-pattern>/staff/product/publish</url-pattern>
     </servlet-mapping>
-    
     <servlet>
         <servlet-name>RateOrder</servlet-name>
         <servlet-class>Controllers.Order.RateOrder</servlet-class>
@@ -233,7 +232,6 @@
         <servlet-name>RateProduct</servlet-name>
         <servlet-class>Controllers.Order.RateProduct</servlet-class>
     </servlet>
-
     <servlet-mapping>
         <servlet-name>RateOrder</servlet-name>
         <url-pattern>/rateOrder</url-pattern>
@@ -242,7 +240,6 @@
         <servlet-name>RateProduct</servlet-name>
         <url-pattern>/rateProduct</url-pattern>
     </servlet-mapping>
-    
     <session-config>
         <session-timeout>
             30

@@ -41,7 +41,7 @@ public class BirdDetailsDAO extends DBContext {
         return null;
     }
 
-    public Integer insert(BirdDetails product, int productId) {
+    public Boolean insert(BirdDetails product, int productId) {
         try {
             String sql = "  INSERT INTO Bird_Details\n"
                     + "  (\n"
@@ -67,15 +67,19 @@ public class BirdDetailsDAO extends DBContext {
             stm.setFloat(4, (float) product.getHeight());
             stm.setFloat(5, (float) product.getHeight());
             stm.setNString(6, product.getOrigin());
-            stm.executeUpdate();
-            ResultSet re = stm.getGeneratedKeys();
-            if (re.next()) {
-                return re.getInt(1);
+            int re = stm.executeUpdate();
+
+            if (re > 0) {
+                return true;
             }
+//            ResultSet re = stm.getGeneratedKeys();
+//            if (re.next()) {
+//                return re.getInt(1);
+//            }
 
         } catch (SQLException ex) {
             Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return null;
+        return false;
     }
 }

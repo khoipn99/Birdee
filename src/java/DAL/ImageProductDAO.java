@@ -63,4 +63,47 @@ public class ImageProductDAO extends DBContext {
         }
         return list;
     }
+
+    public Boolean addImageProduct(int productId, String imagePath) {
+        try {
+            String sql = "INSERT INTO Image_Product(ProductID, image, deleteFlag)\n"
+                    + "VALUES\n"
+                    + "(\n"
+                    + "?, -- ProductID - int\n"
+                    + "?, -- image - text\n"
+                    + "0 -- deleteFlag - bit\n"
+                    + ");";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setInt(1, productId);
+            stm.setString(2, imagePath);
+
+            int re = stm.executeUpdate();
+            if (re > 0) {
+                return true;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ImageProductDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
+
+    public boolean deleteImageProduct(int id) {
+        try {
+            String sql = "DELETE FROM Image_Product WHERE ProductId = ?";
+            PreparedStatement stm = connection.prepareStatement(sql);
+
+            stm.setInt(1, id);
+
+            int result = stm.executeUpdate();
+
+            if (result > 0) {
+                return true;
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return false;
+    }
 }
