@@ -139,34 +139,34 @@
                                                                     style="height: 1px; width: 100%; background-color: #33333330;">
                                                                 </div>
                                                                 <div class="mt-3 mb-4">
-<!--                                                                    <div class="row">
-                                                                        <div class="col-6">
-                                                                            <p class="mb-0"><span
-                                                                                    style="font-weight: bold;">Giới tính:</span>
-                                                                                Đực</p>
-                                                                        </div>
-                                                                        <div class="col-6">
-                                                                            <p class="mb-0"><span
-                                                                                    style="font-weight: bold;">Ngày
-                                                                                    sinh:</span> 21/02/2001</p>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="row mt-1">
-                                                                        <div class="col-4">
-                                                                            <p class="mb-0"><span
-                                                                                    style="font-weight: bold;">Chiều cao:</span>
-                                                                                15cm</p>
-                                                                        </div>
-                                                                        <div class="col-4">
-                                                                            <p class="mb-0"><span style="font-weight: bold;">Cân
-                                                                                    nặng:</span> 200g</p>
-                                                                        </div>
-                                                                        <div class="col-4">
-                                                                            <p class="mb-0"><span
-                                                                                    style="font-weight: bold;">Xuất sứ:</span>
-                                                                                Việt Nam</p>
-                                                                        </div>
-                                                                    </div>-->
+                                                                    <!--                                                                    <div class="row">
+                                                                                                                                            <div class="col-6">
+                                                                                                                                                <p class="mb-0"><span
+                                                                                                                                                        style="font-weight: bold;">Giới tính:</span>
+                                                                                                                                                    Đực</p>
+                                                                                                                                            </div>
+                                                                                                                                            <div class="col-6">
+                                                                                                                                                <p class="mb-0"><span
+                                                                                                                                                        style="font-weight: bold;">Ngày
+                                                                                                                                                        sinh:</span> 21/02/2001</p>
+                                                                                                                                            </div>
+                                                                                                                                        </div>
+                                                                                                                                        <div class="row mt-1">
+                                                                                                                                            <div class="col-4">
+                                                                                                                                                <p class="mb-0"><span
+                                                                                                                                                        style="font-weight: bold;">Chiều cao:</span>
+                                                                                                                                                    15cm</p>
+                                                                                                                                            </div>
+                                                                                                                                            <div class="col-4">
+                                                                                                                                                <p class="mb-0"><span style="font-weight: bold;">Cân
+                                                                                                                                                        nặng:</span> 200g</p>
+                                                                                                                                            </div>
+                                                                                                                                            <div class="col-4">
+                                                                                                                                                <p class="mb-0"><span
+                                                                                                                                                        style="font-weight: bold;">Xuất sứ:</span>
+                                                                                                                                                    Việt Nam</p>
+                                                                                                                                            </div>
+                                                                                                                                        </div>-->
                                                                     <p class="mb-0 mt-1"><span style="font-weight: bold;">Mô tả
                                                                             chi tiết:</span> ${product.description}
                                                                     </p>
@@ -201,7 +201,7 @@
 
                                                     <div class="modal-body">
                                                         <form method="POST" action="${pageContext.request.contextPath}/shop/product/update" class="register-form"
-                                                              id="register-form">
+                                                              id="register-form" enctype="multipart/form-data">
                                                             <input type="hidden" name="id" value="${product.productId}">
                                                             <div class="col">
                                                                 <div class="row">
@@ -233,23 +233,28 @@
                                                                         <input value="${product.quantity}" type="text" class="form-control" id="category-film" name="quantity">
                                                                     </div>
                                                                 </div>
-<!--                                                                <div class="row mt-2">
-                                                                    
-                                                                    <div class="col-6">
-                                                                        <label for="category-film" class="col-form-label">Trạng thái:</label>
-                                                                        <select class="form-select" aria-label="Default select example" id="theloai"
-                                                                                name="loaisach" required>
-                                                                            <option disabled selected value="">Chọn trạng thái:</option>
-                                                                            <option>Đang bán</option>                                                                        <option>Đang bán</option>
-                                                                            <option>Dừng bán</option>
-                                                                        </select>
-                                                                    </div>
-                                                                </div>-->
-<!--                                                                <div class="mb-3 mt-3">
+                                                                <!--                                                                <div class="row mt-2">
+                                                                                                                                    
+                                                                                                                                    <div class="col-6">
+                                                                                                                                        <label for="category-film" class="col-form-label">Trạng thái:</label>
+                                                                                                                                        <select class="form-select" aria-label="Default select example" id="theloai"
+                                                                                                                                                name="loaisach" required>
+                                                                                                                                            <option disabled selected value="">Chọn trạng thái:</option>
+                                                                                                                                            <option>Đang bán</option>                                                                        <option>Đang bán</option>
+                                                                                                                                            <option>Dừng bán</option>
+                                                                                                                                        </select>
+                                                                                                                                    </div>
+                                                                                                                                </div>-->
+                                                                <!--                                                                <div class="mb-3 mt-3">
+                                                                                                                                    <label for="exampleFormControlFile1">Ảnh:</label>
+                                                                                                                                    <input type="file" class="form-control-file mt-2" name="image" id="file" accept="image/*"
+                                                                                                                                           required>
+                                                                                                                                </div>-->
+                                                                <div class="mb-3 mt-3">
                                                                     <label for="exampleFormControlFile1">Ảnh:</label>
                                                                     <input type="file" class="form-control-file mt-2" name="image" id="file" accept="image/*"
                                                                            required>
-                                                                </div>-->
+                                                                </div>
                                                                 <div class="mb-3">
                                                                     <label for="category-film" class="col-form-label">Mô
                                                                         tả:</label>
@@ -303,43 +308,43 @@
                                                 </div>
                                             </div>
                                         </div>
-<!--
-                                        Publish button  
-                                        <button type="button" class="btn btn-outline-danger me-2" data-bs-toggle="modal"
-                                                data-bs-target="#publish-${product.productId}">
-                                            <i class="fa-solid fa-thumbs-up"></i>
-                                        </button>
-                                        Modal Delete Detail
-                                        <div class="modal fade" id="publish-${product.productId}" tabindex="-1"
-                                             aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                            <div class="modal-dialog modal-dialog-centered">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title" id="exampleModalLabel">Bạn có chắc chắn muốn publish
-                                                            sản phẩm
-                                                        </h5>
-                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                                aria-label="Close"></button>
-                                                    </div>
-
-                                                    <div class="modal-body">
-                                                        ${product.name}
-                                                    </div>
-                                                    <form action="/staff/product/publish" method="post">
-                                                        <input type="hidden" class="form-control" id="id" name="pid"
-                                                               value="${product.productId}">
-                                                        <div class="modal-footer">
-                                                            <button style="width:100px" type="button" class="btn btn-secondary"
-                                                                    data-bs-dismiss="modal">
-                                                                Đóng
-                                                            </button>
-                                                            <button style="width:100px" type="submit" class="btn btn-danger">
-                                                                Publish</button>
-                                                        </div>
-                                                    </form>
-                                                </div>
-                                            </div>
-                                        </div>-->
+                                        <!--
+                                                                                Publish button  
+                                                                                <button type="button" class="btn btn-outline-danger me-2" data-bs-toggle="modal"
+                                                                                        data-bs-target="#publish-${product.productId}">
+                                                                                    <i class="fa-solid fa-thumbs-up"></i>
+                                                                                </button>
+                                                                                Modal Delete Detail
+                                                                                <div class="modal fade" id="publish-${product.productId}" tabindex="-1"
+                                                                                     aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                                    <div class="modal-dialog modal-dialog-centered">
+                                                                                        <div class="modal-content">
+                                                                                            <div class="modal-header">
+                                                                                                <h5 class="modal-title" id="exampleModalLabel">Bạn có chắc chắn muốn publish
+                                                                                                    sản phẩm
+                                                                                                </h5>
+                                                                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                                                                        aria-label="Close"></button>
+                                                                                            </div>
+                                        
+                                                                                            <div class="modal-body">
+                                        ${product.name}
+                                    </div>
+                                    <form action="/staff/product/publish" method="post">
+                                        <input type="hidden" class="form-control" id="id" name="pid"
+                                               value="${product.productId}">
+                                        <div class="modal-footer">
+                                            <button style="width:100px" type="button" class="btn btn-secondary"
+                                                    data-bs-dismiss="modal">
+                                                Đóng
+                                            </button>
+                                            <button style="width:100px" type="submit" class="btn btn-danger">
+                                                Publish</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>-->
                                     </td>
                                 </tr>
                             </c:forEach>
