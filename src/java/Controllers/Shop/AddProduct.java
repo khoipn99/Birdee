@@ -75,7 +75,7 @@ public class AddProduct extends HttpServlet {
 
         Part part = request.getPart("image");
         part.write(filePath);
-        imageProductDAO.addImageProduct(productId, "\\images\\" + fileName);
+        imageProductDAO.addImageProduct(productId, "/images/" + fileName);
 
         try {
             if (category.getTag().getTagName().equalsIgnoreCase("Chim")) {

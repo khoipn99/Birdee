@@ -73,7 +73,7 @@ public class UpdateProduct extends HttpServlet {
 
         Part part = request.getPart("image");
         part.write(filePath);
-        imageProductDAO.addImageProduct(product.getProductId(), "\\images\\" + fileName);
+        imageProductDAO.addImageProduct(product.getProductId(), "/images/" + fileName);
 
         product.setName(name);
         product.setPrice(price);
