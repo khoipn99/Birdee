@@ -128,6 +128,5 @@ public class ReloadController extends HttpServlet {
         ArrayList<Order> orderStatus = new ArrayList<>();
         OrderDAO oDao = new OrderDAO();
         orderStatus = oDao.getOrdersByUser(18);
-        System.out.println(orderStatus.get(0).getStatusOrder().getStatusValue());
     }
 }

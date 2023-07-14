@@ -35,6 +35,9 @@
                             <!-- Number of items in cart  -->
                             <span class="badge bg-dark rounded-pill">${sessionScope.totalProduct}</span>
                         </h4>
+                        <c:if test="${overQuantity != null}">
+                            <span style="color: red">Một số sản phẩm bị thay đổi số lượng số lượng sản phẩm nhà bán hàng không đủ!</span>
+                        </c:if>
                         <ul class="list-group mb-3">
                             <c:forEach items="${sessionScope.cart}" var="ord">
                                 <div>
@@ -60,9 +63,9 @@
                         </ul>
 
                         <div class="p-2 d-flex justify-content-between align-items-center gap-2">
-                            <a href="#" style="color: black; text-decoration: none;">
+                            <a href="home" style="color: black; text-decoration: none;">
                                 <i class="fa-solid fa-arrow-left-long"></i>
-                                Quay về
+                                Quay về trang chủ
                             </a>
                             <button type="submit" class="btn btn-dark" onclick="orderProduct()">Đặt hàng</button>
                         </div>
@@ -171,7 +174,7 @@
             cookiesPrice = cookiesPrice + '<c:out value="${sessionScope.account.userID}"></c:out>';
             </c:if>
 
-            var totalPriceValue = getCookie(cookiesPrice);
+            var totalPriceValue = '<c:out value="${sessionScope.totalPrice}"></c:out>';
             if (totalPriceValue !== '') {
                 $(document).ready(function () {
                     var price = parseFloat(totalPriceValue);

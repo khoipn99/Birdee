@@ -20,6 +20,8 @@ import java.util.ArrayList;
  */
 public class RateOrder extends HttpServlet {
 
+    private int orderDetailID;
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -59,12 +61,13 @@ public class RateOrder extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         if (request.getParameter("id") != null) {
+            orderDetailID = Integer.parseInt(request.getParameter("id"));
+            request.setAttribute("orderDetailID", orderDetailID);
             OrderDetailsDAO odDao = new OrderDetailsDAO();
-            int orderID = Integer.parseInt(request.getParameter("id"));
-            ArrayList<OrderDetails> list = odDao.getOrderDetailsByOrderID(orderID);
+            ArrayList<OrderDetails> list = odDao.getOrderDetailsByOrderID(orderDetailID);
             request.setAttribute("list", list);
             request.getRequestDispatcher("views/Account/RateOrder.jsp").forward(request, response);
-        } else {
+        }else{
             response.sendRedirect("home");
         }
     }
@@ -86,7 +89,15 @@ public class RateOrder extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        OrderDetailsDAO odDao = new OrderDetailsDAO();
+        String action = request.getParameter("action");
+        switch (action) {
+            case "cancel":
+                int id = Integer.parseInt(request.getParameter("idOrder"));
+                odDao.changeStatus(id, 4);
+                doGet(request, response);
+                break;
+        }
     }
 
     /**

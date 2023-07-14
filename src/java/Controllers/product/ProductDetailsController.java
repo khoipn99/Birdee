@@ -7,10 +7,12 @@ package Controllers.product;
 import Controllers.ReloadController;
 import DAL.BirdDetailsDAO;
 import DAL.ImageProductDAO;
+import DAL.OrderDetailsDAO;
 import DAL.ProductDAO;
 import Model.BirdDetails;
 import Model.Constants;
 import Model.ImageProduct;
+import Model.OrderDetails;
 import Model.Product;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -71,6 +73,12 @@ public class ProductDetailsController extends ReloadController {
             ImageProductDAO iDao = new ImageProductDAO();
 
             Product product = pDao.getProductByID(productID, Constants.Active);
+
+            OrderDetailsDAO odDao = new OrderDetailsDAO();
+            ArrayList<OrderDetails> rates = odDao.getRatesOrder(productID);
+
+            product.setRate(rates);
+
             ArrayList<ImageProduct> images = iDao.getAllImageByProductID(productID, Constants.DeleteFalse);
 
             request.setAttribute("product", product);
@@ -88,14 +96,12 @@ public class ProductDetailsController extends ReloadController {
         }
     }
 
-//    public static void main(String[] args) {
-//        ProductDAO pDao = new ProductDAO();
-//        Product product = pDao.getProductByID(1, Constants.Active);
-//
-//        BirdDetailsDAO bDao = new BirdDetailsDAO();
-//        BirdDetails birdDetails = bDao.getBirdByProductID(1, Constants.Active);
-//        System.out.println(birdDetails.getDate());
-//    }
+    public static void main(String[] args) {
+        OrderDetailsDAO odDao = new OrderDetailsDAO();
+        ArrayList<OrderDetails> rates = odDao.getRatesOrder(12);
+        System.out.println(rates.size());
+                    
+    }
 
     /**
      * Handles the HTTP <code>POST</code> method.

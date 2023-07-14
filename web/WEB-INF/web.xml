@@ -112,6 +112,14 @@
         <servlet-name>PublishProduct</servlet-name>
         <servlet-class>Controllers.Staff.PublishProduct</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>OrderRequestController</servlet-name>
+        <servlet-class>Controllers.Shop.OrderRequestController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ListOrderController</servlet-name>
+        <servlet-class>Controllers.Shop.ListOrderController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>NewServlet</servlet-name>
         <url-pattern>/NewServlet</url-pattern>
@@ -239,6 +247,14 @@
     <servlet-mapping>
         <servlet-name>RateProduct</servlet-name>
         <url-pattern>/rateProduct</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>OrderRequestController</servlet-name>
+        <url-pattern>/orderRequest</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ListOrderController</servlet-name>
+        <url-pattern>/listOrder</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

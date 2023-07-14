@@ -63,60 +63,70 @@
     </head>
     <body>
         <%@ include file="../../includes/header.jsp" %>
-        <div class="m-2">
-            <form action="rateProduct" method="post">
-                <div id="product m-3">
-                    <div class="mb-2 d-flex gap-2">
-                        <div class="">
-                            <a href="/be-lua-bong-winnie" class="ajaxcart__product-image cart_image"
-                               title="item-cart-1">
-                                <img id="productImage" class="img_item_in_cart"
-                                     src="${details.product.images.get(0).image}"
-                                     alt="Bé lừa bông Winnie">
-                            </a>
-                        </div>
-                        <div class="w-100">
-                            <h6 class="mb-1" id="productName">${details.product.name}</h6>
-                            <div class="mb-1 d-flex justify-content-between gap-1 align-items-center">
-                                <div class="cart_quantity" id="productValue">
+        <div style="margin: 5%">
+            <!-- Admin Products wrapper -->
+            <section>
+                <div class="p-4 mb-5">
+                    <h5 style="color: red">
+                        Đánh giá sản phẩm
+                    </h5>
+                    <div class="mt-3">
+                        <form action="rateProduct" method="post">
+                            <div id="product m-3">
+                                <div class="mb-2 d-flex gap-2">
+                                    <div class="">
+                                        <a href="/be-lua-bong-winnie" class="ajaxcart__product-image cart_image"
+                                           title="item-cart-1">
+                                            <img id="productImage" class="img_item_in_cart"
+                                                 src="${details.product.images.get(0).image}"
+                                                 alt="Bé lừa bông Winnie">
+                                        </a>
+                                    </div>
+                                    <div class="w-100">
+                                        <h6 class="mb-1" id="productName">${details.product.name}</h6>
+                                        <div class="mb-1 d-flex justify-content-between gap-1 align-items-center">
+                                            <div class="cart_quantity" id="productValue">
+                                            </div>
+                                        </div>
+                                        <div class="mb-1 d-flex justify-content-between gap-1 align-items-center">
+                                            <div class="cart_quantity">
+                                                ${details.product.classValue}</br>
+                                                Số lượng: ${details.quantity}
+                                            </div>
+                                            <div class="rate">
+                                                <input type="radio" id="star5" name="rate" value="1" />
+                                                <label for="star5" title="text">1 stars</label>
+                                                <input type="radio" id="star4" name="rate" value="2" />
+                                                <label for="star4" title="text">2 stars</label>
+                                                <input type="radio" id="star3" name="rate" value="3" />
+                                                <label for="star3" title="text">3 stars</label>
+                                                <input type="radio" id="star2" name="rate" value="4" />
+                                                <label for="star2" title="text">4 stars</label>
+                                                <input type="radio" id="star1" name="rate" value="5" />
+                                                <label for="star1" title="text">5 star</label>
+                                            </div>
+                                        </div>
+                                        <div class="mb-1 d-flex justify-content-between gap-1 align-items-center">
+                                            <div class="input-group">
+                                            </div>
+                                            <input type="hidden" value="${orderID}" name="orderID">
+                                            <input type="text" name="comment" placeholder="Nhận xét"/>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="mb-1 d-flex justify-content-between gap-1 align-items-center">
-                                <div class="cart_quantity">
-                                    Số lượng
-                                </div>
-                                <div class="rate">
-                                    <input type="radio" id="star5" name="rate" value="1" />
-                                    <label for="star5" title="text">1 stars</label>
-                                    <input type="radio" id="star4" name="rate" value="2" />
-                                    <label for="star4" title="text">2 stars</label>
-                                    <input type="radio" id="star3" name="rate" value="3" />
-                                    <label for="star3" title="text">3 stars</label>
-                                    <input type="radio" id="star2" name="rate" value="4" />
-                                    <label for="star2" title="text">4 stars</label>
-                                    <input type="radio" id="star1" name="rate" value="5" />
-                                    <label for="star1" title="text">5 star</label>
-                                </div>
+                            <div class="d-flex justify-content-center">
+                                <button type="submit" style="border: none;border-radius: 5px;padding: 3px">Đánh giá</button>
                             </div>
-                            <div class="mb-1 d-flex justify-content-between gap-1 align-items-center">
-                                <div class="input-group">
-                                    <input id="productQuantity" type="number" min="1" class="input_cart_width" value="${details.quantity}" readonly/>
-                                </div>
-                                <input type="text" name="comment" placeholder="Nhận xét"/>
-                            </div>
-                        </div>
+                        </form>
+
                     </div>
                 </div>
-                <div class="d-flex justify-content-center">
-                    <button type="submit" style="border: none;border-radius: 5px;padding: 3px">Đánh giá</button>
-                </div>
-            </form>
-
-        </div>
-        <%@ include file="../../includes/footer.jsp" %>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
-                integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
-        crossorigin="anonymous"></script>
-        <script src="https://kit.fontawesome.com/8d39de38b8.js" crossorigin="anonymous"></script>
+            </section>
+            <%@ include file="../../includes/footer.jsp" %>
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+                    integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+            crossorigin="anonymous"></script>
+            <script src="https://kit.fontawesome.com/8d39de38b8.js" crossorigin="anonymous"></script>
     </body>
 </html>

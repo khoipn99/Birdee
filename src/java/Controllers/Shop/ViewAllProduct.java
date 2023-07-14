@@ -25,7 +25,9 @@ public class ViewAllProduct extends HttpServlet {
             throws ServletException, IOException {
         ProductDAO productDAO = new ProductDAO();
         User user = (User)request.getSession().getAttribute("account");
+        
         List<Product> products = productDAO.getAllProductOfShop(user.getUserID());
+        
         request.setAttribute("listProduct", products);
         request.getRequestDispatcher(VIEW_PATH).forward(request, response);
     }

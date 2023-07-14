@@ -114,7 +114,6 @@
                                         <th scope="col">Địa chỉ</th>
                                         <th scope="col">Giá trị đơn hàng</th>
                                         <th scope="col">TT thanh toán</th>
-                                        <th scope="col">Trạng thái đơn hàng</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -128,12 +127,7 @@
                                                 <fmt:formatNumber value="${sessionScope.orders.get(i).totalOrder}" pattern="#,##0.000" var="formattedNumber" />
                                                 <td> ${formattedNumber}đ</td>
                                                 <td>${sessionScope.orders.get(i).paymentMethod.paymentMethod}</td>
-                                                <td>${sessionScope.orders.get(i).statusOrder.statusValue}</td>
-
-                                                <c:if test="${sessionScope.orders.get(i).statusOrder.statusOrderID == 3 and sessionScope.orders.get(i).isRate == false}">
-                                                    <td><a href="#" style="text-decoration: none" onclick="rateOrder('${sessionScope.orders.get(i).orderId}')">Đánh giá</a></td>
-                                                    <!-- The Modal -->
-                                                </c:if>
+                                                <td><a href="rateOrder?id=${sessionScope.orders.get(i).orderId}" style="text-decoration: none">Xem chi tiết đơn hàng</a></td>
                                             </tr>
                                         </c:forEach>
                                     </c:if>

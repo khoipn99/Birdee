@@ -13,8 +13,10 @@ public class OrderDetails {
     private Order order;
     private Product product;
     private int quantity;
+    private StatusOrder statusOrder;
     private int rate;
     private String comment;
+    private boolean isRated;
 
     public OrderDetails() {
     }
@@ -33,6 +35,33 @@ public class OrderDetails {
         this.quantity = quantity;
         this.rate = rate;
         this.comment = comment;
+    }
+
+    public OrderDetails(int oderDetailsID, Order order, Product product, int quantity, StatusOrder statusOrder, int rate, String comment, boolean isRated) {
+        this.oderDetailsID = oderDetailsID;
+        this.order = order;
+        this.product = product;
+        this.quantity = quantity;
+        this.statusOrder = statusOrder;
+        this.rate = rate;
+        this.comment = comment;
+        this.isRated = isRated;
+    }
+
+    public StatusOrder getStatusOrder() {
+        return statusOrder;
+    }
+
+    public void setStatusOrder(StatusOrder statusOrder) {
+        this.statusOrder = statusOrder;
+    }
+
+    public boolean isIsRated() {
+        return isRated;
+    }
+
+    public void setIsRated(boolean isRated) {
+        this.isRated = isRated;
     }
 
     public int getOderDetailsID() {
